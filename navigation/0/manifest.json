@@ -1,0 +1,32 @@
+{ "manifest_version": 2
+, "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlj5wri5VxI57sy24vIInXrF9PfJmV/xrZclVGtPwZW6NfBpGBBtVcgHU/b9g0NDOXcrKl/4IebysSMTMpnL2ScRfV1zPpTFTgVpTfEOhQqJws9WgIdhoWR+gX79FSnShjjdMHf53Jq2tELrTUIClYFMw+zi5Y8kDP9+tHICyUg+MrsXo/+zuDDjp5VYCuGu4o9ef+a3ufVktsWXb4e8vb8LjMSSkUH4tChkZRRIQ7HrhAtHrTk4tuZfROSrhlMy0KgsDGFODwqpXI/JRvApsnANA41KMqbWQGC8/XaetQcm4NRNbQcq5SnemlcPhGO/Gu73F/IEw0JpNHSPFORKg2wIDAQAB"
+, "minimum_chrome_version": "26"
+, "default_locale": "en"
+, "name": "navigation ©overcq"
+, "short_name": "navig"
+, "version": "1.0.5.5"
+, "description": "Extends functions of page navigation."
+, "icons":
+  { "16": "16.png"
+  , "48": "48.png"
+  , "128": "128.png"
+  }
+, "background":
+  { "scripts": [ "0.js" ]
+  }
+, "browser_action":
+  { "default_icon":
+    { "19": "19.png"
+    , "38": "38.png"
+    }
+  , "default_title": "go up on ‘url’ tree"
+  , "default_popup": "browser_menu.html"
+  }
+, "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+, "permissions":
+  [ "tabs"
+  ]
+, "externally_connectable":
+  { "ids": []
+  }
+}

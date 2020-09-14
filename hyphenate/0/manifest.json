@@ -1,0 +1,27 @@
+{ "manifest_version": 2
+, "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0TnXfrI4X8kfu/fD0UtLoVzlafqA7dZ70N7OXzRCLaycyVQ9Y38+zFpJva2Kl4861MPvpGxN7kcjRn1jrg6rtW4C6plHltUkyfGItkR90KfE+2aZvH8tp6k151LRQU7DzMlyXRxchnSSrNrIiwkNn9XlUzvuXX7JT/yyRhh0OIJpQqHGYClrYzoB7bM9VIJ/7Z6yNlQI3cAbSq1I52bKNv4sYhYaWZSDTz2t0oVnywx3H8Fw+JlP7PLBM/CEZuIGl54yR3ojCitjMTw7u91g9qPune5OTdteaOgiCp2FSVy8a7aw1p5bmQmTERIXyxtjGMFSesGubKZdcGDwNgUtYwIDAQAB"
+, "minimum_chrome_version": "26"
+, "default_locale": "en"
+, "name": "hyphenate ©overcq"
+, "short_name": "hyphen"
+, "version": "0.0.0.33"
+, "description": "Breaks words in lines on a page."
+, "options_ui":
+  { "page": "options_page.html"
+  , "chrome_style": true
+  }
+, "options_page": "options_page.html"
+, "background":
+  { "scripts": [ "0.js" ]
+  , "persistent": false
+  }
+, "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+, "permissions":
+  [ "tabs"
+  , "storage"
+  , "<all_urls>"
+  ]
+, "externally_connectable":
+  { "ids": []
+  }
+}

@@ -1,0 +1,16 @@
+{ "manifest_version": 2
+, "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo4Uq9vm9MnzTm8LBoajk06/3e8bbZYCmVj9qtgZuqyKEhpWPDhOiVZHRH+rGMx/Y7wTZTCAm6fbZfDKjXYCLLa1Z28515+QSjbtBcps8j0MdnitQjv0WDWKCQqxX9ruskjqmOEaT6UsPRmUgpN9vr1h6YKbAd+TBRKFvkUZ79a/fwAZeCt+ut4KKZnmi3HFM5QHup9dd9wEKDIJm+S8vOh9ptacrZybvt04LSyPnniFG+g0iBkAa5mMCRVF3mP/tpqGT+R2KeJGX++eX/EIxBxo1cSrd3LqpAJd/c1BiSyFS0M588y2fR7IKK0Tj1PvxLJRqtPqSUe6QBaHCv/Qt4QIDAQAB"
+, "minimum_chrome_version": "26"
+, "default_locale": "en"
+, "name": "shared library ©overcq"
+, "short_name": "sh‐lib"
+, "version": "0.1.14.7"
+, "description": "Serves definitions of ‟Javascript” symbols for extensions."
+, "background":
+  { "scripts": [ "0.js" ]
+  , "persistent": false
+  }
+, "externally_connectable":
+  { "ids": [ "*" ]
+  }
+}

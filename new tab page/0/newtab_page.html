@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   _ _   publicplace
+%  ¦OUX¦  deprecated standalone injection
+%  ¦Inc¦  ‟chromium” extension
+%   - -   new tab page
+%         new tab page
+% ©overcq                on ‟Gentoo Linux 13.0” “x86_64”              2015‒3‒2 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<title></title>
+<style>
+/*============================================================================*/
+html
+{ min-height: 100%
+}
+body
+{ background-repeat: no-repeat
+; background-size: contain
+}
+p
+{ margin: 0
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#bar_1
+{ display: block
+; z-index: 1
+; float: right
+; position: relative
+; top: 4pt
+; right: 10pt
+; margin: 0 0 6pt 6pt
+; width: 153pt
+; opacity: .98
+; background-color: #cacaca
+; cursor: default
+}
+.bar_1_alt
+{ float: left !important
+; left: 10pt !important
+; margin: 0 6pt 6pt 0 !important
+}
+#bar_1 > p
+{ padding: 4.5pt 2pt 2pt 2pt
+; text-align: justify
+; font-family: Corbel, "TraditionellSans", sans-serif
+; font-size: 6pt
+}
+#bar_1 > #menu_title
+{ padding: 4.5pt 9pt 2pt 9pt
+; text-align: center
+}
+#bar_bm, #bar_bm ul
+{ list-style: none
+; width: 151pt
+; border-right: 1pt solid #7a7a7f
+; border-bottom: 2pt solid #7a7a7f
+; border-left: 1pt solid #7a7a7f
+}
+#bar_bm ul
+{ display: none
+; position: absolute
+; right: 28pt
+; background-color: #cacaca
+}
+.bar_bm_alt ul
+{ left: 28pt !important
+}
+#bar_bm li
+{ display: block
+; border-top: 1pt solid #7a7a7f
+}
+#bar_bm li > a
+{ display: block
+; cursor: default
+}
+#bar_bm li > a > img
+{ display: block
+; float: right
+; margin: 1.3pt 1pt 0 1pt
+; height: 16px
+; max-height: 12pt
+; max-width: 12pt
+; opacity: .65
+}
+#bar_bm li > a > div
+{ padding: 4pt 4.5pt 3.5pt 5.5pt
+}
+#bar_bm li:hover
+{ background-color: #dadada
+}
+/*----------------------------------------------------------------------------*/
+#sea
+{ float: left
+; width: 61%
+; margin: 1pt 8pt 2pt 0
+}
+.sea_alt
+{ float: right !important
+; margin: 1pt 0 2pt 8pt !important
+}
+#attrib
+{ margin: 0 8pt 0 9pt
+; opacity: .25
+}
+.attrib_alt
+{ margin: 0 9pt 0 8pt !important
+}
+/*----------------------------------------------------------------------------*/
+#adv
+{ position: relative
+; float: right
+; z-index: -1
+; margin: 10pt 12.5pt 2pt 2pt
+; opacity: .145
+; background-color: #cacaca
+; padding: 1pt 0 1pt 1pt
+; white-space: nowrap
+}
+.adv_alt
+{ float: left !important
+; margin: 10pt 2pt 2pt 12.5pt !important
+; padding: 1pt 1pt 1pt 0 !important
+}
+/*============================================================================*/
+</style>
+<script src="newtab_page.js"></script>
+</head>
+<!--=========================================================================-->
+<body>
+<div id="sea">
+    <form id="sea_arc" action="#">
+        <input type="text" pattern="^\s*(?:https?://)?[^/?;#]+(?::[0-9]{1,5})?(?:/[^?;#]*)?(?:#.*)?\s*$">
+    </form>
+    <div id="attrib">
+        <a href="https://web.archive.org/" target="_blank" title="Internet Archive">
+            <img alt="Internet Archive Wayback Machine" src="wayback_logo-sm.gif">
+        </a>
+    </div>
+</div>
+<nav id="bar_1"><p id="menu_title">&nbsp;</p><ul id="bar_bm"><ul style="display:block;visibility:hidden"></ul></ul></nav>
+<div id="adv" hidden></div>
+</html>
+<!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->

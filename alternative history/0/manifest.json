@@ -1,0 +1,32 @@
+{ "manifest_version": 2
+, "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAh67d/ZICPaDX4199gJ+Iu6YRV92ji2BR2uHvqtWM2NrB8+WbPpX4hXzYLUvnPler4NnHu3vPAZUbRfZaJviv6YyRcCJfvyAsy2Th/X57Rf6cPf/7vTdYJPtYTiZwpvmwiygXVNbXTA+7lJpsrNsBA7RIkhDjiVdPDJvST8cPgw3I/Z4wmfs0Zisz2ZFW+iIxYiEaTp6RptNktVpRgBWlM+nh/LlTjmWyfNIMYaeqRNE2rNhVTTdkcJ435rX9JWCK3BN3aa2njyHubMS6cPLPwlYKB85wDIDw8wbg5LJV7d/YlZMvPmYIr6TcKL4ow7T78MSYWs02+LiqCTF/H5ZjBwIDAQAB"
+, "minimum_chrome_version": "26"
+, "default_locale": "en"
+, "name": "alternative history ©overcq"
+, "short_name": "alt‐his"
+, "version": "1.0.8.3"
+, "description": "Saves page history using own database."
+, "chrome_url_overrides":
+  { "history": "history_page.html"
+  }
+, "options_ui":
+  { "page": "options_page.html"
+  , "chrome_style": true
+  }
+, "options_page": "options_page.html"
+, "background":
+  { "scripts": [ "0.js" ]
+  }
+, "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+, "permissions":
+  [ "idle"
+  , "storage"
+  , "tabs"
+  , "unlimitedStorage"
+  , "webRequest"
+  , "<all_urls>"
+  ]
+, "externally_connectable":
+  { "ids": []
+  }
+}
