@@ -2,7 +2,7 @@
 ################################################################################
 #   ___   workplace
 #  ¦OUX¦  ‘unix’ ‘shell’ environment
-#  ¦Inc¦  compile
+#  ¦/C+¦  compile
 #   ---   ‟chromium” extension
 #         messages preprocessing
 # ©overcq                on ‟Gentoo Linux 13.0” “x86_64”              2015‒1‒8 #

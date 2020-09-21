@@ -1,7 +1,7 @@
 ################################################################################
 #   ___   workplace
 #  ¦OUX¦  ‟GNU” “make”
-#  ¦Inc¦  compile
+#  ¦/C+¦  compile
 #   ---   ‟chromium” extension
 #         makefile
 # ©overcq                on ‟Gentoo Linux 13.0” “x86_64”              2015‒1‒8 #
@@ -38,6 +38,7 @@ build: 0/manifest.json $(patsubst 0/%,1/%,$(filter-out %.js,$(wildcard 0/*)))
 		js-clc <"$$f" >"$$tmp_file" \
 		&& cp "$$tmp_file" "$$f" ;\
 	done
+# https://developers.google.com/closure/compiler/docs/gettingstarted_app
 1.crx: build
 	if [ -n "$(update_url)" -o -n "$(homepage_url)" ]; then \
         rm -f 1/manifest.json ;\

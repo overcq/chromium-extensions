@@ -1,7 +1,7 @@
 /*******************************************************************************
 *   ___   publicplace
 *  ¦OUX¦  ‟Javascript” library
-*  ¦Inc¦  ‟chromium” extension
+*  ¦/C+¦  ‟chromium” extension
 *   ---   shared library
 *         background scripts
 * ©overcq                on ‟Gentoo Linux 13.0” “x86_64”             2015‒3‒11 *

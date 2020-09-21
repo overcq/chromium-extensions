@@ -1,7 +1,7 @@
 /*******************************************************************************
 *   ___   publicplace
 *  ¦OUX¦  deprecated standalone injection
-*  ¦Inc¦  ‟chromium” extension
+*  ¦/C+¦  ‟chromium” extension
 *   ---   alternative history database
 *         options page scripts
 * ©overcq                on ‟Gentoo Linux 13.0” “x86_64”              2015‒3‒2 *

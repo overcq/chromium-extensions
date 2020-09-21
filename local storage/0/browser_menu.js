@@ -1,7 +1,7 @@
 /*******************************************************************************
 *   ___   publicplace
 *  ¦OUX¦  ‟Javascript” implementation
-*  ¦Inc¦  ‟chromium” extension
+*  ¦/C+¦  ‟chromium” extension
 *   ---   local storage
 *         browser menu page
 * ©overcq                on ‟Gentoo Linux 13.0” “x86_64”             2015‒4‒28 *
