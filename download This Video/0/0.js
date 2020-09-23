@@ -875,9 +875,10 @@ window.addEventListener( "load"
             && url[ "server_query" ] !== undefined
             )
                 E_youtube_Q_document_I_script( tab.id );
-            else if( Q_navigated_S_data[ tab.id ] !== undefined )
+            else
             {   chrome.pageAction.hide( tab.id );
-                delete Q_navigated_S_data[ tab.id ];
+                if( Q_navigated_S_data[ tab.id ] !== undefined )
+                    delete Q_navigated_S_data[ tab.id ];
             }
         }
       );

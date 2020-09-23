@@ -14,9 +14,11 @@ dist: 1.crx
 override update_url := $(strip $(update_url))
 override homepage_url := $(strip $(homepage_url))
 #===============================================================================
+1:
+	mkdir 1
 1/%: 0/%
 	ln -fT -- $< $@
-build: 0/manifest.json $(patsubst 0/%,1/%,$(filter-out %.js,$(wildcard 0/*)))
+build: 1 0/manifest.json $(patsubst 0/%,1/%,$(filter-out %.js,$(wildcard 0/*)))
 	./0_messages.pl $(wildcard 0/*.js)
 	[ -d 1/_locales/en ] || mkdir -p 1/_locales/en
 	tmp_file="$$( mktemp )" ;\
@@ -34,10 +36,12 @@ build: 0/manifest.json $(patsubst 0/%,1/%,$(filter-out %.js,$(wildcard 0/*)))
 		&& cat 1/options_page.js >>"$$tmp_file" \
 		&& cp -- "$$tmp_file" 1/options_page.js ;\
 	fi \
-    && for f in 1/*.js; do \
-		js-clc <"$$f" >"$$tmp_file" \
-		&& cp "$$tmp_file" "$$f" ;\
-	done
+    && if [ "$(wildcard 1/*.js)" != "" ]; then \
+	    for f in 1/*.js; do \
+			js-clc <"$$f" >"$$tmp_file" \
+			&& cp "$$tmp_file" "$$f" ;\
+		done ;\
+	fi
 # https://developers.google.com/closure/compiler/docs/gettingstarted_app
 1.crx: build
 	if [ -n "$(update_url)" -o -n "$(homepage_url)" ]; then \
