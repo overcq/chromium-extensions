@@ -3,7 +3,7 @@
 , "default_locale": "en"
 , "name": "privoxy functions ©ouxy"
 , "short_name": "privoxy-func"
-, "version": "0.6"
+, "version": "0.7"
 , "description": "Adds ‟Privoxy” adaptation for ‘www’ browsing."
 , "background":
   { "scripts": [ "0.js" ]

@@ -72,47 +72,53 @@ document.addEventListener( "DOMContentLoaded", function(
                 }
               );
               chrome.pageAction.show( tab_id );
-          }/*else if( info.status == "complete"
-            && ( a = tab.url.match( /^([^:]+:\/\/[^\/]+)\/PRIVOXY-FORCE(\/[^;?#]*|$)/ ))
+          }else if( info.status == "complete"
+            && ( a = tab.url.match( /^(http:\/\/[^\/]+)\/PRIVOXY-FORCE(\/[^;?#]*|$)/ ))
           )
           {   chrome.tabs.executeScript( tab_id
-              , { "code":
-                    "var host = "+ JSON.stringify( a[1] +"/" ) +";"+
-                    "var match_length = host.length;"+
-                    "var up = "+ JSON.stringify( a[2].replace( /[^\/]+$/, "" ).replace( /[^\/]+\//g, "../" ).replace( /^\//, "" )) +";"+
-                    "function fix_addr( e"+
-                    ", a"+
-                    "){  var s = e.getAttribute(a);"+
-                        "if( !s )"+
-                            "return;"+
-                        "if( s.substring( 0, 1 ) == \"/\" )"+
-                            "e.setAttribute( a, up + s.substring( 1 ));"+
-                        "else if( s.substring( 0, match_length ) == host )"+
-                            "e.setAttribute( a, up + s.substring( match_length ));"+
-                    "}"+
-                    "var es = document.getElementsByTagName( \"base\" );"+
-                    "for( var i = es.length - 1; i >= 0; i-- )"+
-                        "es[i].parentNode.removeChild( es[i] );"+
-                    "es = document.getElementsByTagName( \"link\" );"+
-                    "for( var i = 0; i < es.length; i++ )"+
-                    "{   var a = es[i].getAttribute( \"rel\" );"+
-                        "if( !a )"+
-                            "continue;"+
-                        "if( /^stylesheet$/i.test(a)"+
-                          "|| /^shourtcut icon$/i.test(a)"+
-                        ")"+
-                            "fix_addr( es[i], \"src\" );"+
-                    "}"+
-                    "es = document.getElementsByTagName( \"img\" );"+
-                    "for( var i = 0; i < es.length; i++ )"+
-                        "fix_addr( es[i], \"src\" );"+
-                    "es = document.getElementsByTagName( \"a\" );"+
-                    "for( var i = 0; i < es.length; i++ )"+
-                        "fix_addr( es[i], \"href\" );"
+              , { "code": "("+
+                    function( host
+                    , up
+                    ){  eval( "("+ arguments[ arguments.length - 1 ][ "H_ocq_E_sh_lib_Q_js_Z_cs_I_inject_procs_R_args" ] +")(arguments);" );
+                        var match_length = host.length;
+                        function fix_addr( e
+                        , a
+                        ){  var s = e.getAttribute(a);
+                            if( !s )
+                                return;
+                            if( s.substring( 0, 1 ) == "/" )
+                                e.setAttribute( a, up + s.substring( 1 ));
+                            else if( s.substring( 0, match_length ) == host )
+                                e.setAttribute( a, up + s.substring( match_length ));
+                        }
+                        var es = document.getElementsByTagName( "base" );
+                        for( var i = es.length - 1; i >= 0; i-- )
+                            es[i].parentNode.removeChild( es[i] );
+                        es = document.getElementsByTagName( "link" );
+                        for( var i = 0; i < es.length; i++ )
+                        {   var a = es[i].getAttribute( "rel" );
+                            if( !a )
+                                continue;
+                            if( /^stylesheet$/i.test(a)
+                            || /^shourtcut icon$/i.test(a)
+                            )
+                                fix_addr( es[i], "src" );
+                        }
+                        es = document.getElementsByTagName( "img" );
+                        for( var i = 0; i < es.length; i++ )
+                            fix_addr( es[i], "src" );
+                        es = document.getElementsByTagName( "a" );
+                        for( var i = 0; i < es.length; i++ )
+                            fix_addr( es[i], "href" );
+                    }
+                  +")( "+ JSON.stringify( a[1] +"/" )
+                  +", "+ JSON.stringify( a[2].replace( /[^\/]+$/, "" ).replace( /[^\/]+\//g, "../" ).replace( /^\//, "" ))
+                  +", "+ H_ocq_E_sh_lib_Q_js_Z_cs_I_inject_procs_P_args(null)
+                  +" );"
+                , "runAt": "document_start"
                 }
               );
           }
-          */
       }
     );
     chrome.runtime.onMessage.addListener(
