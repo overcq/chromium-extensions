@@ -619,7 +619,7 @@ function E_youtube_Q_document_I_script( tab_id
                                     }
                             }
                             var a = {};
-                            a[ "js" ] = y[ "config" ][ "assets" ][ "js" ];
+                            a[ "js" ] = y[ "web_player_context_config" ][ "jsUrl" ];
                             a[ "uid" ] = y[ "config" ][ "args" ][ "video_id" ];
                             a[ "title" ] = y[ "config" ][ "args" ][ "title" ].replace( /\++/g, " " );
                             var y_res = JSON.parse( y[ "config" ][ "args" ][ "player_response" ] );
@@ -739,7 +739,9 @@ window.addEventListener( "load"
                     E_wp_pl_Q_document_I_script( tabs[i].id );
                 else if( domain === "wp.tv" )
                     E_wp_tv_Q_document_I_script( tabs[i].id );
-                else if( url[ "host" ] === "www.youtube.com"
+                else if(( url[ "host" ] === "www.youtube.com"
+                  || url[ "host" ] === "youtube.com"
+                )
                 && url[ "path" ] === "/watch"
                 && url[ "server_query" ] !== undefined
                 )
@@ -831,6 +833,10 @@ window.addEventListener( "load"
           , "https://*.youtube.com/generate_*"
           , "http://*.youtube.com/player_*"
           , "https://*.youtube.com/player_*"
+          , "http://*.youtube.com/api/stats/*"
+          , "https://*.youtube.com/api/stats/*"
+          , "http://*.youtube.com/ptracking"
+          , "https://*.youtube.com/ptracking"
           ]
         , "types":
           [ "script"
@@ -870,7 +876,9 @@ window.addEventListener( "load"
                 E_wp_pl_Q_document_I_script( tab.id );
             else if( domain === "wp.tv" )
                 E_wp_tv_Q_document_I_script( tab.id );
-            else if( url[ "host" ] === "www.youtube.com"
+            else if(( url[ "host" ] === "www.youtube.com"
+              || url[ "host" ] === "youtube.com"
+            )
             && url[ "path" ] === "/watch"
             && url[ "server_query" ] !== undefined
             )
