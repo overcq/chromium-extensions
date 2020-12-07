@@ -622,7 +622,7 @@ function E_youtube_Q_document_I_script( tab_id
                             a[ "js" ] = y[ "web_player_context_config" ][ "jsUrl" ];
                             a[ "uid" ] = y[ "config" ][ "args" ][ "video_id" ];
                             a[ "title" ] = y[ "config" ][ "args" ][ "title" ].replace( /\++/g, " " );
-                            var y_res = JSON.parse( y[ "config" ][ "args" ][ "player_response" ] );
+                            var y_res = y[ "config" ][ "args" ][ "raw_player_response" ];
                             a[ "streams" ] = [];
                             a[ "streams" ][0] = y_res[ "streamingData" ][ "adaptiveFormats" ];
                             a[ "streams" ][1] = y_res[ "streamingData" ][ "formats" ];
