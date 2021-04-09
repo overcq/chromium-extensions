@@ -23,7 +23,7 @@ build: 1 0/manifest.json $(patsubst 0/%,1/%,$(filter-out %.js,$(wildcard 0/*)))
 	[ -d 1/_locales/en ] || mkdir -p 1/_locales/en
 	tmp_file="$$( mktemp )" ;\
     trap 'rm -- "$$tmp_file"' EXIT ;\
-    if [ '$(notdir $(realpath $(wildcard .)))' != 'shared library' ]; then \
+    if [ '$(notdir $(realpath $(wildcard .)))' != 'shared-library' ]; then \
         ./1-messages.pl extension_sh_lib_uid='ngodelncdemhlbmkihcndmecpphhlhhk' extensions_url='$(extensions_url)' $(wildcard 0/*.js) >"$$tmp_file" ;\
     else \
         ./1-messages.pl extensions_url='$(extensions_url)' $(wildcard 0/*.js) >"$$tmp_file" ;\

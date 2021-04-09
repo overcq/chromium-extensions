@@ -4,13 +4,10 @@
 , "default_locale": "en"
 , "name": "shared library ©overcq"
 , "short_name": "sh‐lib"
-, "version": "0.1.14.7"
+, "version": "0.1.14.8"
 , "description": "Serves definitions of ‟Javascript” symbols for extensions."
 , "background":
   { "scripts": [ "0.js" ]
   , "persistent": false
-  }
-, "externally_connectable":
-  { "ids": [ "*" ]
   }
 }

@@ -564,6 +564,7 @@ function H_ocq_E_html_M(
       +"; background-color: white\n"
       +"; color: black\n"
       +"; font-family: \"Bitstream Vera Serif\", serif\n"
+      +"; font-size: 8pt\n"
       +"}\n"
       +"input[type=\"checkbox\"], input[type=\"radio\"]\n"
       +"{ margin: 0 3.5pt 0 0\n"
