@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   _ _   publicplace
+%  ¦OUX¦  deprecated standalone injection
+%  ¦/C+¦  ‟chromium” extension
+%   - -   alternative history database
+%         listing page
+% ©overcq                on ‟Gentoo Linux 13.0” “x86_64”             2015‒2‒26 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<title>alternative history: history page</title>
+<base target="_blank">
+<style>
+td
+{ vertical-align: top
+; line-height: 1.15
+}
+#list a
+{ color: inherit
+; text-decoration: none
+}
+#list
+{ max-width: 100%
+}
+#list > tbody > tr:first-child td
+, #list tr.b td
+{ padding-top: 2pt
+}
+#list tr.a td
+{ border-bottom: 1pt dotted #7a7a7f
+; padding-bottom: 4.5pt
+}
+#list th
+{ border: 1pt solid #7a7a7f
+; padding: 6pt 7pt 7pt 7pt
+}
+#list td
+{ border-right: 1pt solid #7a7a7f
+; padding: 0.5pt 7pt 0 4pt
+}
+#list td.a
+{ padding: 0 5pt 0 4pt
+; text-align: right
+; color: #5f5f5f
+}
+#list td.b
+{ white-space: nowrap
+; color: #5f5f5f
+}
+#list td.c
+{ white-space: pre-wrap
+}
+#list td.c > a > span.a
+{ margin-right: 1ex
+; color: #00005f
+}
+#list td.c > a > span.b
+{
+}
+#list td.c > a > span.b:before
+{ content: "«"
+}
+#list td.c > a > span.b:after
+{ content: "»"
+}
+#list td.c > a > span.c
+{ color: #5f3700
+}
+#list td.c > a > span.d
+{ color: #002b00
+}
+#list td.c > a > span.e
+{ color: #5f0000
+}
+</style>
+<script src="history-page.js"></script>
+</head>
+<!--=========================================================================-->
+<body>
+<fieldset>
+    <legend></legend>
+    <label><input type="radio" name="show range" id="show_last"></label>
+    <label><input type="radio" name="show range" id="show_active"></label>
+    <label><input type="radio" name="show range" id="show_day" data-days="1"></label>
+    <label><input type="radio" name="show range" id="show_week" data-days="7"></label>
+    <label><input type="radio" name="show range" id="show_10_days" data-days="10"></label>
+    <label><input type="radio" name="show range" id="show_month" data-days="30"></label>
+    <label><input type="radio" name="show range" id="show_n_days" disabled><input id="show_n_days_S_n" type="number" min="1"></label>
+    <label><input type="radio" name="show range" id="show_all"></label>
+</fieldset>
+<table id="list">
+    <thead></thead>
+    <tbody></tbody>
+</table>
+</body>
+</html>
+<!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->

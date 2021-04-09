@@ -1,0 +1,36 @@
+{ "manifest_version": 2
+, "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhzaJqIPRmysvsef7Jb2Zp8WMZGuErYyScV2OeGOltZHBukpZMqtsfiYyXsfYL+pt1tNfVYBlvD2wAkipnCd838Jmw5XHHVV90Tmx2XnOnEDAyQh/48fIshge2bhpk3Ft2rUL8oB8Uqe3ZPbnj++r/w5EwXYPx7nH+X2eSHdbfSqPcRfO1tKdeUOxtj1hRJz/4Ua28793lTZEDmeF3mRp+/bRDH4vD5MDPgJe5/dtMguE9D8SMhPzx+pFhX86diBc2ADqJIVuJf8Mm8Nat9X+wUW+XNplypGqnIZHocQ+uNQcXLKFHRPGt0WUVW/iP9FuJ81yUET5rQBoa07Ip6Z8dQIDAQAB"
+, "minimum_chrome_version": "31"
+, "default_locale": "en"
+, "name": "download This Video ©overcq"
+, "short_name": "dload‐tv"
+, "version": "1.2.13.1"
+, "description": "On content pages of «youtube.com» and other sites («cnn.com» and some)— presents streams to download into files."
+, "icons":
+  { "16": "16.png"
+  , "48": "48.png"
+  , "128": "128.png"
+  }
+, "background":
+  { "scripts": [ "0.js" ]
+  }
+, "page_action":
+  { "default_icon":
+    { "19": "19.png"
+    , "38": "38.png"
+    }
+  , "default_title": "available streams"
+  , "default_popup": "page-menu.html"
+  }
+, "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+, "permissions":
+  [ "tabs"
+  , "webRequest"
+  , "webRequestBlocking"
+  , "downloads"
+  , "<all_urls>"
+  ]
+, "externally_connectable":
+  { "ids": []
+  }
+}

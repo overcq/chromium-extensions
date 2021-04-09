@@ -19,14 +19,14 @@ override homepage_url := $(strip $(homepage_url))
 1/%: 0/%
 	ln -fT -- $< $@
 build: 1 0/manifest.json $(patsubst 0/%,1/%,$(filter-out %.js,$(wildcard 0/*)))
-	./0_messages.pl $(wildcard 0/*.js)
+	./0-messages.pl $(wildcard 0/*.js)
 	[ -d 1/_locales/en ] || mkdir -p 1/_locales/en
 	tmp_file="$$( mktemp )" ;\
     trap 'rm -- "$$tmp_file"' EXIT ;\
     if [ '$(notdir $(realpath $(wildcard .)))' != 'shared library' ]; then \
-        ./1_messages.pl extension_sh_lib_uid='ngodelncdemhlbmkihcndmecpphhlhhk' extensions_url='$(extensions_url)' $(wildcard 0/*.js) >"$$tmp_file" ;\
+        ./1-messages.pl extension_sh_lib_uid='ngodelncdemhlbmkihcndmecpphhlhhk' extensions_url='$(extensions_url)' $(wildcard 0/*.js) >"$$tmp_file" ;\
     else \
-        ./1_messages.pl extensions_url='$(extensions_url)' $(wildcard 0/*.js) >"$$tmp_file" ;\
+        ./1-messages.pl extensions_url='$(extensions_url)' $(wildcard 0/*.js) >"$$tmp_file" ;\
     fi \
     && if ! diff -Nq "$$tmp_file" 1/_locales/en/messages.json >/dev/null; then \
         cp -- "$$tmp_file" 1/_locales/en/messages.json ;\

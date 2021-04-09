@@ -4,13 +4,13 @@
 , "default_locale": "en"
 , "name": "hyphenate ©overcq"
 , "short_name": "hyphen"
-, "version": "0.0.0.33"
+, "version": "0.0.0.34"
 , "description": "Breaks words in lines on a page."
 , "options_ui":
-  { "page": "options_page.html"
+  { "page": "options-page.html"
   , "chrome_style": true
   }
-, "options_page": "options_page.html"
+, "options_page": "options-page.html"
 , "background":
   { "scripts": [ "0.js" ]
   , "persistent": false

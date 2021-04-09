@@ -1,0 +1,24 @@
+{ "manifest_version": 2
+, "minimum_chrome_version": "31"
+, "default_locale": "en"
+, "name": "privoxy functions ©ouxy"
+, "short_name": "privoxy-func"
+, "version": "0.7.0.1"
+, "description": "Adds ‟Privoxy” adaptation for ‘www’ browsing."
+, "background":
+  { "scripts": [ "0.js" ]
+  , "persistent": false
+  }
+, "page_action":
+  { "default_title": "privoxy functions"
+  , "default_popup": "page-menu.html"
+  }
+, "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+, "permissions":
+  [ "tabs"
+  , "<all_urls>"
+  ]
+, "externally_connectable":
+  { "ids": []
+  }
+}

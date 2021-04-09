@@ -4,7 +4,7 @@
 , "default_locale": "en"
 , "name": "navigation ©overcq"
 , "short_name": "navig"
-, "version": "1.0.5.5"
+, "version": "1.0.5.6"
 , "description": "Extends functions of page navigation."
 , "icons":
   { "16": "16.png"
@@ -20,7 +20,7 @@
     , "38": "38.png"
     }
   , "default_title": "go up on ‘url’ tree"
-  , "default_popup": "browser_menu.html"
+  , "default_popup": "browser-menu.html"
   }
 , "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 , "permissions":

@@ -1,0 +1,27 @@
+{ "manifest_version": 2
+, "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlpeYMESCDif/qHgIWA0HwPPDwd4dsaRoco/RKeLgNS5hXQyww+EvzmVaMDGsTbv+4aRaW25R07LrQ6+fZ6zAVBP2AmX6VV57Jj6IAOtQ+IN/FAVZNXR/Hspy33LkVcZ48lGH6wy6F7Qh5O1bJ2Yb/TC6iE4IiGKsY066XS2LOxaLXN7eUxaG2AM3NmCsgLDQZy2Bx5JNy4zmLyA5FbkoAEB4P1F0ZMOfxxtVtow4/EsZNJ/wOGiVbQr3gR48y5g16kcqxl4HiifZIwNVWVuOa9/wqHzmgLtGqmXes3nCSWBTpVCKUf6Mkhd7GGeqnbL6G1ebt51/FEcy5xRe/p2BRQIDAQAB"
+, "minimum_chrome_version": "26"
+, "default_locale": "en"
+, "name": "page restyle ©overcq"
+, "short_name": "restyle"
+, "version": "1.4.6.8"
+, "description": "Changes common inappropriate appearances."
+, "options_ui":
+  { "page": "options-page.html"
+  , "chrome_style": true
+  }
+, "options_page": "options-page.html"
+, "background":
+  { "scripts": [ "0.js" ]
+  , "persistent": false
+  }
+, "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+, "permissions":
+  [ "tabs"
+  , "storage"
+  , "<all_urls>"
+  ]
+, "externally_connectable":
+  { "ids": []
+  }
+}

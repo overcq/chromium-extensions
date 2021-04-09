@@ -1,0 +1,37 @@
+{ "manifest_version": 2
+, "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAreqlRA1lewMUmL2siWHIZfqYuc8Ob/epuckMv3c8iQVyeTddM2a8jwLQ+ukIJCe2B7ZjkQtHg38qV5kztkZNQl8QvgWCieFcZssJPVikJHPyjQtlCL2Q5rf40Qs0A0LLdSNt0Bl67Fi51OAvGODYRGkSrmFAZPSCtASYlB8zXWThaKJlGH0hcipiU8VKGE5Z89KiLGgTihcvlG0lecQyVPMcRjAd2jOJH1IVBGDdjpxlWUYAoqVOFg1t8AYqPbf55FUmJzOwus4qj7HBNHWPd5kKIVLHtiaqsXXSw4buhYCS/LQ+q4vthfZn40x0MV3qa9UTpUO/nOlcdYcBqrw+uQIDAQAB"
+, "minimum_chrome_version": "26"
+, "default_locale": "en"
+, "name": "new tab page ©overcq"
+, "short_name": "new‐tab"
+, "version": "3.1.0.3"
+, "description": "Replaces the new tab page."
+, "icons":
+  { "16": "16.png"
+  , "48": "48.png"
+  , "128": "128.png"
+  }
+, "chrome_url_overrides":
+  { "newtab": "newtab-page.html"
+  }
+, "options_ui":
+  { "page": "options-page.html"
+  , "chrome_style": true
+  }
+, "options_page": "options-page.html"
+, "background":
+  { "scripts": [ "0.js" ]
+  }
+, "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+, "permissions":
+  [ "bookmarks"
+  , "management"
+  , "storage"
+  , "tabs"
+  , "chrome://favicon/"
+  , "file:///*"
+  ]
+, "externally_connectable":
+  { "ids": []
+  }
+}
