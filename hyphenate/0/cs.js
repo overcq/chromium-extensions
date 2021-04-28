@@ -38,7 +38,7 @@
               , new RegExp( "("+ re_l +"{"+ I_sub_to_0( Q_hyphenate_C_min_length_before_hyphen, 1 ) +"}[AĄEĘIOÓUYaąeęioóuy])([Rr][\xad]?[BCĆDFGHJKLŁNŃPQRSŚVXŹŻbcćdfghjklłnńpqrsśvxźż]"+ re_l +"{"+ I_sub_to_0( Q_hyphenate_C_min_length_after_hyphen, 2 ) +"})", "g" )
               , new RegExp( "("+ re_l +"{"+ I_sub_to_0( Q_hyphenate_C_min_length_before_hyphen, 2 ) +"}[AĄEĘIOÓUYaąeęioóuy][\xad]?[Rr])([BCĆDFGHJKLŁMNŃPQRSŚTVWXŹŻbcćdfghjklłmnńpqrsśtvwxźż]"+ re_l +"{"+ I_sub_to_0( Q_hyphenate_C_min_length_after_hyphen, 1 ) +"})", "g" )
               , new RegExp( "("+ re_l +"{"+ I_sub_to_0( Q_hyphenate_C_min_length_before_hyphen, 1 ) +"}[AĄEĘIOÓUYaąeęioóuy])([Ss][\xad]?[BCĆDFGHJKLŁMNŃPQRSŚVWXŹŻbcćdfghjklłmnńpqrsśvwxźż]"+ re_l +"{"+ I_sub_to_0( Q_hyphenate_C_min_length_after_hyphen, 2 ) +"})", "g" )
-              , new RegExp( "("+ re_l +"{"+ I_sub_to_0( Q_hyphenate_C_min_length_before_hyphen, 2 ) +"}[AĄEĘIOÓUYaąeęioóuy][\xad]?[Ss])([BCĆDFGHKLŁMNŃPQRSŚTVWXŹŻbcćdfghklłmnńpqrsśtvwxźż]"+ re_l +"{"+ I_sub_to_0( Q_hyphenate_C_min_length_after_hyphen, 1 ) +"})", "g" )
+              , new RegExp( "("+ re_l +"{"+ I_sub_to_0( Q_hyphenate_C_min_length_before_hyphen, 2 ) +"}[AĄEĘIOÓUYaąeęioóuy][\xad]?[Ss])([BCĆDFGHKLŁMNŃPRSŚTVWXŹŻbcćdfghklłmnńprsśtvwxźż]"+ re_l +"{"+ I_sub_to_0( Q_hyphenate_C_min_length_after_hyphen, 1 ) +"})", "g" )
               , new RegExp( "("+ re_l +"{"+ I_sub_to_0( Q_hyphenate_C_min_length_before_hyphen, 1 ) +"}[AĄEĘIOÓUYaąeęioóuy])([Śś][\xad]?[BCDFGJKLMPQRSTVWXbcdfgjklmpqrstvwx]"+ re_l +"{"+ I_sub_to_0( Q_hyphenate_C_min_length_after_hyphen, 2 ) +"})", "g" )
               , new RegExp( "("+ re_l +"{"+ I_sub_to_0( Q_hyphenate_C_min_length_before_hyphen, 2 ) +"}[AĄEĘIOÓUYaąeęioóuy][\xad]?[Śś])([BCĆDFGHKLŁMNŃPQRSŚTVWXŹŻbcćdfghklłmnńpqrsśtvwxźż]"+ re_l +"{"+ I_sub_to_0( Q_hyphenate_C_min_length_after_hyphen, 1 ) +"})", "g" )
               , new RegExp( "("+ re_l +"{"+ I_sub_to_0( Q_hyphenate_C_min_length_before_hyphen, 1 ) +"}[AĄEĘIOÓUYaąeęioóuy])([BĆFPQTVWXbćfpqtvwx]"+ re_l +"{"+ I_sub_to_0( Q_hyphenate_C_min_length_after_hyphen, 1 ) +"})", "g" )
@@ -61,6 +61,10 @@
                               && e.nodeName !== "SCRIPT"
                               && e.nodeName !== "STYLE"
                               && e.nodeName !== "TEXTAREA"
+                              && ( e.nodeName !== "TABLE"
+                                || e.className.indexOf( "highlight" ) === -1
+                              )
+                              && e.nodeName !== "YTD-EXPANDER"
                               )
                                   ea.push(e);
                               break;
