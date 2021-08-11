@@ -9,7 +9,7 @@
 function Q_doc_P_ex_th( a
 ){  var d = document.createDocumentFragment();
     for( var i = 0; i !== a.length; i++ )
-    {   e = document.createElement( "TH" );
+    {   var e = document.createElement( "TH" );
         e.appendChild( document.createTextNode( a[i] ));
         d.appendChild(e);
     }
@@ -223,7 +223,8 @@ function Q_gui_Q_link_I_dload( e
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 function Q_string_I_form_filename( s
 , type
-){  if( navigator.platform.startsWith( "Windows" ))
+){  var n;
+    if( navigator.platform.startsWith( "Windows" ))
         switch(type)
         { case "author":
                 n = 10;
@@ -275,6 +276,7 @@ document.addEventListener( "DOMContentLoaded"
             ]
           , function( data
             ){  data = H_ocq_Q_object_R_decode_undefined(data);
+                console.log(data);
                 switch( data[ "type" ] )
                 { case "cda.pl":
                         var title = Q_string_I_form_filename( data[ "elem" ][ "title" ], "title" );

@@ -619,7 +619,7 @@ function E_youtube_Q_document_I_script( tab_id
                                     }
                             }
                             var a = {};
-                            a[ "js" ] = y[ "web_player_context_config" ][ "jsUrl" ];
+                            a[ "js" ] = y[ "bootstrapWebPlayerContextConfig" ][ "jsUrl" ];
                             a[ "uid" ] = y[ "config" ][ "args" ][ "video_id" ];
                             a[ "title" ] = y[ "config" ][ "args" ][ "title" ].replace( /\++/g, " " );
                             var y_res = y[ "config" ][ "args" ][ "raw_player_response" ];

@@ -38,13 +38,14 @@ function H_ocq_Q_database_P( k
         H_ocq_Q_database_S_timeout = window.setTimeout( H_ocq_Q_database_P, 1000 );
 }
 //==============================================================================
-var E_conf_S_defaults =
+window[ "E_conf_S_defaults" ] =
 { "Q_purge_C_interval": 100
 , "Q_purge_C_next_time": 0
 , "Q_purge_C_idle_delay": 150
 , "Q_list_C_idle_period": 5
 , "Q_list_C_last_count": 10
 };
+//==============================================================================
 function E_conf_Q_storage_T( k
 , v
 ){  var b;

@@ -6,16 +6,6 @@
 *         new tab page scripts
 * ©overcq                on ‟Gentoo Linux 13.0” “x86_64”              2015‒3‒2 *
 *******************************************************************************/
-var E_conf_S_defaults =
-{ "Q_menu_C_internal_links": false
-, "Q_menu_C_quick_help": false
-, "Q_menu_C_wheel_rev_dir": false
-, "Q_menu_C_alt_side": false
-, "Q_bg_C_root_path": ""
-, "Q_bg_C_rel_path": ""
-, "Q_bg_C_repeat": false
-};
-//==============================================================================
 var Q_menu_S_max_timeout = 1000;
 var Q_menu_I_close_S_neutral_min_bottom_margin = 8;
 var Q_menu_I_wheel_S_min_visible_y = 20;

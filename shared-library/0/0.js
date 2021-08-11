@@ -34,8 +34,8 @@ function H_ocq_Q_number_I_max( a
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 function H_ocq_Q_number_Z_int_N_hex( v
-){  var h = "0123456789abcdef";
-    var s = v ? "" : "0";
+){  const h = "0123456789abcdef";
+    let s = v ? "" : "0";
     while(v)
     {   s = h.charAt( v % 16 ) + s;
         v = H_ocq_Q_number_N_int( v / 16 );
@@ -47,8 +47,8 @@ function H_ocq_Q_number_Z_int_N_fill( v
 , c
 ){  if( c === undefined )
         c = "0";
-    var s = "";
-    var i = 10 * n;
+    let s = "";
+    let i = 10 * n;
     while( i !== 1
     && v < i
     )
@@ -86,7 +86,7 @@ function H_ocq_Q_date_M_now(
 }
 function H_ocq_Q_date_M_week_of_year( y
 , w
-){  var d = new Date( H_ocq_Q_date_M( y, 0 ));
+){  const d = new Date( H_ocq_Q_date_M( y, 0 ));
     if( w > 1 )
         d.setUTCDate( 1 + 7 * w - d.getUTCDay() ); //NDFN w ‘html’ początkiem tygodnia jest niedziela tak jak w ‟Javascript”?
     return d.valueOf();
@@ -95,9 +95,9 @@ function H_ocq_Q_date_M_week_of_year( y
 function H_ocq_Q_date_P_clear_upto( d
 , u
 ){  d = new Date(d);
-    for( var i = 0; i <= u; i++ )
-    {   var s = "setUTC"+ H_ocq_E_date_S_u[i];
-        var v = i === 4 ? 1 : 0;
+    for( let i = 0; i <= u; i++ )
+    {   const s = "setUTC"+ H_ocq_E_date_S_u[i];
+        const v = i === 4 ? 1 : 0;
         d[s](v);
     }
     return d.valueOf();
@@ -105,7 +105,7 @@ function H_ocq_Q_date_P_clear_upto( d
 //------------------------------------------------------------------------------
 function H_ocq_E_date_I_u_delta( u
 , n
-){  var d = new Date(0);
+){  const d = new Date(0);
     if( u === 4 )
         n++;
     else if( u === 6 )
@@ -117,7 +117,7 @@ function H_ocq_Q_date_R_day_of_year( d
 ){  return ( d - H_ocq_Q_date_M(( new Date(d) ).getUTCFullYear(), 0 )) / H_ocq_E_date_I_u_delta( 4, 1 ) + 1;
 }
 function H_ocq_Q_date_R_week_of_year( d
-){  var d0 = new Date( H_ocq_Q_date_M( d.getUTCFullYear(), 0 ));
+){  const d0 = new Date( H_ocq_Q_date_M( d.getUTCFullYear(), 0 ));
     return ( d - d0.valueOf() + d0.getUTCDay() ) / H_ocq_E_date_I_u_delta( 4, 7 ) + 1;
 }
 //------------------------------------------------------------------------------
@@ -149,8 +149,8 @@ function H_ocq_Q_s_Z_int_N_fill( s_
 , c
 ){  if( c === undefined )
         c = "0";
-    var s = "";
-    for( var i = s_.length; i <= n; i++ )
+    let s = "";
+    for( let i = s_.length; i <= n; i++ )
         s += c
     return s + s_;
 }
@@ -163,21 +163,21 @@ function H_ocq_Q_s_Z_url_I_normalize( url
 ){  return H_ocq_Q_url_R( H_ocq_Q_url_M(url) );
 }
 function H_ocq_Q_s_Z_url_R_without_query( url
-){  var i = url.indexOf( "#" );
+){  const i = url.indexOf( "#" );
     if( i !== -1 )
         return url.substring( 0, i );
     return url;
 }
 function H_ocq_Q_s_Z_url_R_host( url
-){  var p = url.indexOf( ":" );
-    var host = url.substring( p + 3 );
+){  const p = url.indexOf( ":" );
+    const host = url.substring( p + 3 );
     return host.substring( 0, host.indexOf( "/" ));
 }
 function H_ocq_Q_s_Z_url_Z_host_R_domain( host
-){  var domain = host;
-    var p = domain.lastIndexOf( "." );
+){  let domain = host;
+    let p = domain.lastIndexOf( "." );
     if( p !== -1 )
-    {   var s = domain.substring( 0, p );
+    {   const s = domain.substring( 0, p );
         p = s.lastIndexOf( "." );
         if( p !== -1 )
             domain = domain.substring( p + 1 );
@@ -192,8 +192,8 @@ function H_ocq_Q_s_Z_html_R_breakable( s
 ){  return s.replace( new RegExp( "", "g" ), String.fromCharCode( 0x200b )).replace( /.$/, "" ).replace( /.(.)$/, "$1" ).replace( /^./, "" ).replace( /^(.)./, "$1" );
 }
 function H_ocq_Q_s_Z_html_R_document_fragment( s
-){  var d = document.createDocumentFragment();
-    var p = 0;
+){  const d = document.createDocumentFragment();
+    let p = 0;
     while(( p = s.indexOf( "\n" )) !== -1 )
     {   d.appendChild( document.createTextNode( s.substring( 0, p )));
         d.appendChild( document.createElement( "br" ));
@@ -205,7 +205,7 @@ function H_ocq_Q_s_Z_html_R_document_fragment( s
 //==============================================================================
 function H_ocq_Q_array_Z_set_M( a
 ){  a.sort();
-    var i = 1;
+    let i = 1;
     while( i < a.length )
         if( a[i] === a[ i - 1 ] )
             a.splice( i, 1 );
@@ -221,7 +221,7 @@ function H_ocq_Q_array_Z_set_I_add( a
 }
 function H_ocq_Q_array_Z_set_I_remove( a
 , e
-){  for( var i = 0; i !== a.length; i++ )
+){  for( let i = 0; i !== a.length; i++ )
         if( a[i] === e )
         {   a.splice( i, 1 );
             break;
@@ -230,7 +230,7 @@ function H_ocq_Q_array_Z_set_I_remove( a
 }
 function H_ocq_Q_array_Z_set_T_in( a
 , e
-){  for( var i = 0; i !== a.length; i++ )
+){  for( let i = 0; i !== a.length; i++ )
         if( a[i] === e )
             return true;
     return false;
@@ -238,7 +238,7 @@ function H_ocq_Q_array_Z_set_T_in( a
 //==============================================================================
 function H_ocq_Q_object_T_eq( a
 , b
-){  var t = typeof a;
+){  const t = typeof a;
     if( t !== typeof b )
         return false;
     if( t === "object" )
@@ -248,7 +248,7 @@ function H_ocq_Q_object_T_eq( a
 //------------------------------------------------------------------------------
 ///uzupełnienie o ‘serializację’ przypisanej w obiekcie wartości “undefined” dla niezgubienia tej wartości w obiekcie przekazywanym poprzez nieznaną ‘serializację’ (“response”, procedury ‘api’ rozszerzeń, tekst w “znaczniku” ‘html’).
 function H_ocq_Q_object_R_encode_undefined( o
-){  for( var k in o )
+){  for( let k in o )
         if( o[k] === undefined )
             o[k] = "\ufffe";
         else if( typeof o[k] === "object" )
@@ -256,7 +256,7 @@ function H_ocq_Q_object_R_encode_undefined( o
     return o;
 }
 function H_ocq_Q_object_R_decode_undefined( o
-){  for( var k in o )
+){  for( let k in o )
         if( o[k] === "\ufffe" )
             o[k] = undefined;
         else if( typeof o[k] === "object" )
@@ -265,8 +265,8 @@ function H_ocq_Q_object_R_decode_undefined( o
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 function H_ocq_Q_object_Z_hash_table_T_empty( o
-){  var r = true;
-    for( var k in o )
+){  let r = true;
+    for( let k in o )
     {   r = false;
         break;
     }
@@ -277,7 +277,7 @@ function H_ocq_Q_object_Z_hash_table_T_eq( a
 ){  if( a === b )
         return true;
     if( arguments[2] !== undefined )
-        for( var k in arguments[2] )
+        for( let k in arguments[2] )
             if( arguments[2][k] === undefined ) ///domyślnie. muszą być identyczne.
             {   if( a[k] !== b[k] )
                     return false;
@@ -300,9 +300,9 @@ function H_ocq_Q_object_Z_hash_table_T_eq( a
                 { case "object":
                         switch( a[k].constructor.name )
                         { case "Date":
-                                for( var i = 0; i <= arguments[2][k]; i++ )
-                                {   var s = "setUTC"+ H_ocq_E_date_S_u[i];
-                                    var v = i === 4 ? 1 : 0;
+                                for( let i = 0; i <= arguments[2][k]; i++ )
+                                {   const s = "setUTC"+ H_ocq_E_date_S_u[i];
+                                    const v = i === 4 ? 1 : 0;
                                     a[k][s](v);
                                     b[k][s](v);
                                 }
@@ -327,7 +327,7 @@ function H_ocq_Q_object_Z_hash_table_T_eq( a
     else
     {   if( a.length !== b.length )
             return false;
-        for( var k in a )
+        for( let k in a )
             if( a[k] !== b[k] )
                 return false;
     }
@@ -335,13 +335,13 @@ function H_ocq_Q_object_Z_hash_table_T_eq( a
 }
 //==============================================================================
 function H_ocq_Q_url_M( s
-){  var a = s.match( /^(?:(?:(view-source):)?([^:/?;#]+)?:)?(?:\/\/)?(?:([^:@/?;#]+):([^@/?;#]+)@)?([^/?;#]+(:[0-9]{1,5})?)?(\/[^?;#]*)?(?:([?;][^#]+)?|[?;])?(?:#(.+)?)?$/i ); ///NDFN średnik jest traktowany jako równorzędny separator “query”, ponieważ był używany bez pytajnika przez chyba serwery ‘jsp’, a teraz miałby być używany jako alternatywny separator parametrów!
+){  const a = s.match( /^(?:(?:(view-source):)?([^:/?;#]+)?:)?(?:\/\/)?(?:([^:@/?;#]+):([^@/?;#]+)@)?([^/?;#]+(:[0-9]{1,5})?)?(\/[^?;#]*)?(?:([?;][^#]+)?|[?;])?(?:#(.+)?)?$/i ); ///NDFN średnik jest traktowany jako równorzędny separator “query”, ponieważ był używany bez pytajnika przez chyba serwery ‘jsp’, a teraz miałby być używany jako alternatywny separator parametrów!
     if( a === null )
     {   alert( "‘url’ not recognized\n“"+ s +"”" );
         return;
     }
     a.shift();
-    var o = {};
+    const o = {};
     if( a[0] !== undefined )
         o[ "internal" ] = a[0];
     if( a[1] !== undefined )
@@ -387,7 +387,7 @@ function H_ocq_Q_url_T_www( o
     && /^(?:file|https?|ftp)$/.test( o[ "protocol" ] );
 }
 function H_ocq_Q_url_R( o
-){  var s = o[ "protocol" ] + "://";
+){  let s = o[ "protocol" ] + "://";
     if( o[ "host" ] !== undefined )
         s += o[ "host" ];
     s += o[ "path" ];
@@ -399,7 +399,7 @@ function H_ocq_Q_url_R( o
 }
 //------------------------------------------------------------------------------
 function H_ocq_Q_url_Z_unicode_N_readable( o
-){  var s = "";
+){  let s = "";
     if( o[ "protocol" ] !== undefined )
         s += o[ "protocol" ] +"://";
     if( o[ "username" ] !== undefined )
@@ -417,7 +417,7 @@ function H_ocq_Q_url_Z_unicode_N_readable( o
     return s;
 }
 function H_ocq_Q_url_N_readable( o
-){  var s = "";
+){  let s = "";
     if( o[ "protocol" ] !== undefined )
         s += o[ "protocol" ] +"://";
     if( o[ "username" ] !== undefined )
@@ -425,14 +425,14 @@ function H_ocq_Q_url_N_readable( o
     if( o[ "password" ] !== undefined )
         s += o[ "password" ] +"@";
     if( o[ "host" ] !== undefined )
-    {   var a = o[ "host" ].split( "." );
-        for( var i = 0; i !== a.length; i++ )
+    {   const a = o[ "host" ].split( "." );
+        for( let i = 0; i !== a.length; i++ )
             a[i] = H_ocq_E_idn_N_entity( a[i] );
         s += a.join( "." );
     }
     if( o[ "path" ] !== undefined )
-    {   var a = o[ "path" ].split( "." );
-        for( var i = 0; i !== a.length; i++ )
+    {   const a = o[ "path" ].split( "." );
+        for( let i = 0; i !== a.length; i++ )
             a[i] = decodeURIComponent( a[i] );
         s += a.join( "." );
     }
@@ -455,13 +455,13 @@ function H_ocq_E_idn_N_entity_I_char_to_number( d
 function H_ocq_E_idn_N_entity_I_next_digit( a
 , n
 , bias
-){  var w = 1;
-    var i = 0;
+){  let w = 1;
+    let i = 0;
     while(true)
-    {   var d = a.pop();
+    {   const d = a.pop();
         n += w * d;
         i += 36;
-        var t;
+        let t;
         if( i <= bias )
             t = 1;
         else if( i >= bias + 26 )
@@ -477,24 +477,24 @@ function H_ocq_E_idn_N_entity_I_next_digit( a
 function H_ocq_E_idn_N_entity( s
 ){  if( s.substring( 0, 4 ) !== "xn--" )
         return s;
-    var p = s.lastIndexOf( "-" );
-    var a = [];
-    for( var i = s.length - 1; i > p; i-- )
+    let p = s.lastIndexOf( "-" );
+    let a = [];
+    for( let i = s.length - 1; i > p; i-- )
         a.push( H_ocq_E_idn_N_entity_I_char_to_number( s.charCodeAt(i) ));
     s = s.substring( 4, p );
-    var n = 128;
-    var p = 0;
-    var bias = 72;
+    let n = 128;
+    p = 0;
+    let bias = 72;
     while( a.length )
-    {   var b = H_ocq_E_idn_N_entity_I_next_digit( a, p, bias );
+    {   const b = H_ocq_E_idn_N_entity_I_next_digit( a, p, bias );
         a = b.pop();
-        var d = b[0] - p;
+        let d = b[0] - p;
         if(p)
             d >>= 1;
         else
             d = H_ocq_Q_number_N_int( d / 700 );
         d += s.length + 1;
-        var i = 0;
+        let i = 0;
         while( d > 455 )
         {   d = H_ocq_Q_number_N_int( d / 35 );
             i += 36;
@@ -508,15 +508,15 @@ function H_ocq_E_idn_N_entity( s
     return s;
 }
 function H_ocq_Q_idn_R( s
-){  var a = s.split( "." );
-    for( var i = 0; i !== a.length; i++ )
+){  const a = s.split( "." );
+    for( let i = 0; i !== a.length; i++ )
         a[i] = H_ocq_E_idn_N_entity( a[i] );
     return a.join( "." );
 }
 //==============================================================================
 function H_ocq_E_html_M(
-){  var h = document.documentElement.getElementsByTagName( "head" )[0];
-    var d;
+){  const h = document.documentElement.getElementsByTagName( "head" )[0];
+    let d;
     for( d = h.firstElementChild; d !== null; d = d.nextElementSibling )
         if( d.nodeName === "STYLE"
         || d.nodeName === "SCRIPT"
@@ -524,9 +524,9 @@ function H_ocq_E_html_M(
           && d.getAttribute( "rel" ).toUpperCase() === "STYLESHEET"
         ))
             break;
-    var s = location.pathname;
-    var menu = /(?:^|[^0-9A-Za-z])menu(?:[^0-9A-Za-z]|$)/i.test( s.substring( s.indexOf( "/" ) + 1 ));
-    var e = document.createElement( "style" );
+    const s = location.pathname;
+    const menu = /(?:^|[^0-9A-Za-z])menu(?:[^0-9A-Za-z]|$)/i.test( s.substring( s.indexOf( "/" ) + 1 ));
+    const e = document.createElement( "style" );
     e.appendChild( document.createTextNode(
       "*\n"
       +"{ margin: 0\n"
@@ -593,11 +593,11 @@ function H_ocq_E_html_M(
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 function H_ocq_E_html_Q_element_I_prev( e
-){  var e_ = e.previousElementSibling;
+){  const e_ = e.previousElementSibling;
     return e_ !== null ? e_ : e.parentNode;
 }
 function H_ocq_E_html_Q_element_I_next( e
-){  var e_;
+){  let e_;
     if(( e_ = e.firstElementChild ) !== null
     || ( e_ = e.nextElementSibling ) !== null
     )
@@ -609,32 +609,32 @@ function H_ocq_E_html_Q_element_I_next( e
 }
 //------------------------------------------------------------------------------
 function H_ocq_E_html_Q_element_R_page_offset_x( e
-){  var a = 0;
+){  let a = 0;
     do
         a += e.offsetLeft;
     while(( e = e.offsetParent ) !== null ) {}
     return a;
 }
 function H_ocq_E_html_Q_element_R_page_offset_y( e
-){  var a = 0;
+){  let a = 0;
     do
         a += e.offsetTop;
     while(( e = e.offsetParent ) !== null ) {}
     return a;
 }
 function H_ocq_E_html_Q_element_R_visible_width( e
-){  var v = H_ocq_E_html_Q_element_R_page_offset_x(e);
-    var v_0 = H_ocq_Q_number_I_max( v, window.pageXOffset );
-    var v_1 = H_ocq_Q_number_I_min( v + e.offsetWidth, window.pageXOffset + window.innerWidth );
+){  let v = H_ocq_E_html_Q_element_R_page_offset_x(e);
+    const v_0 = H_ocq_Q_number_I_max( v, window.pageXOffset );
+    const v_1 = H_ocq_Q_number_I_min( v + e.offsetWidth, window.pageXOffset + window.innerWidth );
     v =  v_1 - v_0;
     if( v < 0 )
         v = 0;
     return v;
 }
 function H_ocq_E_html_Q_element_R_visible_height( e
-){  var v = H_ocq_E_html_Q_element_R_page_offset_y(e);
-    var v_0 = H_ocq_Q_number_I_max( v, window.pageYOffset );
-    var v_1 = H_ocq_Q_number_I_min( v + e.offsetHeight, window.pageYOffset + window.innerHeight );
+){  let v = H_ocq_E_html_Q_element_R_page_offset_y(e);
+    const v_0 = H_ocq_Q_number_I_max( v, window.pageYOffset );
+    const v_1 = H_ocq_Q_number_I_min( v + e.offsetHeight, window.pageYOffset + window.innerHeight );
     v =  v_1 - v_0;
     if( v < 0 )
         v = 0;
@@ -642,11 +642,11 @@ function H_ocq_E_html_Q_element_R_visible_height( e
 }
 //------------------------------------------------------------------------------
 function H_ocq_E_html_Q_element_R_text_I( e
-){  var s;
+){  let s;
     switch( e.nodeType )
     { case e.TEXT_NODE:
             s = e.nodeValue;
-            var wrap = document.defaultView.getComputedStyle( e.parentNode ).whiteSpace;
+            const wrap = document.defaultView.getComputedStyle( e.parentNode ).whiteSpace;
             if( !/^pre/.test(wrap) )
                 s = s.replace( /\s+/g, " " );
             else if( wrap === "pre-line" )
@@ -666,7 +666,7 @@ function H_ocq_E_html_Q_element_R_text_I( e
       case e.DOCUMENT_NODE:
       case e.DOCUMENT_FRAGMENT_NODE:
             s = "";
-            for( var i = 0; i !== e.childNodes.length; i++ )
+            for( let i = 0; i !== e.childNodes.length; i++ )
                 s += H_ocq_E_html_Q_element_R_text_I( e.childNodes[i] )
             break;
       default:
@@ -682,7 +682,7 @@ function H_ocq_E_html_Q_element_R_text( e
 function H_ocq_E_html_E_wa_X_mouse_over_I_filter( e
 ){  if( e.relatedTarget === null )
         return true;
-    var phase = e.target.getAttribute( "data-wa-mouse-over-move-out" );
+    let phase = e.target.getAttribute( "data-wa-mouse-over-move-out" );
     if( phase === null )
         phase = "0";
     if( phase === "0" )
@@ -696,7 +696,7 @@ function H_ocq_E_html_E_wa_X_mouse_move_I_filter( e
     || !e.target.getAttribute
     )
         return true;
-    var phase = e.target.getAttribute( "data-wa-mouse-over-move-out" );
+    const phase = e.target.getAttribute( "data-wa-mouse-over-move-out" );
     if( phase === "2" )
         return false;
     if( phase === "1"
@@ -710,7 +710,7 @@ function H_ocq_E_html_E_wa_X_mouse_move_I_filter( e
 function H_ocq_E_html_E_wa_X_mouse_out_I_filter( e
 ){  if( e.relatedTarget === null )
         return true;
-    var phase = e.target.getAttribute( "data-wa-mouse-over-move-out" );
+    const phase = e.target.getAttribute( "data-wa-mouse-over-move-out" );
     if( phase >= 1 )
     {   e.target.removeAttribute( "data-wa-mouse-over-move-out" );
         return false;
@@ -738,10 +738,10 @@ function H_ocq_E_html_Q_form_Q_input_P_conv( e
       case "file":
             break;
       case "datetime":
-            var d = new Date(v);
+        {   const d = new Date(v);
             v = d.getUTCFullYear() +"-"+ H_ocq_Q_number_Z_int_N_fill( d.getUTCMonth() + 1, 1 ) +"-"+ H_ocq_Q_number_Z_int_N_fill( d.getUTCDate(), 1 ) +"T"+ H_ocq_Q_number_Z_int_N_fill( d.getUTCHours(), 1 ) +":"+ H_ocq_Q_number_Z_int_N_fill( d.getUTCMinutes(), 1 );
-            var s = d.getUTCSeconds();
-            var ms = d.getUTCMilliseconds();
+            const s = d.getUTCSeconds();
+            const ms = d.getUTCMilliseconds();
             if( s
             || ms
             )
@@ -750,23 +750,27 @@ function H_ocq_E_html_Q_form_Q_input_P_conv( e
                     v += "."+ H_ocq_Q_number_Z_int_N_fill( d.getUTCMilliseconds() + 1, 2 ) +"Z";
             }
             break;
+        }
       case "date":
-            var d = new Date(v);
+        {   const d = new Date(v);
             v = d.getUTCFullYear() +"-"+ H_ocq_Q_number_Z_int_N_fill( d.getUTCMonth() + 1, 1 ) +"-"+ H_ocq_Q_number_Z_int_N_fill( d.getUTCDate(), 1 );
             break;
+        }
       case "month":
-            var d = new Date(v);
+        {   const d = new Date(v);
             v = d.getUTCFullYear() +"-"+ H_ocq_Q_number_Z_int_N_fill( d.getUTCMonth() + 1, 1 );
             break;
+        }
       case "week":
-            var d = new Date(v);
+        {   const d = new Date(v);
             v = d.getUTCFullYear() +"-W"+ H_ocq_Q_number_Z_int_N_fill( H_ocq_Q_date_R_week_of_year(v), 1 );
             break;
+        }
       case "time":
-            var d = new Date(v);
+        {   const d = new Date(v);
             v = H_ocq_Q_number_Z_int_N_fill( d.getUTCHours(), 1 ) +":"+ H_ocq_Q_number_Z_int_N_fill( d.getUTCMinutes(), 1 );
-            var s = d.getUTCSeconds();
-            var ms = d.getUTCMilliseconds();
+            const s = d.getUTCSeconds();
+            const ms = d.getUTCMilliseconds();
             if( s
             || ms
             )
@@ -775,6 +779,7 @@ function H_ocq_E_html_Q_form_Q_input_P_conv( e
                     v += "."+ H_ocq_Q_number_Z_int_N_fill( d.getUTCMilliseconds() + 1, 2 ) +"Z";
             }
             break;
+        }
       case "color":
             v = "#"+ H_ocq_Q_s_Z_int_N_fill( H_ocq_Q_number_Z_int_N_hex( v >> 16 ), 1 ) + H_ocq_Q_s_Z_int_N_fill( H_ocq_Q_number_Z_int_N_hex(( v >> 8 ) & 0xff ), 1 ) + H_ocq_Q_s_Z_int_N_fill( H_ocq_Q_number_Z_int_N_hex( v & 0xff ), 1 );
             break;
@@ -806,57 +811,63 @@ function H_ocq_E_html_Q_form_Q_input_R_conv( e
       case "radio":
             break;
       case "datetime":
-            var a = v.match( /^([0-9]{4,})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2})(?::([0-9]{2})(?:.([0-9]{1,3}))?)?Z$/ );
+        {   const a = v.match( /^([0-9]{4,})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2})(?::([0-9]{2})(?:.([0-9]{1,3}))?)?Z$/ );
             v = H_ocq_Q_date_M( parseInt( a[1] ), parseInt( a[2] ) - 1, parseInt( a[3] ), parseInt( a[4] ), parseInt( a[5] ), a[6] !== undefined ? parseInt( a[6] ) : 0, a[7] !== undefined ? parseInt( a[7] ) : 0 );
             break;
+        }
       case "date":
-            var a = v.match( /^([0-9]{4,})-([0-9]{2})-([0-9]{2})$/ );
+        {   const a = v.match( /^([0-9]{4,})-([0-9]{2})-([0-9]{2})$/ );
             v = H_ocq_Q_date_M( parseInt( a[1] ), parseInt( a[2] ) - 1, parseInt( a[3] ));
             break;
+        }
       case "month":
-            var a = v.match( /^([0-9]{4,})-([0-9]{2})$/ );
+        {   const a = v.match( /^([0-9]{4,})-([0-9]{2})$/ );
             v = H_ocq_Q_date_M( parseInt( a[1] ), parseInt( a[2] ) - 1 );
             break;
+        }
       case "week":
-            var a = v.match( /^([0-9]{4,})-W([0-9]{2})$/ );
+        {   const a = v.match( /^([0-9]{4,})-W([0-9]{2})$/ );
             v = H_ocq_Q_date_M_week_of_year( parseInt( a[1] ), parseInt( a[2] ));
             break;
+        }
       case "time":
-            var a = v.match( /^([0-9]{2}):([0-9]{2})(?::([0-9]{2})(?:.([0-9]{1,3}))?)?$/ );
+        {   const a = v.match( /^([0-9]{2}):([0-9]{2})(?::([0-9]{2})(?:.([0-9]{1,3}))?)?$/ );
             v = ( new Date(0) ).setUTCHours( parseInt( a[1] ), parseInt( a[2] ), a[3] !== undefined ? parseInt( a[3] ) : 0, a[4] !== undefined ? parseInt( a[4] ) : 0 );
             break;
+        }
       case "number":
       case "range":
             v = parseFloat(v);
             break;
       case "color":
-            var a = v.match( /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/ );
+        {   const a = v.match( /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/ );
             v = ( parseInt( "0x"+ a[1] ) << 16 ) | ( parseInt( "0x"+ a[2] ) << 8 ) | parseInt( "0x"+ a[3] );
             break;
+        }
       case "file":
             v = [];
-            for( var i = 0; i !== e.files.length; i++ )
+            for( let i = 0; i !== e.files.length; i++ )
                 v.push( e.files[i].name );
             break;
     }
     return v;
 }
 function H_ocq_E_html_Q_form_Q_input_R( e
-){  var v = H_ocq_E_html_Q_form_Q_input_R_value(e);
+){  let v = H_ocq_E_html_Q_form_Q_input_R_value(e);
     if( v === "" )
         v = e.getAttribute( "value" );
     return H_ocq_E_html_Q_form_Q_input_R_conv( e, v );
 }
 //==============================================================================
 function H_ocq_E_conf_Q_form_M(
-){  var e = document.createElement( "form" );
+){  const e = document.createElement( "form" );
     document.body.appendChild(e);
     return e;
 }
 function H_ocq_E_conf_Q_form_I_add_group( form_group
 , label
-){  var e = document.createElement( "fieldset" );
-    var l = document.createElement( "legend" );
+){  const e = document.createElement( "fieldset" );
+    const l = document.createElement( "legend" );
     l.appendChild( document.createTextNode(label) );
     e.appendChild(l);
     form_group.appendChild(e);
@@ -864,7 +875,7 @@ function H_ocq_E_conf_Q_form_I_add_group( form_group
 }
 function H_ocq_E_conf_Q_form_I_add_p( form_group
 , df
-){  var e = document.createElement( "p" );
+){  const e = document.createElement( "p" );
     e.appendChild(df);
     form_group.appendChild(e);
     return e;
@@ -877,13 +888,13 @@ function H_ocq_E_conf_Q_form_I_add( form_group
 , type
 , option_change
 , label
-){  var l = document.createElement( "label" );
-    var e = document.createElement( "input" );
+){  const l = document.createElement( "label" );
+    const e = document.createElement( "input" );
     e.id = option_change;
     e.type = type;
     if( H_ocq_E_sh_lib_Q_conf_T_name_match( option_change ))
         e.addEventListener( "change", H_ocq_E_conf_Q_form_X_change, true );
-    var p = label.indexOf( "$" );
+    const p = label.indexOf( "$" );
     l.appendChild( document.createTextNode( label.substring( 0, p )));
     l.appendChild(e);
     l.appendChild( document.createTextNode( label.substring( p + 1 )));
@@ -903,7 +914,7 @@ function H_ocq_E_conf_Q_form_I_add_button( form_group
             window[ "H_ocq_E_conf_Q_form_S_danger_uids" ] = [];
         window[ "H_ocq_E_conf_Q_form_S_danger_uids" ].push(id);
     }
-    var e = document.createElement( "input" );
+    const e = document.createElement( "input" );
     e.id = id;
     e.type = type;
     e.value = label;
@@ -914,7 +925,7 @@ function H_ocq_E_conf_Q_form_I_add_button( form_group
             ){  e.stopPropagation();
                 window.setTimeout(
                   function(
-                  ){  var e = document.getElementById( "danger_enable" );
+                  ){  const e = document.getElementById( "danger_enable" );
                       e.checked = false;
                       H_ocq_E_conf_Q_form_Q_danger_enable_I_change(e);
                   }
@@ -927,7 +938,7 @@ function H_ocq_E_conf_Q_form_I_add_button( form_group
         ){  e.stopPropagation();
             window.setTimeout(
               function(
-              ){  var e = document.getElementById( "danger_enable" );
+              ){  const e = document.getElementById( "danger_enable" );
                   e.checked = false;
                   H_ocq_E_conf_Q_form_Q_danger_enable_I_change(e);
               }
@@ -941,7 +952,7 @@ function H_ocq_E_conf_Q_form_I_add_button( form_group
 }
 function H_ocq_E_conf_Q_form_I_add_reset( form_group
 , listener
-){  var e = H_ocq_E_conf_Q_form_I_add_button( form_group
+){  const e = H_ocq_E_conf_Q_form_I_add_button( form_group
     , "reset"
     , "reset"
     , "reset"
@@ -953,12 +964,12 @@ function H_ocq_E_conf_Q_form_I_add_reset( form_group
 //------------------------------------------------------------------------------
 function H_ocq_E_conf_Q_form_X_change( e
 ){  e.stopPropagation();
-    var v = H_ocq_E_html_Q_form_Q_input_R_value( e.currentTarget );
+    let v = H_ocq_E_html_Q_form_Q_input_R_value( e.currentTarget );
     if( v === "" )
     {   v = e.currentTarget.getAttribute( "value" );
         H_ocq_E_html_Q_form_Q_input_P_value( e.currentTarget, v );
     }
-    var o = {};
+    const o = {};
     o[ e.currentTarget.id ] = E_conf_Q_form_R_conv( e.currentTarget.id, H_ocq_E_html_Q_form_Q_input_R_conv( e.currentTarget, v ));
     if( o[ e.currentTarget.id ] !== window[ e.currentTarget.id ] )
         chrome.runtime.sendMessage(
@@ -972,7 +983,7 @@ function H_ocq_E_conf_Q_form_X_change( e
 }
 function H_ocq_E_conf_Q_form_X_focus( e
 ){  e.stopPropagation();
-    var e = document.getElementById( "danger_enable" );
+    e = document.getElementById( "danger_enable" );
     e.checked = false;
     H_ocq_E_conf_Q_form_Q_danger_enable_I_change(e);
 }
@@ -983,15 +994,15 @@ function H_ocq_E_conf_Q_form_Q_danger_enable_X_change( e
 function H_ocq_E_conf_Q_form_Q_danger_enable_I_change( e
 ){  if( e === undefined )
         e = document.getElementById( "danger_enable" );
-    var a = e.getAttribute( "data-uids" ).split( "," );
-    for( var i = 0; i !== a.length; i++ )
+    const a = e.getAttribute( "data-uids" ).split( "," );
+    for( let i = 0; i !== a.length; i++ )
         document.getElementById( a[i] ).disabled = !e.checked;
 }
 //------------------------------------------------------------------------------
 function H_ocq_E_conf_Q_form_P( form_group
-){  var es = form_group.getElementsByTagName( "input" );
-    var o = {};
-    for( var i = 0; i !== es.length; i++ )
+){  const es = form_group.getElementsByTagName( "input" );
+    const o = {};
+    for( let i = 0; i !== es.length; i++ )
         if( H_ocq_E_sh_lib_Q_conf_T_name_match( es[i].id ))
             o[ es[i].id ] = undefined;
     if( !H_ocq_Q_object_Z_hash_table_T_empty(o) )
@@ -1000,15 +1011,15 @@ function H_ocq_E_conf_Q_form_P( form_group
           , H_ocq_Q_object_R_encode_undefined(o)
           ]
         , function( o
-          ){  for( var k in o )
-              {   var e = document.getElementById(k);
+          ){  for( let k in o )
+              {   const e = document.getElementById(k);
                   e.setAttribute( "value", H_ocq_E_html_Q_form_Q_input_P_conv( e, E_conf_Q_form_P_conv( k, o[k] )));
                   e.addEventListener( "focus", H_ocq_E_conf_Q_form_X_focus, true );
               }
           }
         );
     if( H_ocq_E_conf_Q_form_S_danger_uids !== undefined )
-    {   var e = H_ocq_E_conf_Q_form_I_add( form_group, "checkbox", "danger_enable", "enable dangerous functions of form" );
+    {   const e = H_ocq_E_conf_Q_form_I_add( form_group, "checkbox", "danger_enable", "enable dangerous functions of form" );
         e.setAttribute( "data-uids", H_ocq_E_conf_Q_form_S_danger_uids.join( "," ));
         delete window[ "H_ocq_E_conf_Q_form_S_danger_uids" ];
         e.addEventListener( "change", H_ocq_E_conf_Q_form_Q_danger_enable_X_change, true );
@@ -1021,23 +1032,23 @@ function H_ocq_E_sh_lib_Q_js_T_conf(
 ){  return window[ "E_conf_Q_form_P_conv" ] !== undefined;
 }
 function H_ocq_E_sh_lib_Q_js_Z_cs_I_inject_procs_P_args(
-){  var o = {};
+){  const o = {};
     o[ "H_ocq_E_sh_lib_Q_js_Z_cs_I_inject_procs_R_args" ] = window[ "H_ocq_E_sh_lib_Q_js_Z_cs_I_inject_procs_R_args" ].toString();
-    var f = [];
-    var j = 0;
+    const f = [];
+    let j = 0;
     if( arguments[j] === null )
     {   f.push( "H_ocq_E_sh_lib_Q_js_Z_cs_I_inject_procs_P_args" );
         j++;
     }
     for( ; j !== arguments.length; j++ )
         f.push( arguments[j] );
-    for( var i = 0; i !== f.length; i++ )
+    for( let i = 0; i !== f.length; i++ )
         if( /^H_ocq_[A-Z]_\w+$/.test( f[i] ))
             if( typeof window[ f[i] ] === "function" )
-            {   var s = window[ f[i] ].toString();
-                var a = s.substring( s.indexOf( "{" )).match( /\bH_ocq_[A-Z]_\w+/g );
+            {   const s = window[ f[i] ].toString();
+                const a = s.substring( s.indexOf( "{" )).match( /\bH_ocq_[A-Z]_\w+/g );
                 if( a !== null )
-                    for( var j = 0; j !== a.length; j++ )
+                    for( let j = 0; j !== a.length; j++ )
                         H_ocq_Q_array_Z_set_I_add( f, a[j] );
                 o[ f[i] ] = "function"+ s.substring( s.indexOf( "(" ));
             }else
@@ -1045,11 +1056,11 @@ function H_ocq_E_sh_lib_Q_js_Z_cs_I_inject_procs_P_args(
     return JSON.stringify(o);
 }
 function H_ocq_E_sh_lib_Q_js_Z_cs_I_inject_procs_R_args( caller_arguments
-){  var o = caller_arguments[ caller_arguments.length - 1 ];
+){  const o = caller_arguments[ caller_arguments.length - 1 ];
     if( o[ "H_ocq_E_sh_lib_Q_js_Z_cs_I_inject_procs_P_args" ] === undefined )
         delete o[ "H_ocq_E_sh_lib_Q_js_Z_cs_I_inject_procs_R_args" ];
     s = "";
-    for( var k in o )
+    for( let k in o )
         if( /^H_ocq_[A-Z]_\w+$/.test(k) )
             s += "window[ \""+ k +"\" ] = "+ o[k] +";";
     eval(s);
@@ -1059,21 +1070,21 @@ function H_ocq_E_sh_lib_Q_conf_T_name_match( s
 ){  return /^(?:[A-Z]_\w+_)?C_\w+$/.test(s);
 }
 function H_ocq_E_sh_lib_Q_conf_N_change_to_hash_table( o
-){  var r_o = {};
-    for( var k in o )
+){  const r_o = {};
+    for( let k in o )
         r_o[k] = o[k].newValue;
     return r_o;
 }
 //------------------------------------------------------------------------------
 function H_ocq_E_sh_lib_Q_conf_X( o
 ){  if( H_ocq_E_sh_lib_Q_js_T_conf() )
-        for( var k in o )
-        {   var e = document.getElementById(k);
-            if( e !== null ) ///czy wymieniona opcja konfiguracji jest obecna w formularzu tego panelu.
+        for( let k in o )
+        {   const e = document.getElementById(k);
+            if( e !== null ) // Czy wymieniona opcja konfiguracji jest obecna w formularzu tego panelu.
                 H_ocq_E_html_Q_form_Q_input_P( e, E_conf_Q_form_P_conv( k, o[k] ));
         }
     if( window[ "Q_conf_X" ] !== undefined )
-        Q_conf_X(o);
+        window[ "Q_conf_X" ](o);
 }
 function H_ocq_E_sh_lib_Q_conf_X_0( o
 , area
@@ -1088,8 +1099,7 @@ function H_ocq_E_sh_lib_Q_conf_X_0( o
           , o
           ]
         , function( s
-          ){  var o;
-              eval(s);
+          ){  eval(s);
           }
         );
 }
@@ -1107,8 +1117,7 @@ function H_ocq_E_sh_lib_Q_conf_X_1( o
           , o
           ]
         , function( s
-          ){  var o;
-              eval(s);
+          ){  eval(s);
               H_ocq_E_sh_lib_Q_conf_X(o);
           }
         );
@@ -1116,7 +1125,7 @@ function H_ocq_E_sh_lib_Q_conf_X_1( o
 //------------------------------------------------------------------------------
 function H_ocq_E_sh_lib_Q_conf_Q_storage_T( k
 , v
-){  if( typeof v !== typeof E_conf_S_defaults[k]
+){  if( typeof v !== typeof window[ "E_conf_S_defaults" ][k]
     || ( typeof v === "number"
       && !H_ocq_Q_number_T(v)
     ))
@@ -1128,13 +1137,13 @@ function H_ocq_E_sh_lib_Q_conf_Q_storage_T( k
 function H_ocq_E_sh_lib_Q_conf_Q_storage_R_conv( k
 , v
 ){  if( !H_ocq_E_sh_lib_Q_conf_Q_storage_T( k, v ))
-        v = E_conf_S_defaults[k];
+        v = window[ "E_conf_S_defaults" ][k];
     if( window[ "E_conf_Q_storage_R_conv" ] !== undefined )
     {   v = E_conf_Q_storage_R_conv( k, v );
         if( typeof v === "number"
         && !H_ocq_Q_number_T(v)
         )
-            v = E_conf_Q_storage_R_conv( k, E_conf_S_defaults[k] );
+            v = E_conf_Q_storage_R_conv( k, window[ "E_conf_S_defaults" ][k] );
     }
     return v;
 }
@@ -1142,49 +1151,49 @@ function H_ocq_E_sh_lib_Q_conf_Q_storage_P_conv( k
 , v
 ){  if( window[ "E_conf_Q_storage_P_conv" ] !== undefined )
         v = E_conf_Q_storage_P_conv( k, v );
-    if( v !== E_conf_S_defaults[k] )
+    if( v !== window[ "E_conf_S_defaults" ][k] )
         return v;
 }
 //------------------------------------------------------------------------------
-///uaktualnij zmienne globalne konfiguracji —przez “eval”.
+/// Uaktualnij zmienne globalne konfiguracji —przez “eval”.
 function H_ocq_E_sh_lib_Q_conf_I_msg_R_conv_0( o
-){  var ret = "";
+){  let ret = "";
     o = H_ocq_Q_object_R_decode_undefined(o);
-    for( var k in o )
+    for( let k in o )
         ret += "if("+ k +"===undefined)"+ k +"="+ JSON.stringify( H_ocq_E_sh_lib_Q_conf_Q_storage_R_conv( k, o[k] )) +";";
     return ret;
 }
-///ustaw zmienne globalne konfiguracji —przez “eval”.
+/// Ustaw zmienne globalne konfiguracji —przez “eval”.
 function H_ocq_E_sh_lib_Q_conf_I_msg_R_conv_1( o
 ){  o = H_ocq_Q_object_R_decode_undefined(o);
-    var ret = "";
-    for( var k in o )
+    let ret = "";
+    for( let k in o )
         ret += k +"="+ JSON.stringify( H_ocq_E_sh_lib_Q_conf_Q_storage_R_conv( k, o[k] )) +";";
     return ret;
 }
-///daj zmienną lokalną ‘hash table’ konfiguracji.
+/// Daj zmienną lokalną ‘hash table’ konfiguracji.
 function H_ocq_E_sh_lib_Q_conf_I_msg_R_conv_2( o
 ){  o = H_ocq_Q_object_R_decode_undefined(o);
-    for( var k in o )
+    for( let k in o )
         o[k] = H_ocq_E_sh_lib_Q_conf_Q_storage_R_conv( k, o[k] );
     return o;
 }
-///1. i 2. —przez “eval”.
+/// 1. i 2. —przez “eval”.
 function H_ocq_E_sh_lib_Q_conf_I_msg_R_conv_3( o
 ){  o = H_ocq_Q_object_R_decode_undefined(o);
-    for( var k in o )
+    for( let k in o )
         o[k] = H_ocq_E_sh_lib_Q_conf_Q_storage_R_conv( k, o[k] );
-    return "o="+ JSON.stringify(o) +";for(var k in o)window[k]=o[k];";
+    return "const o="+ JSON.stringify(o) +";for(let k in o)window[k]=o[k];";
 }
-///daj obiekt zapisu konfiguracji.
+/// Daj obiekt zapisu konfiguracji.
 function H_ocq_E_sh_lib_Q_conf_I_msg_P_conv( o
-){  for( var k in o )
+){  for( let k in o )
         o[k] = H_ocq_E_sh_lib_Q_conf_Q_storage_P_conv( k, o[k] );
     return H_ocq_Q_object_R_encode_undefined(o);
 }
 function H_ocq_E_sh_lib_Q_conf_I_msg( msg
 , response
-){  var f = [ "H_ocq_E_sh_lib_Q_init_R_session_name", "H_ocq_E_sh_lib_Q_conf_I_msg_R_conv_0", "H_ocq_E_sh_lib_Q_conf_I_msg_R_conv_1", "H_ocq_E_sh_lib_Q_conf_I_msg_R_conv_2", "H_ocq_E_sh_lib_Q_conf_I_msg_R_conv_3", "H_ocq_E_sh_lib_Q_conf_I_msg_P_conv" ];
+){  const f = [ "H_ocq_E_sh_lib_Q_init_R_session_name", "H_ocq_E_sh_lib_Q_conf_I_msg_R_conv_0", "H_ocq_E_sh_lib_Q_conf_I_msg_R_conv_1", "H_ocq_E_sh_lib_Q_conf_I_msg_R_conv_2", "H_ocq_E_sh_lib_Q_conf_I_msg_R_conv_3", "H_ocq_E_sh_lib_Q_conf_I_msg_P_conv" ];
     if( msg[0] < f.length )
     {   response( window[ f[ msg[0] ]]( msg[1] ));
         return true;
@@ -1194,12 +1203,12 @@ function H_ocq_E_sh_lib_Q_conf_I_msg( msg
 //------------------------------------------------------------------------------
 function H_ocq_E_sh_lib_Q_conf_I_save( o
 ){  o = H_ocq_Q_object_R_decode_undefined(o);
-    var r = [];
-    for( var k in o )
+    const r = [];
+    for( let k in o )
         if( o[k] === undefined )
             r.push(k);
     if( r.length )
-    {   for( var i = 0; i !== r.length; i++ )
+    {   for( let i = 0; i !== r.length; i++ )
             delete o[ r[i] ];
         chrome.storage.sync.remove(r);
     }
@@ -1208,9 +1217,9 @@ function H_ocq_E_sh_lib_Q_conf_I_save( o
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 function H_ocq_E_sh_lib_Q_init_R_session_name(
-){  if( window[ "H_ocq_E_sh_lib_Q_init_R_session_name_S" ] === undefined )
-        window[ "H_ocq_E_sh_lib_Q_init_R_session_name_S" ] = "_"+ H_ocq_Q_date_M_now() +"_";
-    return window[ "H_ocq_E_sh_lib_Q_init_R_session_name_S" ];
+){  if( window[ "H"+"_ocq_E_sh_lib_Q_init_R_session_name_S" ] === undefined )
+        window[ "H"+"_ocq_E_sh_lib_Q_init_R_session_name_S" ] = "_"+ H_ocq_Q_date_M_now() +"_";
+    return window[ "H"+"_ocq_E_sh_lib_Q_init_R_session_name_S" ];
 }
 function H_ocq_E_sh_lib_Q_init_W_wait( i
 ){  window.clearInterval( E_sh_lib_Q_init_S_interval[i] );
@@ -1228,8 +1237,8 @@ function H_ocq_E_sh_lib_Q_init_Q_conf_I_listener_1( a
 ){  chrome.storage.onChanged.addListener( H_ocq_E_sh_lib_Q_conf_X_1 );
     chrome.storage.onChanged.removeListener( H_ocq_E_sh_lib_Q_conf_X_0 );
     delete window[ "H_ocq_E_sh_lib_Q_conf_X_0" ];
-    var o = {};
-    for( var i = 0; i !== a.length; i++ )
+    const o = {};
+    for( let i = 0; i !== a.length; i++ )
         o[ a[i] ] = window[ a[i] ];
     H_ocq_E_sh_lib_Q_conf_X(o);
     delete window[ "H_ocq_E_sh_lib_Q_init_Q_conf_I_listener_1" ];
@@ -1238,13 +1247,11 @@ function H_ocq_E_sh_lib_Q_init_Q_conf_I_listener_1( a
 var H_ocq_E_ui_Q_menu_S_delay = 360;
 var H_ocq_E_flow_S_interval = 2000;
 //==============================================================================
-///OLET
-
-//==============================================================================
+const H_ocq_E_import_export_S = {};
 window.addEventListener( "load"
 , function(
   ){  H_ocq_Q_number_Z_integer_S_max = 1;
-      var v = H_ocq_Q_number_Z_integer_S_max;
+      let v = H_ocq_Q_number_Z_integer_S_max;
       while(( v = H_ocq_Q_number_Z_integer_S_max << 1 ) > H_ocq_Q_number_Z_integer_S_max )
           H_ocq_Q_number_Z_integer_S_max = v;
       H_ocq_Q_number_Z_integer_S_min = v;
@@ -1253,30 +1260,31 @@ window.addEventListener( "load"
         function( msg
         , sender
         , response
-        ){  var ret = "";
-            if( typeof msg === "string" )
-            {   var a = msg.substring( msg.indexOf( "{" )).match( /\bH_ocq_[A-Z]_\w+/g );
-                msg = [];
-                if( a !== null )
-                    for( var j = 0; j !== a.length; j++ )
-                        H_ocq_Q_array_Z_set_I_add( msg, a[j] );
-            }
-            for( var i = 0; i !== msg.length; i++ )
-            {   if( !/^H_ocq_[A-Z]_\w+$/.test( msg[i] )
-                || window[ msg[i] ] === undefined
-                )
-                    continue;
-                ret += "window["+ JSON.stringify( msg[i] ) +"]=";
-                if( typeof window[ msg[i] ] === "function" )
-                {   var s = window[ msg[i] ].toString();
-                    var a = s.substring( s.indexOf( "{" )).match( /\bH_ocq_[A-Z]_\w+/g );
-                    if( a !== null )
-                        for( var j = 0; j !== a.length; j++ )
-                            H_ocq_Q_array_Z_set_I_add( msg, a[j] );
-                    ret += "function"+ s.substring( s.indexOf( "(" ));
-                }else
-                    ret += JSON.stringify( window[ msg[i] ] );
-                ret += ";";
+        ){  let ret = "";
+            if( typeof msg === "string" ) // Eksport definicji z “0.js” (i plików *.html) i import do plików *.html.
+            {   if( H_ocq_E_import_export_S[ sender.id ] === undefined )
+                    H_ocq_E_import_export_S[ sender.id ] = "";
+                H_ocq_E_import_export_S[ sender.id ] += msg;
+            }else
+            {   for( let i = 0; i !== msg.length; i++ )
+                {   if( !/^H_ocq_[A-Z]_\w+$/.test( msg[i] )
+                    || window[ msg[i] ] === undefined
+                    )
+                        continue;
+                    ret += "window["+ JSON.stringify( msg[i] ) +"]=";
+                    if( typeof window[ msg[i] ] === "function" )
+                    {   const s = window[ msg[i] ].toString();
+                        const a = s.substring( s.indexOf( "{" )).match( /\bH_ocq_[A-Z]_\w+/g );
+                        if( a !== null )
+                            for( let j = 0; j !== a.length; j++ )
+                                H_ocq_Q_array_Z_set_I_add( msg, a[j] );
+                        ret += "function"+ s.substring( s.indexOf( "(" ));
+                    }else
+                        ret += JSON.stringify( window[ msg[i] ] );
+                    ret += ";";
+                }
+                if( H_ocq_E_import_export_S[ sender.id ] !== undefined )
+                    ret += H_ocq_E_import_export_S[ sender.id ];
             }
             response(ret);
             return false;

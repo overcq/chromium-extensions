@@ -59,7 +59,7 @@ foreach my $Q_file_S_filename ( @ARGV )
         @a_ = ( @a_, $cnt =~ m{\bH_ocq_[A-Z]_\w+\b}g );
         @a_ = ( @a_, 'H_ocq_E_sh_lib_Q_init_W_wait' ) if @a_;
         my @a = ();
-        foreach( sort @a_ ) #unique
+        foreach( sort @a_ ) # unique
         {   if( $_ ne $last )
             {   push @a, $_;
                 $last = $_;
@@ -69,7 +69,7 @@ foreach my $Q_file_S_filename ( @ARGV )
         undef $last;
         my $Q_cnt_S_wait_instance = -1;
         my $s = '';
-        if( @a ) #jeśli ”@b”, to ”@a” napewno jest.
+        if( @a ) # Jeśli ”@b”, to ”@a” napewno jest.
         {   if( $Q_file_T_0
             and @b
             ){  $s .= $& if $cnt =~ s`^var E_conf_S_defaults\s*=.*?^};\n?``ms;
@@ -99,7 +99,8 @@ foreach my $Q_file_S_filename ( @ARGV )
         }
       );'. $after;
             }egms;
-            $s .= 'var E_sh_lib_Q_init_S_done, E_sh_lib_Q_init_S_interval = {};
+            $s .= 'window[ "E_sh_lib_Q_init_S_done" ] = undefined;
+window[ "E_sh_lib_Q_init_S_interval" ] = {};
 ';
             $s .= 'var '. join( ', ', @b ) .';
 ' if @b;
@@ -114,11 +115,11 @@ foreach my $Q_file_S_filename ( @ARGV )
   ){  eval(s);
 ';
             $s .=  '      H_ocq_E_sh_lib_Q_init_Q_conf_I_listener_0();
-      var a = [ '. join( ', ', map { '"'. $_ .'"' } @b ) .' ];
+      const a = [ '. join( ', ', map { '"'. $_ .'"' } @b ) .' ];
       chrome.storage.sync.get( a
       , (function( a
         ){  return function( o
-            ){  for( var i = 0; i < a.length; i++ )
+            ){  for( let i = 0; i < a.length; i++ )
                     if( o[ a[i] ] === undefined )
                         o[ a[i] ] = undefined;
                 ' if @b;
@@ -164,6 +165,18 @@ foreach my $Q_file_S_filename ( @ARGV )
             $s .= '  }
 );
 ';
+            my $s_ = '';
+            $s_ .= "if(window[\"E_conf_S_defaults\"]===undefined)window[\"E_conf_S_defaults\"]$1" if $s =~ /^var E_conf_S_defaults\s*(=.*?^};)\n?/ms;
+            #$s_ .= "if(window[\"Q_conf_X\"]===undefined)window[\"Q_conf_X\"]=function$1;" if $cnt =~ /^function Q_conf_X(\(.*?^})\n?/ms;
+            if( $s_ ne '' )
+            {   $s_ =~ s`\\`\\\\`gs;
+                $s_ =~ s`\n`\\n`gs;
+                $s_ =~ s`"`\\"`gs;
+                $s .= 'chrome.runtime.sendMessage( "'. $global{ 'extension_sh_lib_uid' } .'"
+, "'. $s_ .'"
+);
+';
+            }
             $cnt = $s . $cnt;
             $cnt .= "\n" if $cnt !~ /\n$/;
             $Q_cnt_S_wait_instance++;
@@ -173,7 +186,7 @@ foreach my $Q_file_S_filename ( @ARGV )
       , function(
         ){  if( E_sh_lib_Q_init_S_done === undefined )
                 return;
-            for( var k in E_sh_lib_Q_init_S_interval )
+            for( let k in E_sh_lib_Q_init_S_interval )
                 if( k !== "'. $Q_cnt_S_wait_instance .'" )
                     return;
             H_ocq_E_sh_lib_Q_init_W_wait( "'. $Q_cnt_S_wait_instance .'" );
