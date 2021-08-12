@@ -9,12 +9,12 @@
 var E_conf_S_defaults =
 { "C_max_count": 20
 };
-var Q_url_S_a = [];
-var Q_url_S_removed = [];
+const Q_url_S_a = [];
+const Q_url_S_removed = [];
 //==============================================================================
 function E_conf_Q_storage_T( k
 , v
-){  var b;
+){  let b;
     switch(k)
     { case "C_max_count":
             b = v === H_ocq_Q_number_N_int(v)
@@ -31,13 +31,13 @@ function Q_url_M( tab_id
       }
     , (function( url
       ){ return function( result
-         ){  var o =
+         ){  const o =
              { "title": result !== undefined ? result[0] : "[no title]"
              , "url": url
              };
              Q_url_S_a[ tab_id ] = o;
              if( result !== undefined )
-                 for( var i = 0; i !== Q_url_S_removed.length; i++ )
+                 for( let i = 0; i !== Q_url_S_removed.length; i++ )
                      if( Q_url_S_removed[i][ "title" ] === "[no title]"
                      && Q_url_S_removed[i][ "url" ] === Q_url_S_a[ tab_id ][ "url" ]
                      )
@@ -77,7 +77,7 @@ window.addEventListener( "load"
       );
       chrome.tabs.query( {}
       , function( tabs
-        ){  for( var i = 0; i !== tabs.length; i++ )
+        ){  for( let i = 0; i !== tabs.length; i++ )
                 Q_url_M( tabs[i].id, tabs[i].url );
             init_end;
         }
@@ -86,7 +86,7 @@ window.addEventListener( "load"
         function( tab_id
         , info
         , tab
-        ){  var url;
+        ){  let url;
             if( info.status === "complete" ) //WA bo kasuje ‘badge’.
                 url = info.url !== undefined ? info.url : tab.url;
             else if( info.url !== undefined )

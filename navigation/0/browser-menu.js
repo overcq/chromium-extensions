@@ -13,7 +13,7 @@ function Q_tr_X_click( e
     )
         return true;
     e.stopPropagation();
-    var o = { "url": e.currentTarget.getAttribute( "data-url" ) };
+    const o = { "url": e.currentTarget.getAttribute( "data-url" ) };
     if( e.button )
         chrome.tabs.create(o);
     else
@@ -28,7 +28,7 @@ function Q_tr_X_click( e
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 document.addEventListener( "DOMContentLoaded"
 , function(
-  ){  var tbody = document.getElementsByTagName( "tbody" )[0];
+  ){  const tbody = document.getElementsByTagName( "tbody" )[0];
       chrome.tabs.query(
         { "currentWindow": true
         , "active": true
@@ -41,9 +41,9 @@ document.addEventListener( "DOMContentLoaded"
             , function( a
               ){  a = H_ocq_Q_object_R_decode_undefined(a);
                   if( a !== undefined )
-                  {   var s;
-                      var tr = document.createElement( "tr" );
-                      var m = a[ "protocol" ].match( /^(http)(s)?$/ )
+                  {   let s;
+                      const tr = document.createElement( "tr" );
+                      const m = a[ "protocol" ].match( /^(http)(s)?$/ )
                       if( m !== null )
                       {   if( m[2] === undefined )
                               a[ "protocol" ] += "s";
@@ -62,7 +62,7 @@ document.addEventListener( "DOMContentLoaded"
                           a[ "protocol" ] = m[0];
                       }else
                           s = a[ "protocol" ] +":";
-                      var td = document.createElement( "td" );
+                      const td = document.createElement( "td" );
                       td.appendChild( document.createTextNode(s) );
                       tr.appendChild(td);
                       tbody.appendChild(tr);
@@ -70,7 +70,7 @@ document.addEventListener( "DOMContentLoaded"
                       && /\./.test( a[ "host" ] )
                       && !/^www\./.test( a[ "host" ] )
                       )
-                      {   tr = document.createElement( "tr" );
+                      {   const tr = document.createElement( "tr" );
                           tr.setAttribute( "data-url"
                           , H_ocq_Q_url_R( H_ocq_Q_url_M_incomplete(
                               { "protocol": a[ "protocol" ]
@@ -78,7 +78,7 @@ document.addEventListener( "DOMContentLoaded"
                               }
                           )));
                           tr.addEventListener( "click", Q_tr_X_click, true );
-                          td = document.createElement( "td" );
+                          const td = document.createElement( "td" );
                           td.appendChild( document.createTextNode( "⇢ "+ H_ocq_Q_url_Z_unicode_N_readable(
                             { "domain": "www."+ a[ "host" ]
                             , "path": "/"
@@ -87,8 +87,8 @@ document.addEventListener( "DOMContentLoaded"
                           tr.appendChild(td);
                           tbody.appendChild(tr);
                       }
-                      var b;
-                      var s_display;
+                      let b;
+                      let s_display;
                       if( a[ "host" ] !== undefined )
                       {   b = a[ "host" ].split( "." );
                           if( b.length > 1 )
@@ -99,16 +99,16 @@ document.addEventListener( "DOMContentLoaded"
                           {   s = "";
                               s_display = "";
                           }
-                          for( var i = b.length - 1; i >= 0; i-- )
+                          for( let i = b.length - 1; i >= 0; i-- )
                           {   s = "."+ b[i] + s;
                               s_display = "."+ H_ocq_E_idn_N_entity( b[i] ) + s_display;
-                              td = document.createElement( "td" );
+                              const td = document.createElement( "td" );
                               td.style.textAlign = "right";
                               td.appendChild( document.createTextNode( H_ocq_Q_url_Z_unicode_N_readable(
                                 { "host": s_display
                                 }
                               )));
-                              tr = document.createElement( "tr" );
+                              const tr = document.createElement( "tr" );
                               tr.setAttribute( "data-url"
                               , H_ocq_Q_url_R( H_ocq_Q_url_M_incomplete(
                                   { "protocol": a[ "protocol" ]
@@ -125,15 +125,15 @@ document.addEventListener( "DOMContentLoaded"
                           b.shift();
                           s = "";
                           s_display = "";
-                          for( var i = 0; i !== b.length; i++ )
+                          for( let i = 0; i !== b.length; i++ )
                           {   s += "/"+ b[i];
                               s_display += "/"+ decodeURIComponent( b[i] );
-                              td = document.createElement( "td" );
+                              const td = document.createElement( "td" );
                               td.appendChild( document.createTextNode( H_ocq_Q_url_Z_unicode_N_readable(
                                 { "path": s_display
                                 }
                               )));
-                              tr = document.createElement( "tr" );
+                              const tr = document.createElement( "tr" );
                               tr.setAttribute( "data-url"
                               , H_ocq_Q_url_R( H_ocq_Q_url_M_incomplete(
                                   { "protocol": a[ "protocol" ]
@@ -149,12 +149,12 @@ document.addEventListener( "DOMContentLoaded"
                       if( a[ "server_query" ] !== undefined )
                       {   s = a[ "client_query" ];
                           delete a[ "client_query" ];
-                          td = document.createElement( "td" );
+                          const td = document.createElement( "td" );
                           td.appendChild( document.createTextNode( H_ocq_Q_url_Z_unicode_N_readable(
                             { "server_query": a[ "server_query" ]
                             }
                           )));
-                          tr = document.createElement( "tr" );
+                          const tr = document.createElement( "tr" );
                           tr.setAttribute( "data-url", H_ocq_Q_url_R( H_ocq_Q_url_M_incomplete(a)));
                           tr.addEventListener( "click", Q_tr_X_click, true );
                           tr.appendChild(td);
@@ -163,13 +163,13 @@ document.addEventListener( "DOMContentLoaded"
                               a[ "client_query" ] = s;
                       }
                       if( a[ "client_query" ] !== undefined )
-                      {   td = document.createElement( "td" );
+                      {   const td = document.createElement( "td" );
                           td.style.textAlign = "right";
                           td.appendChild( document.createTextNode( H_ocq_Q_url_Z_unicode_N_readable(
                             { "client_query": a[ "client_query" ]
                             }
                           )));
-                          tr = document.createElement( "tr" );
+                          const tr = document.createElement( "tr" );
                           tr.appendChild(td);
                           tbody.appendChild(tr);
                       }

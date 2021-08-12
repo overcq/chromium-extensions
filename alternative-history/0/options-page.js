@@ -34,8 +34,8 @@ function E_conf_Q_form_R_conv( k
 document.addEventListener( "DOMContentLoaded"
 , function(
   ){  document.title = 25%`extension ‟alternative history”➪options page``;
-      var form = H_ocq_E_conf_Q_form_M();
-      var group = H_ocq_E_conf_Q_form_I_add_group( form, 26%`purge history`` );
+      const form = H_ocq_E_conf_Q_form_M();
+      let group = H_ocq_E_conf_Q_form_I_add_group( form, 26%`purge history`` );
       H_ocq_E_conf_Q_form_I_add( group, "number", "Q_purge_C_interval", 27%`older than$$days`` );
       H_ocq_E_conf_Q_form_I_add( group, "date", "Q_purge_C_next_time", 28%`saved next time is$$`` );
       H_ocq_E_conf_Q_form_I_add( group, "number", "Q_purge_C_idle_delay", 29%`when user is idle for$$seconds or display is locked`` );

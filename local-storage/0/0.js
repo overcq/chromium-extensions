@@ -6,25 +6,25 @@
 *         background scripts
 * ©overcq                on ‟Gentoo Linux 13.0” “x86_64”             2015‒4‒28 *
 *******************************************************************************/
-var Q_interval_S_delta = 400;
+const Q_interval_S_delta = 400;
 //==============================================================================
-var Q_tabs_S_opener = {};
-var Q_tabs_S_cookie_urls = {};
-var Q_tabs_S_cookie_hosts = {};
-var Q_tabs_S_cookie_domains = {};
-var Q_tabs_S_after_main = {};
-var Q_oth_req_S_first_url = [];
-var Q_oth_req_S_uid = [];
-var Q_oth_req_S_interval;
-var Q_oth_req_S_timeout = 4000;
+const Q_tabs_S_opener = {};
+const Q_tabs_S_cookie_urls = {};
+const Q_tabs_S_cookie_hosts = {};
+const Q_tabs_S_cookie_domains = {};
+const Q_tabs_S_after_main = {};
+const Q_oth_req_S_first_url = [];
+const Q_oth_req_S_uid = [];
+let Q_oth_req_S_interval;
+const Q_oth_req_S_timeout = 4000;
 //==============================================================================
 function Q_cookie_set_P_clean_url( url
 ){  chrome.cookies.getAll(
       { "url": url
       }
     , function( cookies
-      ){  for( var i = 0; i !== cookies.length; i++ )
-          {   var cookie_url = "://"+ ( cookies[i].domain.charAt(0) === "." ? cookies[i].domain.substring(1) : cookies[i].domain ) + cookies[i].path;
+      ){  for( let i = 0; i !== cookies.length; i++ )
+          {   const cookie_url = "://"+ ( cookies[i].domain.charAt(0) === "." ? cookies[i].domain.substring(1) : cookies[i].domain ) + cookies[i].path;
               chrome.cookies.remove(
                 { "url": "http"+ cookie_url
                 , "name": cookies[i].name
@@ -60,15 +60,15 @@ function Q_cookie_set_I_add( tab_id
 ){  if( into_main_frame === undefined
     || !into_main_frame
     )
-    {   for( var i = 0; i !== Q_tabs_S_cookie_urls[ tab_id ].length; i++ )
+    {   for( let i = 0; i !== Q_tabs_S_cookie_urls[ tab_id ].length; i++ )
             if( Q_tabs_S_cookie_urls[ tab_id ][i] === url )
                 return;
         Q_tabs_S_cookie_urls[ tab_id ].push(url);
-        var s = H_ocq_Q_s_Z_url_R_host(url);
+        let s = H_ocq_Q_s_Z_url_R_host(url);
         if( s === "" )
             return;
-        var b = false;
-        for( var i = 0; i !== Q_tabs_S_cookie_hosts[ tab_id ].length; i++ )
+        let b = false;
+        for( let i = 0; i !== Q_tabs_S_cookie_hosts[ tab_id ].length; i++ )
             if( Q_tabs_S_cookie_hosts[ tab_id ][i] === s )
             {   b = true;
                 break;
@@ -77,7 +77,7 @@ function Q_cookie_set_I_add( tab_id
             Q_tabs_S_cookie_hosts[ tab_id ].push(s);
         s = H_ocq_Q_s_Z_url_Z_host_R_domain(s);
         b = false;
-        for( var i = 0; i !== Q_tabs_S_cookie_domains[ tab_id ].length; i++ )
+        for( let i = 0; i !== Q_tabs_S_cookie_domains[ tab_id ].length; i++ )
             if( Q_tabs_S_cookie_domains[ tab_id ][i] === s )
             {   b = true;
                 break;
@@ -85,8 +85,8 @@ function Q_cookie_set_I_add( tab_id
         if( !b )
             Q_tabs_S_cookie_domains[ tab_id ].push(s);
     }else
-    {   var h;
-        for( var i = 0; i !== Q_tabs_S_cookie_urls[ tab_id ].length; i++ )
+    {   let h;
+        for( let i = 0; i !== Q_tabs_S_cookie_urls[ tab_id ].length; i++ )
         {   if( Q_tabs_S_cookie_urls[ tab_id ][i] === "" )
             {   h = i;
                 continue;
@@ -98,12 +98,12 @@ function Q_cookie_set_I_add( tab_id
             Q_tabs_S_cookie_urls[ tab_id ].push(url);
         else
             Q_tabs_S_cookie_urls[ tab_id ].splice( h, 0, url );
-        var s = H_ocq_Q_s_Z_url_R_host(url);
+        const s = H_ocq_Q_s_Z_url_R_host(url);
         if( s === "" )
             return;
         h = undefined;
-        var b = false;
-        for( var i = 0; i !== Q_tabs_S_cookie_hosts[ tab_id ].length; i++ )
+        let b = false;
+        for( let i = 0; i !== Q_tabs_S_cookie_hosts[ tab_id ].length; i++ )
         {   if( Q_tabs_S_cookie_hosts[ tab_id ][i] === "" )
             {   h = i;
                 continue;
@@ -121,14 +121,14 @@ function Q_cookie_set_I_add( tab_id
     }
 }
 function Q_cookie_set_W( tab_id
-){  for( var i = 0; i !== Q_tabs_S_cookie_urls[ tab_id ].length; i++ )
+){  for( let i = 0; i !== Q_tabs_S_cookie_urls[ tab_id ].length; i++ )
     {   if( Q_tabs_S_cookie_urls[ tab_id ][i] === "" )
             continue;
-        var b = false;
-        for( var id in Q_tabs_S_cookie_urls )
+        let b = false;
+        for( let id in Q_tabs_S_cookie_urls )
         {   if( id == tab_id )
                 continue;
-            for( var j = 0; j !== Q_tabs_S_cookie_urls[id].length; j++ )
+            for( let j = 0; j !== Q_tabs_S_cookie_urls[id].length; j++ )
             {   if( Q_tabs_S_cookie_urls[id][j] === "" )
                     break;
                 if( Q_tabs_S_cookie_urls[id][j] === Q_tabs_S_cookie_urls[ tab_id ][i] )
@@ -142,8 +142,8 @@ function Q_cookie_set_W( tab_id
         if(b)
             continue;
         b = false;
-        var domain = H_ocq_Q_s_Z_url_R_domain( Q_tabs_S_cookie_urls[ tab_id ][i] );
-        for( var id in Q_tabs_S_cookie_domains )
+        const domain = H_ocq_Q_s_Z_url_R_domain( Q_tabs_S_cookie_urls[ tab_id ][i] );
+        for( let id in Q_tabs_S_cookie_domains )
         {   if( id == tab_id )
                  continue;
             if( Q_tabs_S_cookie_domains[id][0] === domain )
@@ -167,10 +167,10 @@ function Q_content_script_I_document_load( tab_id
             ){  if( window[ my_var +"clear" ] !== undefined )
                     return;
                 window[ my_var +"clear" ] = true;
-                var req = indexedDB.webkitGetDatabaseNames();
+                const req = indexedDB.webkitGetDatabaseNames();
                 req.addEventListener( "success"
                 , function( e
-                ){  for( var i = 0; i !== e.target.result.length; i++ )
+                ){  for( let i = 0; i !== e.target.result.length; i++ )
                         indexedDB.deleteDatabase( e.target.result[i] );
                 }
                 );
@@ -190,7 +190,7 @@ function Q_content_script_I_document_load_delay( tab_id
             function( my_var
             , tab_id
             ){  window.addEventListener( "focus", window[ my_var +"focus_func" ] = function( e
-                ){  var msg = {};
+                ){  const msg = {};
                     msg.cmd = 1;
                     msg.tab_id = tab_id;
                     chrome.runtime.sendMessage( msg, function( response
@@ -215,7 +215,7 @@ function Q_content_script_I_document_load_delay_check( tab_id
     , { "code": "("+
             function( my_var
             ){  if( window[ my_var +"focus_func" ] !== undefined )
-                {   var e = {};
+                {   const e = {};
                     window[ my_var +"focus_func" ](e);
                 }
             }
@@ -228,9 +228,9 @@ function Q_content_script_I_document_load_delay_check( tab_id
 function Q_request_I_main_frame( tab_id
 , url
 ){  if( Q_tabs_S_cookie_domains[ tab_id ] !== undefined )
-    {   var domain = H_ocq_Q_s_Z_url_R_domain(url);
+    {   const domain = H_ocq_Q_s_Z_url_R_domain(url);
         if( Q_tabs_S_cookie_domains[ tab_id ][0] === domain )
-        {   var i;
+        {   let i;
             for( i = 0; i !== Q_tabs_S_cookie_urls[ tab_id ].length; i++ )
                 if( Q_tabs_S_cookie_urls[ tab_id ][i] === "" )
                 {   i++;
@@ -248,9 +248,9 @@ function Q_request_I_main_frame( tab_id
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 function Q_oth_req_I_interval(
-){  var now = H_ocq_Q_date_M_now();
-    for( var i = 0; i !== Q_oth_req_S_first_url.length; i++ )
-        for( var j = 0; j !== Q_oth_req_S_first_url[i][1].length; j++ )
+){  const now = H_ocq_Q_date_M_now();
+    for( let i = 0; i !== Q_oth_req_S_first_url.length; i++ )
+        for( let j = 0; j !== Q_oth_req_S_first_url[i][1].length; j++ )
             if( Q_oth_req_S_first_url[i][1][j][1] <= now )
                 if( Q_oth_req_S_first_url[i][1].length > 1 )
                     Q_oth_req_S_first_url[i][1].splice( j--, 1 );
@@ -258,7 +258,7 @@ function Q_oth_req_I_interval(
                 {   Q_oth_req_S_first_url.splice( i--, 1 );
                     break;
                 }
-    for( var i = 0; i !== Q_oth_req_S_uid.length; i++ )
+    for( let i = 0; i !== Q_oth_req_S_uid.length; i++ )
         if( Q_oth_req_S_uid[i][1] <= now )
             Q_oth_req_S_uid.splice( i--, 1 );
     if( !Q_oth_req_S_first_url.length
@@ -286,10 +286,10 @@ window.addEventListener( "load"
       );
       chrome.tabs.query( {}
       , function( tabs
-        ){  for( var i = 0; i !== tabs.length; i++ )
+        ){  for( let i = 0; i !== tabs.length; i++ )
             {   if( tabs[i].url === undefined )
                     continue;
-                var url = H_ocq_Q_url_M( tabs[i].url );
+                const url = H_ocq_Q_url_M( tabs[i].url );
                 if( !H_ocq_Q_url_T_www(url) )
                     continue;
                 Q_cookie_set_M( tabs[i].id, H_ocq_Q_s_Z_url_R_without_query( H_ocq_Q_url_R(url) ));
@@ -302,14 +302,14 @@ window.addEventListener( "load"
       );
       chrome.webRequest.onBeforeRequest.addListener(
         function( details
-        ){  var url = H_ocq_Q_s_Z_url_I_normalize( details.url );
-            var host = H_ocq_Q_s_Z_url_R_host(url);
+        ){  const url = H_ocq_Q_s_Z_url_I_normalize( details.url );
+            const host = H_ocq_Q_s_Z_url_R_host(url);
             if( host === ""
             || host === "p.p"
             || host === "config.privoxy.org"
             )
                 return {};
-            var domain = H_ocq_Q_s_Z_url_Z_host_R_domain(host);
+            const domain = H_ocq_Q_s_Z_url_Z_host_R_domain(host);
             if( details.tabId !== -1 )
             {   if( Q_tabs_S_cookie_domains[ details.tabId ] === undefined )
                 {   if( Q_tabs_S_opener[ details.tabId ] !== undefined
@@ -325,10 +325,10 @@ window.addEventListener( "load"
                     return {}; //zezwolenie na pobranie ‘urla’ z głównej domeny tej karty.
                 }
                 if( details.type === "main_frame" )
-                    for( var id in Q_tabs_S_cookie_hosts )
+                    for( let id in Q_tabs_S_cookie_hosts )
                     {   if( id == details.tabId )
                             continue;
-                        for( var i = 0; i !== Q_tabs_S_cookie_hosts[id].length; i++ )
+                        for( let i = 0; i !== Q_tabs_S_cookie_hosts[id].length; i++ )
                         {   if( Q_tabs_S_cookie_hosts[id][i] === "" )
                                 break;
                             if( Q_tabs_S_cookie_hosts[id][i] === host )
@@ -338,19 +338,19 @@ window.addEventListener( "load"
                         }
                     }
             }else if( details.type === "other" )
-            {   for( var i = 0; i !== Q_oth_req_S_uid.length; i++ )
+            {   for( let i = 0; i !== Q_oth_req_S_uid.length; i++ )
                     if( Q_oth_req_S_uid[i][0] === details.requestId )
                     {   Q_oth_req_S_uid[i][1] = H_ocq_Q_date_M_now() + Q_oth_req_S_timeout;
                         return {}; //zezwolenie na kolejne ‘urle’ zarejestrowanego, nie blokowanego żądania “chrome.downloads”.
                     }
-                for( var i = 0; i !== Q_oth_req_S_first_url.length; i++ )
+                for( let i = 0; i !== Q_oth_req_S_first_url.length; i++ )
                     if( Q_oth_req_S_first_url[i][0] === url )
                         return {}; //delegowanie decyzji o blokowaniu żądań “chrome.downloads” do procedury nagłówków ‘http’ przed wysłaniem żądania ‘http’.
             }
-            for( var id in Q_tabs_S_cookie_domains )
+            for( let id in Q_tabs_S_cookie_domains )
             {   if( id == details.tabId )
                     continue;
-                for( var i = 0; i !== Q_tabs_S_cookie_domains[id].length; i++ )
+                for( let i = 0; i !== Q_tabs_S_cookie_domains[id].length; i++ )
                     if( Q_tabs_S_cookie_domains[id][i] === domain )
                     {   if( details.type === "main_frame"
                         && Q_tabs_S_cookie_urls[ details.tabId ] !== undefined
@@ -374,13 +374,12 @@ window.addEventListener( "load"
       );
       chrome.webRequest.onBeforeSendHeaders.addListener(
         function( details
-        ){  var same_header_name = false;
-            for( var i = 0; i !== Q_oth_req_S_first_url.length; i++ )
+        ){  for( let i = 0; i !== Q_oth_req_S_first_url.length; i++ )
                 if( Q_oth_req_S_first_url[i][0] === H_ocq_Q_s_Z_url_I_normalize( details.url ))
                 {   if( details.requestHeaders !== undefined )
-                        for( var j = 0; j !== details.requestHeaders.length; j++ )
+                        for( let j = 0; j !== details.requestHeaders.length; j++ )
                             if( details.requestHeaders[j].name === H_ocq_E_sh_lib_Q_init_R_session_name() )
-                            {   for( var k = 0; k !== Q_oth_req_S_first_url[i][1].length; k++ )
+                            {   for( let k = 0; k !== Q_oth_req_S_first_url[i][1].length; k++ )
                                     if( details.requestHeaders[j].value === Q_oth_req_S_first_url[i][1][k][0] )
                                     {   if( Q_oth_req_S_first_url[i][1].length > 1 )
                                             Q_oth_req_S_first_url[i][1].splice( k, 1 );
@@ -451,11 +450,11 @@ window.addEventListener( "load"
                 return;
             Q_content_script_I_document_load( tab_id );
             Q_request_I_main_frame( tab_id, H_ocq_Q_s_Z_url_R_without_query( info.url ));
-            var b = false;
-            for( var id in Q_tabs_S_cookie_domains )
+            let b = false;
+            for( let id in Q_tabs_S_cookie_domains )
             {   if( id == tab_id )
                     continue;
-                for( var i = 0; i !== Q_tabs_S_cookie_domains[ tab_id ].length; i++ )
+                for( let i = 0; i !== Q_tabs_S_cookie_domains[ tab_id ].length; i++ )
                     if( Q_tabs_S_cookie_domains[id][i] === Q_tabs_S_cookie_domains[ tab_id ][0] )
                     {   b = true;
                         break;
@@ -483,10 +482,10 @@ window.addEventListener( "load"
         , response
         ){  if( message.cmd !== 1 )
                 return false;
-            for( var tab_id in Q_tabs_S_cookie_domains )
+            for( let tab_id in Q_tabs_S_cookie_domains )
             {   if( tab_id == message.tab_id )
                     continue;
-                for( var i = 0; i !== Q_tabs_S_cookie_domains[ tab_id ].length; i++ )
+                for( let i = 0; i !== Q_tabs_S_cookie_domains[ tab_id ].length; i++ )
                     if( Q_tabs_S_cookie_domains[ tab_id ][i] === Q_tabs_S_cookie_domains[ message.tab_id ][0] )
                     {   response(true);
                         return false;
@@ -500,14 +499,14 @@ window.addEventListener( "load"
         function( message
         , sender
         , response
-        ){  var now = H_ocq_Q_date_M_now();
-            var req_header =
+        ){  const now = H_ocq_Q_date_M_now();
+            const req_header =
             [ now.toString()
             , now + Q_oth_req_S_timeout
             ];
             if( Q_oth_req_S_interval === undefined )
                 Q_oth_req_S_interval = window.setInterval( Q_oth_req_I_interval, Q_oth_req_S_timeout + Q_interval_S_delta );
-            for( var i = 0; i !== Q_oth_req_S_first_url.length; i++ )
+            for( let i = 0; i !== Q_oth_req_S_first_url.length; i++ )
                 if( Q_oth_req_S_first_url[i][0] === message )
                 {   Q_oth_req_S_first_url[i][1].push( req_header )
                     response( [ H_ocq_E_sh_lib_Q_init_R_session_name(), req_header[0] ] );

@@ -4,7 +4,7 @@
 , "default_locale": "en"
 , "name": "local storage ©overcq"
 , "short_name": "local-stor"
-, "version": "1.0.4.77"
+, "version": "1.0.5"
 , "description": "Clears local storages՚ data for a tab‐domain."
 , "icons":
   { "16": "16.png"

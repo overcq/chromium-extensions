@@ -18,9 +18,9 @@ function E_conf_Q_form_R_conv( k
 document.addEventListener( "DOMContentLoaded"
 , function(
   ){  document.title = 0%`extension ‟recently closed”➪options page``;
-      var form = H_ocq_E_conf_Q_form_M();
+      const form = H_ocq_E_conf_Q_form_M();
       H_ocq_E_conf_Q_form_I_add( form, "number", "C_max_count", 1%`max. count$$`` );
-      var group = H_ocq_E_conf_Q_form_I_add_group( form, 2%`configuration settings`` );
+      const group = H_ocq_E_conf_Q_form_I_add_group( form, 2%`configuration settings`` );
       H_ocq_E_conf_Q_form_I_add_reset( group
       , function(
         ){  chrome.storage.sync.clear();

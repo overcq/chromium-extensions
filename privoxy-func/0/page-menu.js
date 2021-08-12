@@ -14,7 +14,7 @@ function Q_button_I_click( n
     window.close();
 }
 document.addEventListener( "DOMContentLoaded", function(
-){  var e = document.getElementById( "button_go" );
+){  let e = document.getElementById( "button_go" );
     e.addEventListener( "click", function(
     ){  Q_button_I_click(1);
     }

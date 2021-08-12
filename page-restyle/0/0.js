@@ -41,7 +41,7 @@ var E_conf_S_defaults =
 };
 function E_conf_Q_storage_T( k
 , v
-){  var b;
+){  let b;
     switch(k)
     { case "Q_color_C_default_background":
       case "Q_color_C_default_border":
@@ -86,7 +86,7 @@ function E_conf_Q_storage_P_conv( k
     return v;
 }
 function Q_conf_X( o
-){  for( var k in o )
+){  for( let k in o )
         switch(k)
         { case "Q_color_C_default_background":
           case "Q_color_C_default_border":
@@ -103,7 +103,7 @@ function Q_conf_X( o
                     ]
                   }
                 , function( tabs
-                  ){  for( var i = 0; i !== tabs.length; i++ )
+                  ){  for( let i = 0; i !== tabs.length; i++ )
                           Q_page_I_restyle( tabs[i].id );
                   }
                 );

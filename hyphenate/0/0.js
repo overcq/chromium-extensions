@@ -33,7 +33,7 @@ function Q_page_I_hyphenate( tab_id
 //==============================================================================
 function E_conf_Q_storage_T( k
 , v
-){  var b;
+){  let b;
     switch(k)
     { case "Q_hyphenate_C_min_length_before_hyphen":
       case "Q_hyphenate_C_min_length_after_hyphen":

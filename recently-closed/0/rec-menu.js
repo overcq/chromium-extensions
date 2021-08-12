@@ -19,7 +19,7 @@ function Q_tr_X_click( e
           , e.currentTarget.id.substring(1)
           ]
         );
-    var o = { "url": e.currentTarget.getAttribute( "data-url" ) };
+    const o = { "url": e.currentTarget.getAttribute( "data-url" ) };
     if( e.button )
         chrome.tabs.create(o);
     else
@@ -34,7 +34,7 @@ function Q_tr_X_click( e
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 document.addEventListener( "DOMContentLoaded"
 , function(
-  ){  var tbody = document.getElementsByTagName( "tbody" )[0];
+  ){  const tbody = document.getElementsByTagName( "tbody" )[0];
       chrome.tabs.query(
         { "currentWindow": true
         , "active": true
@@ -44,8 +44,8 @@ document.addEventListener( "DOMContentLoaded"
               [ 10 ]
             , function( a
               ){  a = H_ocq_Q_object_R_decode_undefined(a);
-                  for( var i = 0; i !== a.length; i++ )
-                  {   var tr = document.createElement( "tr" );
+                  for( let i = 0; i !== a.length; i++ )
+                  {   const tr = document.createElement( "tr" );
                       tr.id = "_"+ i;
                       tr.setAttribute( "data-url", a[i][ "url" ] );
                       tr.addEventListener( "mousedown", Q_tr_X_click, true );

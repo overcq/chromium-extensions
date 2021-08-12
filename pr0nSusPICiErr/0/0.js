@@ -25,7 +25,7 @@ window.addEventListener( "load"
 , function(
   ){  chrome.tabs.query( {}
       , function( tabs
-        ){  for( var i = 0; i !== tabs.length; i++ )
+        ){  for( let i = 0; i !== tabs.length; i++ )
                 if( H_ocq_Q_s_Z_url_T_www( tabs[i].url ))
                     Q_page_I_insert_cs( tabs[i].id );
             init_end;

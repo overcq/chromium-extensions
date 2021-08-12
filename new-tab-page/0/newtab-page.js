@@ -6,16 +6,16 @@
 *         new tab page scripts
 * ©overcq                on ‟Gentoo Linux 13.0” “x86_64”              2015‒3‒2 *
 *******************************************************************************/
-var Q_menu_S_max_timeout = 1000;
-var Q_menu_I_close_S_neutral_min_bottom_margin = 8;
-var Q_menu_I_wheel_S_min_visible_y = 20;
-var Q_menu_X_mouse_move_S_x, Q_menu_X_mouse_move_S_y;
+const Q_menu_S_max_timeout = 1000;
+const Q_menu_I_close_S_neutral_min_bottom_margin = 8;
+const Q_menu_I_wheel_S_min_visible_y = 20;
+let Q_menu_X_mouse_move_S_x, Q_menu_X_mouse_move_S_y;
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-var Q_bar_Q_ul_S_offset_x;
-var Q_bar_Q_ul_S_0, Q_bar_Q_li_S_1;
+let Q_bar_Q_ul_S_offset_x;
+let Q_bar_Q_ul_S_0, Q_bar_Q_li_S_1;
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-var Q_bar_Q_ul_S_opened, Q_bar_Q_ul_S_over, Q_bar_Q_li_S_over;
-var Q_bar_Q_ul_S_timeout;
+let Q_bar_Q_ul_S_opened, Q_bar_Q_ul_S_over, Q_bar_Q_li_S_over;
+let Q_bar_Q_ul_S_timeout;
 //==============================================================================
 function Q_browser_I_open_tab(
   url
@@ -37,7 +37,7 @@ function Q_link_Z_one_X_click( e
     if( e.button !== 0
     || e.metaKey || e.ctrlKey || e.shiftKey )
         return;
-    var url;
+    let url;
     if( !e.altKey )
         url = e.currentTarget.getAttribute( "href" );
     else
@@ -71,10 +71,10 @@ function Q_link_Z_dir_X_click( e
     }
     if( !confirm( 0%`open ·all· bookmarks from first level in the directory “$1$”?`H_ocq_E_html_Q_element_R_text( e.currentTarget.getElementsByTagName( "div" )[0] )` ))
         return;
-    var e = e.currentTarget.nextSibling;
-    var a = [];
-    for( var i = 0; i !== e.childNodes.length; i++ )
-    {   var url = e.childNodes[i].firstChild.getAttribute( "href" );
+    e = e.currentTarget.nextSibling;
+    const a = [];
+    for( let i = 0; i !== e.childNodes.length; i++ )
+    {   const url = e.childNodes[i].firstChild.getAttribute( "href" );
         if( url !== "#" )
             a.push(url);
     }
@@ -100,7 +100,7 @@ function Q_menu_I_timeout_n(
 ){  return H_ocq_E_html_Q_element_R_visible_height( Q_bar_Q_ul_S_opened ) / window.innerHeight;
 }
 function Q_menu_I_timeout( n
-){  var v = H_ocq_E_ui_Q_menu_S_delay * n;
+){  let v = H_ocq_E_ui_Q_menu_S_delay * n;
     if( v > Q_menu_S_max_timeout )
         v = Q_menu_S_max_timeout;
     return v;
@@ -117,9 +117,9 @@ function Q_bar_Q_li_X_mouse_over( e
     if( e.type === "mouseover"
     && Q_bar_Q_ul_S_opened !== Q_bar_Q_ul_S_over
     )
-    {   var niece;
-        var niece_bottom = 0;
-        var niece_parent = Q_bar_Q_ul_S_opened;
+    {   let niece;
+        let niece_bottom = 0;
+        let niece_parent = Q_bar_Q_ul_S_opened;
         do
         {   niece = niece_parent;
             if( niece_bottom < niece.offsetHeight )
@@ -142,8 +142,8 @@ function Q_bar_Q_li_X_mouse_move( e
 ){  e.stopPropagation();
     if( H_ocq_E_html_E_wa_X_mouse_move_I_filter(e) )
         return;
-    var dx = H_ocq_Q_number_I_abs( Q_menu_X_mouse_move_S_x - e.clientX );
-    var dy = H_ocq_Q_number_I_abs( Q_menu_X_mouse_move_S_y - e.clientY );
+    const dx = H_ocq_Q_number_I_abs( Q_menu_X_mouse_move_S_x - e.clientX );
+    const dy = H_ocq_Q_number_I_abs( Q_menu_X_mouse_move_S_y - e.clientY );
     Q_menu_X_mouse_move_S_x = e.clientX;
     Q_menu_X_mouse_move_S_y = e.clientY;
     if( Q_bar_Q_ul_S_timeout !== undefined )
@@ -153,7 +153,7 @@ function Q_bar_Q_li_X_mouse_move( e
             return;
         window.clearTimeout( Q_bar_Q_ul_S_timeout );
     }
-    var timeout_n = 1;
+    let timeout_n = 1;
     if( Q_bar_Q_ul_S_opened !== Q_bar_Q_ul_S_over )
         timeout_n += Q_menu_I_timeout_n();
     Q_bar_Q_ul_S_timeout = window.setTimeout( Q_bar_Q_li_I_timeout, Q_menu_I_timeout( timeout_n ));
@@ -231,10 +231,10 @@ function Q_bar_Q_ul_X_wheel( e
     {   window.clearTimeout( Q_bar_Q_ul_S_timeout );
         Q_bar_Q_ul_S_timeout = undefined;
     }
-    var li = e.currentTarget.firstChild;
+    let li = e.currentTarget.firstChild;
     if( li === null )
         return;
-    var d = li.offsetHeight;
+    let d = li.offsetHeight;
     while(( li = li.nextSibling ) !== null )
         if( li.offsetHeight < d )
             d = li.offsetHeight;
@@ -242,12 +242,12 @@ function Q_bar_Q_ul_X_wheel( e
         d = -d;
     if( Q_menu_C_wheel_rev_dir )
         d = -d;
-    var c_y = H_ocq_E_html_Q_element_R_page_offset_y( e.currentTarget );
+    const c_y = H_ocq_E_html_Q_element_R_page_offset_y( e.currentTarget );
     if( c_y + e.currentTarget.offsetHeight + d < Q_menu_I_wheel_S_min_visible_y
     || c_y + d + Q_menu_I_wheel_S_min_visible_y > document.documentElement.clientHeight
     )
         return;
-    var y;
+    let y;
     if( e.currentTarget.style.top !== "" )
         y = parseInt( e.currentTarget.style.top );
     else
@@ -256,17 +256,17 @@ function Q_bar_Q_ul_X_wheel( e
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 function Q_bar_P_level( parent, level
-){  var li = document.createElement( "li" );
+){  const li = document.createElement( "li" );
     li.addEventListener( "mouseover", Q_bar_Q_li_X_mouse_over, false );
     li.addEventListener( "mouseout", Q_bar_Q_li_X_mouse_out, false );
     li.addEventListener( "focusin", Q_bar_Q_li_X_mouse_over, false );
     li.addEventListener( "focusout", Q_bar_Q_li_X_mouse_out, false );
-    var e = document.createElement( "a" );
+    const e = document.createElement( "a" );
     if( level.url !== undefined )
     {   e.id = "_"+ level.id;
         e.setAttribute( "href", level.url );
         e.addEventListener( "click", Q_link_Z_one_X_click, true );
-        var img = document.createElement( "img" );
+        const img = document.createElement( "img" );
         img.src = "chrome://favicon/"+ level.url;
         e.appendChild(img);
     }else
@@ -275,14 +275,14 @@ function Q_bar_P_level( parent, level
         e.setAttribute( "href", "#" );
         e.addEventListener( "click", Q_link_Z_dir_X_click, true );
     }
-    var div = document.createElement( "div" );
+    const div = document.createElement( "div" );
     div.appendChild( document.createTextNode( level.title ));
     e.appendChild(div);
     li.appendChild(e);
     if( level.children !== undefined )
-    {   e = document.createElement( "ul" );
+    {   const e = document.createElement( "ul" );
         e.addEventListener( "wheel", Q_bar_Q_ul_X_wheel, false );
-        for( var i = 0; i !== level.children.length; i++ )
+        for( let i = 0; i !== level.children.length; i++ )
             Q_bar_P_level( e, level.children[i] );
         li.appendChild(e);
     }
@@ -290,20 +290,20 @@ function Q_bar_P_level( parent, level
 }
 //==============================================================================
 function Q_conf_X( o
-){  var changed_group_1 = false;
-    for( var k in o )
+){  let changed_group_1 = false;
+    for( let k in o )
         switch(k)
         { case "Q_menu_C_internal_links":
                 if( o[k] )
                 {   if( Q_bar_Q_ul_S_0.lastChild !== null )
-                    {   var e;
+                    {   let e;
                         while( /^chrome:\/\//.test(( e = Q_bar_Q_ul_S_0.lastChild.firstChild ).getAttribute( "href" ))) //NDFN bez jawnego oznaczenia.
                             e.parentNode.parentNode.removeChild( e.parentNode );
                     }
                 }else
                     chrome.bookmarks.getTree(
                       function( tree
-                      ){  var a =
+                      ){  const a =
                           [ { url: "chrome://chrome-urls", title: 1%`built‐in pages`` }
                           , { url: "chrome://history", title: 2%`history of addresses`` }
                           , { url: "chrome://downloads", title: 3%`downloads`` }
@@ -312,7 +312,7 @@ function Q_conf_X( o
                           , { url: "chrome://apps", title: 31%`installable applications`` }
                           , { url: "chrome://version", title: 7%`program version`` }
                           ];
-                          for( var i = 0; i !== a.length; i++ )
+                          for( let i = 0; i !== a.length; i++ )
                               Q_bar_P_level( Q_bar_Q_ul_S_0, a[i] );
                       }
                     );
@@ -320,19 +320,19 @@ function Q_conf_X( o
           case "Q_menu_C_quick_help":
                 if( o[k] )
                 {   if( Q_bar_Q_ul_S_0.parentNode.lastChild !== null )
-                    {   var e;
+                    {   let e;
                         while(( e = Q_bar_Q_ul_S_0.parentNode.lastChild ).tagName === "P" ) //NDFN bez jawnego oznaczenia.
                             Q_bar_Q_ul_S_0.parentNode.removeChild(e);
                     }
                 }else
-                {   var a =
+                {   const a =
                     [ 13%`quick help:``
                     , 14%`to open a menu node under the screen pointer is below and not far of opened menu— move pointer near icon (or the right edge of menu) of this closed node.``
                     , 15%`to edit— click pressing “alt” key.``
                     , 16%`supports keyboard on generic level: “esc”, “tab”, arrow keys, “enter”.``
                     ];
-                    for( var i = 0; i !== a.length; i++ )
-                    {   var p = document.createElement( "p" );
+                    for( let i = 0; i !== a.length; i++ )
+                    {   const p = document.createElement( "p" );
                         p.appendChild( document.createTextNode( a[i] ));
                         Q_bar_Q_ul_S_0.parentNode.appendChild(p);
                     }
@@ -340,7 +340,7 @@ function Q_conf_X( o
                 break;
           case "Q_menu_C_alt_side":
                 if( o[k] )
-                {   var e = document.getElementById( "sea" );
+                {   let e = document.getElementById( "sea" );
                     e.className = H_ocq_Q_s_Z_set_I_add( e.className, "sea_alt" );
                     e = document.getElementById( "attrib" );
                     e.className = H_ocq_Q_s_Z_set_I_add( e.className, "attrib_alt" );
@@ -351,7 +351,7 @@ function Q_conf_X( o
                     e = document.getElementById( "adv" );
                     e.className = H_ocq_Q_s_Z_set_I_add( e.className, "adv_alt" );
                 }else
-                {   var e = document.getElementById( "sea" );
+                {   let e = document.getElementById( "sea" );
                     e.className = H_ocq_Q_s_Z_set_I_remove( e.className, "sea_alt" );
                     e = document.getElementById( "attrib" );
                     e.className = H_ocq_Q_s_Z_set_I_remove( e.className, "attrib_alt" );
@@ -374,7 +374,7 @@ function Q_conf_X( o
                     else
                         chrome.management.getAll(
                           function( extensions
-                          ){  for( var i = 0; i !== extensions.length; i++ )
+                          ){  for( let i = 0; i !== extensions.length; i++ )
                                   if( extensions[i].type === "theme" )
                                   {   document.body.style.backgroundImage = "url("+ JSON.stringify( "file:///"+ Q_bg_C_root_path +"/Default/Extensions/"+ extensions[i].id +"/"+ extensions[i].version +"_0/"+ Q_bg_C_rel_path ) +")";
                                       return;
@@ -392,11 +392,11 @@ function Q_conf_X( o
 //------------------------------------------------------------------------------
 document.addEventListener( "DOMContentLoaded"
 , function(
-  ){  var e = document.getElementById( "sea_arc" );
+  ){  let e = document.getElementById( "sea_arc" );
       e.addEventListener( "submit"
       , function( e
         ){  e.preventDefault();
-            var a = H_ocq_Q_url_M_incomplete( H_ocq_Q_url_M( e.currentTarget.getElementsByTagName( "input" )[0].value ));
+            const a = H_ocq_Q_url_M_incomplete( H_ocq_Q_url_M( e.currentTarget.getElementsByTagName( "input" )[0].value ));
             if( a !== undefined )
                 Q_browser_I_open_tab( "https://web.archive.org/web/*/"+ H_ocq_Q_url_R(a) );
         }
@@ -410,12 +410,12 @@ document.addEventListener( "DOMContentLoaded"
       chrome.bookmarks.getTree(
         function( tree
         ){  Q_bar_Q_ul_S_0.innerHTML = "";
-            var e = H_ocq_E_html_Q_element_I_prev( Q_bar_Q_ul_S_0 );
+            const e = H_ocq_E_html_Q_element_I_prev( Q_bar_Q_ul_S_0 );
             e.id = "_"+ tree[0].children[0].id;
             e.setAttribute( "data-dir", "" );
-            for( var i = 0; i !== tree[0].children[0].children.length; i++ )
+            for( let i = 0; i !== tree[0].children[0].children.length; i++ )
                 Q_bar_P_level( Q_bar_Q_ul_S_0, tree[0].children[0].children[i] );
-            for( var i = 1; i !== tree[0].children.length; i++ )
+            for( let i = 1; i !== tree[0].children.length; i++ )
                 Q_bar_P_level( Q_bar_Q_ul_S_0, tree[0].children[i] );
             Q_bar_Q_li_S_1 = document.getElementById( "_"+ tree[0].children[1].id ).parentNode;
             init_end;
@@ -429,7 +429,7 @@ document.addEventListener( "DOMContentLoaded"
         , bookmark
         ){  Q_bar_P_level( bookmark.parentId !== "1" ? document.getElementById( "_"+ bookmark.parentId ).nextSibling : Q_bar_Q_ul_S_0, bookmark );
             if( bookmark.parentId === "1" )
-            {   var e = document.getElementById( "_"+ bookmark.id ).parentNode;
+            {   const e = document.getElementById( "_"+ bookmark.id ).parentNode;
                 e.parentNode.removeChild(e);
                 Q_bar_Q_ul_S_0.insertBefore( e, Q_bar_Q_li_S_1 );
             }
@@ -438,14 +438,14 @@ document.addEventListener( "DOMContentLoaded"
       chrome.bookmarks.onRemoved.addListener(
         function( id
         , remove_info
-        ){  var e = document.getElementById( "_"+ id ).parentNode;
+        ){  const e = document.getElementById( "_"+ id ).parentNode;
             e.parentNode.removeChild(e);
         }
       );
       chrome.bookmarks.onMoved.addListener(
         function( id
         , move_info
-        ){  var e = document.getElementById( "_"+ move_info.oldParentId ).nextSibling.children[ move_info.oldIndex ];
+        ){  const e = document.getElementById( "_"+ move_info.oldParentId ).nextSibling.children[ move_info.oldIndex ];
             e.parentNode.removeChild(e);
             document.getElementById( "_"+ move_info.parentId ).nextSibling.insertBefore( e, document.getElementById( "_"+ move_info.parentId ).nextSibling.children[ move_info.index ] );
         }
@@ -453,7 +453,7 @@ document.addEventListener( "DOMContentLoaded"
       chrome.bookmarks.onChanged.addListener(
         function( id
         , change_info
-        ){  var e = document.getElementById( "_"+ id );
+        ){  const e = document.getElementById( "_"+ id );
             e.getElementsByTagName( "DIV" )[0].firstChild.nodeValue = change_info.title;
             if( change_info.url !== undefined )
             {   e.getElementsByTagName( "IMG" )[0].setAttribute( "src", "chrome://favicon/"+ change_info.url );
@@ -463,9 +463,9 @@ document.addEventListener( "DOMContentLoaded"
       );
       chrome.management.onInstalled.addListener(
         function( extension
-        ){  var adv = document.getElementById( "adv" );
-            var es = adv.getElementsByTagName( "p" );
-            for( var i = 0; i !== es.length; i++ )
+        ){  const adv = document.getElementById( "adv" );
+            const es = adv.getElementsByTagName( "p" );
+            for( let i = 0; i !== es.length; i++ )
                 if( es[i].getAttribute( "data-guid" ) === extension.id )
                 {   if( es.length > 1 )
                         es[i].parentNode.removeChild( es[i] );
@@ -490,7 +490,7 @@ document.addEventListener( "DOMContentLoaded"
       );
       chrome.management.getAll(
         function( extensions
-        ){  var my_extensions =
+        ){  const my_extensions =
             [ { "guid": "fphbnkckhppinhpofaeidjekbhjgegdh"
               , "name": "navigation"
               }
@@ -510,8 +510,8 @@ document.addEventListener( "DOMContentLoaded"
               , "name": "pr0nSusPICiErr"
               }
             ];
-            for( var i = 0; i !== extensions.length; i++ )
-            {   for( var j = 0; j !== my_extensions.length; j++ )
+            for( let i = 0; i !== extensions.length; i++ )
+            {   for( let j = 0; j !== my_extensions.length; j++ )
                     if( extensions[i].id === my_extensions[j][ "guid" ] )
                     {   my_extensions.splice( j, 1 );
                         break;
@@ -520,15 +520,15 @@ document.addEventListener( "DOMContentLoaded"
                     break;
             }
             if( my_extensions.length )
-            {   var adv = document.getElementById( "adv" );
-                var p = document.createElement( "p" );
+            {   const adv = document.getElementById( "adv" );
+                let p = document.createElement( "p" );
                 p.appendChild( document.createTextNode( 8%`would you like to consider… 8-]`` ));
                 adv.appendChild(p);
                 p = document.createElement( "p" );
                 p.appendChild( document.createTextNode( 9%`other my extension programs?`` ));
                 adv.appendChild(p);
-                var a;
-                for( var i = 0; i !== my_extensions.length; i++ )
+                let a;
+                for( let i = 0; i !== my_extensions.length; i++ )
                 {   p = document.createElement( "p" );
                     p.setAttribute( "data-guid", my_extensions[i][ "guid" ] );
                     p.appendChild( document.createTextNode( "•"+ my_extensions[i][ "name" ] ));
@@ -595,8 +595,8 @@ document.addEventListener( "DOMContentLoaded"
                     break;
               case "ArrowUp":
               case "ArrowDown":
-                    var li = Q_bar_Q_li_S_over;
-                    var d = li.offsetHeight;
+                {   let li = Q_bar_Q_li_S_over;
+                    let d = li.offsetHeight;
                     while(( li = li.nextSibling ) !== null )
                         if( li.offsetHeight < d )
                             d = li.offsetHeight;
@@ -606,18 +606,19 @@ document.addEventListener( "DOMContentLoaded"
                         d = -d;
                     if( Q_menu_C_wheel_rev_dir )
                         d = -d;
-                    var c_y = H_ocq_E_html_Q_element_R_page_offset_y( Q_bar_Q_ul_S_over );
+                    const c_y = H_ocq_E_html_Q_element_R_page_offset_y( Q_bar_Q_ul_S_over );
                     if( c_y + Q_bar_Q_ul_S_over.offsetHeight + d < Q_menu_I_wheel_S_min_visible_y
                     || c_y + d + Q_menu_I_wheel_S_min_visible_y > document.documentElement.clientHeight
                     )
                         return;
-                    var y;
+                    let y;
                     if( Q_bar_Q_ul_S_over.style.top !== "" )
                         y = parseInt( Q_bar_Q_ul_S_over.style.top );
                     else
                         y = Q_bar_Q_ul_S_over.offsetTop;
                     Q_bar_Q_ul_S_over.style.top = ( y + d ) +"px";
                     break;
+                }
             }
             e.preventDefault();
         }

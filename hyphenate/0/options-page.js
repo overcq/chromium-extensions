@@ -18,8 +18,8 @@ function E_conf_Q_form_R_conv( k
 document.addEventListener( "DOMContentLoaded"
 , function(
   ){  document.title = 0%`extension ‟hyphenate”➪options page``;
-      var form = H_ocq_E_conf_Q_form_M();
-      var group = H_ocq_E_conf_Q_form_I_add_group( form, 1%`required characters before, after hyphenation point`` );
+      const form = H_ocq_E_conf_Q_form_M();
+      let group = H_ocq_E_conf_Q_form_I_add_group( form, 1%`required characters before, after hyphenation point`` );
       H_ocq_E_conf_Q_form_I_add( group, "number", "Q_hyphenate_C_min_length_before_hyphen", 2%`before`` );
       H_ocq_E_conf_Q_form_I_add( group, "number", "Q_hyphenate_C_min_length_after_hyphen", 3%`after`` );
       group = H_ocq_E_conf_Q_form_I_add_group( form, 4%`configuration settings`` );

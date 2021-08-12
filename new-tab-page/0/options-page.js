@@ -18,8 +18,8 @@ function E_conf_Q_form_R_conv( k
 document.addEventListener( "DOMContentLoaded"
 , function(
   ){  document.title = 20%`extension ‟new tab page”➪options page``;
-      var form = H_ocq_E_conf_Q_form_M();
-      var group = H_ocq_E_conf_Q_form_I_add_group( form, 21%`menu panel`` );
+      const form = H_ocq_E_conf_Q_form_M();
+      let group = H_ocq_E_conf_Q_form_I_add_group( form, 21%`menu panel`` );
       H_ocq_E_conf_Q_form_I_add( group, "checkbox", "Q_menu_C_internal_links", 22%`hide internal pages shortcuts (bottom ones)`` );
       H_ocq_E_conf_Q_form_I_add( group, "checkbox", "Q_menu_C_quick_help", 23%`hide quick help text (bottom)`` );
       H_ocq_E_conf_Q_form_I_add( group, "checkbox", "Q_menu_C_wheel_rev_dir", 24%`alternate scroll direction`` );

@@ -6,17 +6,17 @@
 *         background scripts
 * ©overcq                on ‟Gentoo Linux 13.0” “x86_64”             2015‒3‒31 *
 *******************************************************************************/
-var Q_url_S_a = {};
+const Q_url_S_a = {};
 //=============================================================================
 function Q_url_M( tab_id
 , url
-){  var a = H_ocq_Q_url_M(url);
+){  const a = H_ocq_Q_url_M(url);
     if( a === undefined
     || !H_ocq_Q_url_T_www(a)
     ){  chrome.browserAction.disable( tab_id );
         return;
     }
-    var n = 0;
+    let n = 0;
     if( a[ "host" ] !== undefined )
         n += a[ "host" ].split( "." ).length - 1;
     if( a[ "path" ] !== "/" )
@@ -57,7 +57,7 @@ window.addEventListener( "load"
       );
       chrome.tabs.query( {}
       , function( tabs
-        ){  for( var i = 0; i !== tabs.length; i++ )
+        ){  for( let i = 0; i !== tabs.length; i++ )
                 Q_url_M( tabs[i].id, tabs[i].url );
             init_end;
         }
@@ -66,7 +66,7 @@ window.addEventListener( "load"
         function( tab_id
         , info
         , tab
-        ){  var url;
+        ){  let url;
             if( info.status === "complete" ) //WA bo kasuje ‘badge’.
                 url = info.url !== undefined ? info.url : tab.url;
             else if( info.url !== undefined )

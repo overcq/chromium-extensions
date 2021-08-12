@@ -44,8 +44,8 @@ function E_conf_Q_form_R_conv( k
 document.addEventListener( "DOMContentLoaded"
 , function(
   ){  document.title = 0%`extension ‟page restyle”➪options page``;
-      var form = H_ocq_E_conf_Q_form_M();
-      var group = H_ocq_E_conf_Q_form_I_add_group( form, 1%`forced colors`` );
+      const form = H_ocq_E_conf_Q_form_M();
+      let group = H_ocq_E_conf_Q_form_I_add_group( form, 1%`forced colors`` );
       H_ocq_E_conf_Q_form_I_add( group, "color", "Q_color_C_default_background", 2%`background$$`` );
       H_ocq_E_conf_Q_form_I_add( group, "color", "Q_color_C_default_border", 3%`frame$$`` );
       H_ocq_E_conf_Q_form_I_add( group, "color", "Q_color_C_default_text", 4%`text$$`` );

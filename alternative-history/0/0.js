@@ -6,11 +6,11 @@
 *         background scripts
 * ©overcq                on ‟Gentoo Linux 13.0” “x86_64”             2015‒2‒26 *
 *******************************************************************************/
-var H_ocq_E_request_S_pending = {};
-var H_ocq_Q_database_S_readonly = false;
-var H_ocq_Q_database_S_queue = {};
-var H_ocq_Q_database_S_queue_next_time = 0;
-var H_ocq_Q_database_S_timeout;
+const H_ocq_E_request_S_pending = {};
+let H_ocq_Q_database_S_readonly = false;
+let H_ocq_Q_database_S_queue = {};
+let H_ocq_Q_database_S_queue_next_time = 0;
+let H_ocq_Q_database_S_timeout;
 //==============================================================================
 function H_ocq_Q_database_P( k
 , v
@@ -22,7 +22,7 @@ function H_ocq_Q_database_P( k
     && H_ocq_Q_date_M_now() > H_ocq_Q_database_S_queue_next_time
     )
     {   H_ocq_Q_database_S_readonly = true;
-        var o = H_ocq_Q_database_S_queue;
+        const o = H_ocq_Q_database_S_queue;
         H_ocq_Q_database_S_queue = {};
         if( H_ocq_Q_database_S_timeout !== undefined )
         {   window.clearTimeout( H_ocq_Q_database_S_timeout );
@@ -48,7 +48,7 @@ window[ "E_conf_S_defaults" ] =
 //==============================================================================
 function E_conf_Q_storage_T( k
 , v
-){  var b;
+){  let b;
     switch(k)
     { case "Q_purge_C_interval": ///dni
             b = v >= 1;
@@ -94,7 +94,7 @@ function E_conf_Q_storage_P_conv( k
     return v;
 }
 function Q_conf_X( o
-){  for( var k in o )
+){  for( let k in o )
         switch(k)
         { case "Q_purge_C_idle_delay":
                 chrome.idle.setDetectionInterval( o[k] );
@@ -111,14 +111,14 @@ window.addEventListener( "load"
         , "E_list_S_last_active_idle_period"
         ]
       , function( o
-        ){  var o_conv =
+        ){  const o_conv =
             { "E_idle_S_delay": "Q_purge_C_idle_delay"
             , "E_idle_S_purge_interval": "Q_purge_C_interval"
             , "E_idle_S_purge_time": "Q_purge_C_next_time"
             , "E_list_S_last_active_idle_period": "Q_list_C_idle_period"
             }
             if( !H_ocq_Q_object_Z_hash_table_T_empty(o) )
-            {   for( var k in o_conv )
+            {   for( let k in o_conv )
                 {   chrome.storage.sync.remove(k);
                     if( o[k] !== undefined )
                     {   o[ o_conv[k] ] = o[k];
@@ -143,8 +143,8 @@ window.addEventListener( "load"
                 return;
             //if( H_ocq_E_request_S_pending[ details.tabId ] === null )
                 //alert( "onErrorOccurred" );
-            var t = H_ocq_Q_date_M_now().toString();
-            var url = H_ocq_Q_s_Z_url_I_normalize( details.url );
+            const t = H_ocq_Q_date_M_now().toString();
+            const url = H_ocq_Q_s_Z_url_I_normalize( details.url );
             if( H_ocq_E_request_S_pending[ details.tabId ] === url )
                 H_ocq_Q_database_P( t, url );
             else
@@ -165,8 +165,8 @@ window.addEventListener( "load"
         function( details
         ){  if( H_ocq_E_request_S_pending[ details.tabId ] === undefined )
                 return;
-            var t = H_ocq_Q_date_M_now().toString();
-            var url = H_ocq_Q_s_Z_url_I_normalize( details.url );
+            const t = H_ocq_Q_date_M_now().toString();
+            const url = H_ocq_Q_s_Z_url_I_normalize( details.url );
             if( H_ocq_E_request_S_pending[ details.tabId ] === null
             || H_ocq_E_request_S_pending[ details.tabId ] === url
             )
@@ -219,8 +219,8 @@ window.addEventListener( "load"
             && H_ocq_E_request_S_pending[ tab_id ] !== undefined
             ) ///jeśli było w “webRequest” lub w “loading”.
             {   if( H_ocq_E_request_S_pending[ tab_id ] !== null ) ///nie było w “webRequest” (tylko w “loading”).
-                {   var t = H_ocq_Q_date_M_now().toString();
-                    var url = H_ocq_Q_s_Z_url_I_normalize( tab.url );
+                {   const t = H_ocq_Q_date_M_now().toString();
+                    const url = H_ocq_Q_s_Z_url_I_normalize( tab.url );
                     if( H_ocq_E_request_S_pending[ tab_id ] === url )
                         H_ocq_Q_database_P( t, url );
                     else
@@ -242,8 +242,8 @@ window.addEventListener( "load"
             H_ocq_Q_database_S_readonly = true;
             chrome.storage.local.get( null
             , function( items
-              ){  var rm_keys = [];
-                  for( var k in items )
+              ){  const rm_keys = [];
+                  for( let k in items )
                   {   if( parseInt(k) > Q_purge_C_next_time )
                           break;
                       rm_keys.push(k);
@@ -251,7 +251,7 @@ window.addEventListener( "load"
                   chrome.storage.local.remove( rm_keys
                   , function(
                     ){  Q_purge_C_next_time = H_ocq_Q_date_M_now() + Q_purge_C_interval;
-                        var o = {};
+                        const o = {};
                         o[ "Q_purge_C_next_time" ] = Q_purge_C_next_time;
                         H_ocq_E_sh_lib_Q_conf_I_save( H_ocq_E_sh_lib_Q_conf_I_msg_P_conv(o) );
                         H_ocq_Q_database_S_readonly = false;

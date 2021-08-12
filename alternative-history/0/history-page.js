@@ -7,13 +7,13 @@
 * ©overcq                on ‟Gentoo Linux 13.0” “x86_64”             2015‒2‒26 *
 *******************************************************************************/
 function H_ocq_Q_uri_R_decorated( uri
-){  var d = document.createDocumentFragment();
-    var a = H_ocq_Q_url_M(uri);
+){  const d = document.createDocumentFragment();
+    const a = H_ocq_Q_url_M(uri);
     if( a === undefined )
     {   d.appendChild( document.createTextNode( 33%`[invalid]`` ));
         return d;
     }
-    var span = document.createElement( "span" );
+    let span = document.createElement( "span" );
     span.className = "a";
     span.appendChild( document.createTextNode( a[ "protocol" ] ));
     d.appendChild(span);
@@ -36,10 +36,10 @@ function H_ocq_Q_uri_R_decorated( uri
         span.className = "d";
         span.appendChild( document.createTextNode( H_ocq_Q_s_Z_html_R_breakable( a[ "server_query" ] )));
         d.appendChild( document.createTextNode( "\n" ));
-        var s = "";
-        var a_1 = a[ "server_query" ].substring(1).split( "&" );
-        for( var i = 0; i < a_1.length; i++ )
-        {   var a_2 = a_1[i].split( "=" );
+        let s = "";
+        const a_1 = a[ "server_query" ].substring(1).split( "&" );
+        for( let i = 0; i < a_1.length; i++ )
+        {   const a_2 = a_1[i].split( "=" );
             if( a_2[0] === undefined )
                 continue;
             s += a_2[0];
@@ -65,26 +65,26 @@ function H_ocq_Q_uri_R_decorated( uri
 function H_ocq_Q_list_I_show( filter
 ){  chrome.storage.local.get( null
     , function( items
-      ){  var tbody = document.body.getElementsByTagName( "tbody" )[0];
+      ){  const tbody = document.body.getElementsByTagName( "tbody" )[0];
           tbody.innerHTML = "";
-          var last;
-          for( var k in items )
+          let last;
+          for( let k in items )
           {   last = parseInt(k);
               break;
           }
-          var ordinal = 0;
-          for( var k in items )
-          {   var d = parseInt(k);
-              var block_end = d > last + Q_list_C_idle_period;
+          let ordinal = 0;
+          for( let k in items )
+          {   const d = parseInt(k);
+              const block_end = d > last + Q_list_C_idle_period;
               last = d;
               if( filter !== undefined
               && !filter( d, items[k] )
               )
                   continue;
-              var td = document.createElement( "td" );
+              let td = document.createElement( "td" );
               td.className = "a";
               td.appendChild( document.createTextNode( ++ordinal ));
-              var tr = document.createElement( "tr" );
+              const tr = document.createElement( "tr" );
               tr.appendChild(td);
               td = document.createElement( "td" );
               td.className = "b";
@@ -95,7 +95,7 @@ function H_ocq_Q_list_I_show( filter
               ) ///NDFN jeśli z nie wiadomo jakiego powodu w sporadycznym naruszeniu przewidzianego raportowego przepływu wykonania— jako adres żądania ‘url’ jest ustawione “null” w “onCompleted”, to ignoruj adres żądania.
                   items[k] = items[k][0];
               if( typeof items[k] === "object" )
-              {   var a = document.createElement( "a" );
+              {   let a = document.createElement( "a" );
                   a.href = items[k][0];
                   a.appendChild( H_ocq_Q_uri_R_decorated( items[k][0] ));
                   td = document.createElement( "td" );
@@ -110,7 +110,7 @@ function H_ocq_Q_list_I_show( filter
                   td.appendChild(a);
                   tr.appendChild(td);
               }else
-              {   var a = document.createElement( "a" );
+              {   const a = document.createElement( "a" );
                   a.href = items[k];
                   a.appendChild( H_ocq_Q_uri_R_decorated( items[k] ));
                   td = document.createElement( "td" );
@@ -137,12 +137,11 @@ function H_ocq_Q_list_Q_show_X_change_I_last( e
         return;
     chrome.storage.local.get( null
     , function( items
-      ){  var start = 0, last;
-          var a = [];
-          for( var k in items )
+      ){  let a = [];
+          for( let k in items )
               a.push( parseInt(k) );
           a = a.sort();
-          var i = a.length >= Q_list_C_last_count ? a.length - Q_list_C_last_count : 0;
+          const i = a.length >= Q_list_C_last_count ? a.length - Q_list_C_last_count : 0;
           H_ocq_Q_list_I_show(
             (function( d
             ){  return function( k, v
@@ -159,13 +158,13 @@ function H_ocq_Q_list_Q_show_X_change_I_active( e
         return;
     chrome.storage.local.get( null
     , function( items
-      ){  var start = 0, last;
-          for( var k in items )
+      ){  let start = 0, last;
+          for( let k in items )
           {   last = parseInt(k);
               break;
           }
-          for( var k in items )
-          {   var d = parseInt(k);
+          for( let k in items )
+          {   const d = parseInt(k);
               if( d > last + Q_list_C_idle_period )
                   start = d;
               last = d;
@@ -184,8 +183,8 @@ function H_ocq_Q_list_Q_show_X_change( e
 ){  e.stopPropagation();
     if( e.button )
         return;
-    var n = parseInt( e.currentTarget.getAttribute( "data-days" ));
-    var d = H_ocq_Q_date_P_clear_upto( H_ocq_Q_date_M_now() - H_ocq_E_date_I_u_delta( 4, n ), n !== 30 ? 3 : 4 );
+    const n = parseInt( e.currentTarget.getAttribute( "data-days" ));
+    const d = H_ocq_Q_date_P_clear_upto( H_ocq_Q_date_M_now() - H_ocq_E_date_I_u_delta( 4, n ), n !== 30 ? 3 : 4 );
     H_ocq_Q_list_I_show(
       (function( d
       ){  return function( k, v
@@ -198,10 +197,10 @@ function H_ocq_Q_list_Q_show_X_change_I_n_days( e
 ){  e.stopPropagation();
     if( e.button )
         return;
-    var radio = e.currentTarget;
+    const radio = e.currentTarget;
     e = document.getElementById( "show_n_days_S_n" );
-    var s = e.value;
-    var v = H_ocq_Q_number_N_int( parseFloat(s) );
+    const s = e.value;
+    const v = H_ocq_Q_number_N_int( parseFloat(s) );
     if( s === ""
     || v < 1
     )
@@ -211,8 +210,8 @@ function H_ocq_Q_list_Q_show_X_change_I_n_days( e
         return;
     }
     e.value = v;
-    var now = H_ocq_Q_date_M_now();
-    var d = H_ocq_E_date_I_u_delta( 4, v );
+    const now = H_ocq_Q_date_M_now();
+    let d = H_ocq_E_date_I_u_delta( 4, v );
     if( H_ocq_Q_number_T_not_a_number(d)
     || now < d
     )
@@ -233,10 +232,10 @@ function H_ocq_Q_list_Q_show_X_change_I_n_days_S_n( e
 ){  e.stopPropagation();
     if( e.button )
         return;
-    var radio = document.getElementById( "show_n_days" );
+    const radio = document.getElementById( "show_n_days" );
     e = document.getElementById( "show_n_days_S_n" );
-    var s = e.value;
-    var v = H_ocq_Q_number_N_int( parseFloat(s) );
+    const s = e.value;
+    const v = H_ocq_Q_number_N_int( parseFloat(s) );
     if( s === ""
     || v < 1
     )
@@ -246,8 +245,8 @@ function H_ocq_Q_list_Q_show_X_change_I_n_days_S_n( e
         return;
     }
     e.value = v;
-    var now = H_ocq_Q_date_M_now();
-    var d = H_ocq_E_date_I_u_delta( 4, v );
+    const now = H_ocq_Q_date_M_now();
+    let d = H_ocq_E_date_I_u_delta( 4, v );
     if( H_ocq_Q_number_T_not_a_number(d)
     || now < d
     )
@@ -274,7 +273,7 @@ function H_ocq_Q_list_Q_show_X_change_I_all( e
 }
 //==============================================================================
 function Q_conf_X( o
-){  var e = document.getElementById( "show_active" );
+){  const e = document.getElementById( "show_active" );
     if( e.checked )
         if( o[ "Q_list_C_idle_period" ] !== undefined )
         {   e.checked = false;
@@ -284,9 +283,9 @@ function Q_conf_X( o
 document.addEventListener( "DOMContentLoaded"
 , function(
   ){  document.body.getElementsByTagName( "fieldset" )[0].getElementsByTagName( "legend" )[0].appendChild( document.createTextNode( 16%`show range`` ));
-      var thead = document.body.getElementsByTagName( "thead" )[0];
-      var tr = document.createElement( "tr" );
-      var th = document.createElement( "th" );
+      const thead = document.body.getElementsByTagName( "thead" )[0];
+      let tr = document.createElement( "tr" );
+      let th = document.createElement( "th" );
       th.appendChild( document.createTextNode( 34%`ordinal`` ));
       th.setAttribute( "rowspan", 2 );
       tr.appendChild(th);
@@ -307,30 +306,30 @@ document.addEventListener( "DOMContentLoaded"
       th.appendChild( document.createTextNode( 2%`requested`` ));
       tr.appendChild(th);
       thead.appendChild(tr);
-      var a = document.getElementById( "show_last" );
+      const a = document.getElementById( "show_last" );
       a.parentNode.appendChild( document.createTextNode( 35%`last addresses`` ));
       a.addEventListener( "change", H_ocq_Q_list_Q_show_X_change_I_last, true );
-      var e = document.getElementById( "show_active" );
+      let e = document.getElementById( "show_active" );
       e.parentNode.appendChild( document.createTextNode( 18%`last active time`` ));
       e.addEventListener( "change", H_ocq_Q_list_Q_show_X_change_I_active, true );
-      var e = document.getElementById( "show_day" );
+      e = document.getElementById( "show_day" );
       e.parentNode.appendChild( document.createTextNode( 19%`last day`` ));
       e.addEventListener( "change", H_ocq_Q_list_Q_show_X_change, true );
-      var e = document.getElementById( "show_week" );
+      e = document.getElementById( "show_week" );
       e.parentNode.appendChild( document.createTextNode( 20%`last week`` ));
       e.addEventListener( "change", H_ocq_Q_list_Q_show_X_change, true );
-      var e = document.getElementById( "show_10_days" );
+      e = document.getElementById( "show_10_days" );
       e.parentNode.appendChild( document.createTextNode( 21%`last 10 days`` ));
       e.addEventListener( "change", H_ocq_Q_list_Q_show_X_change, true );
-      var e = document.getElementById( "show_month" );
+      e = document.getElementById( "show_month" );
       e.parentNode.appendChild( document.createTextNode( 22%`last month`` ));
       e.addEventListener( "change", H_ocq_Q_list_Q_show_X_change, true );
-      var e = document.getElementById( "show_n_days" );
+      e = document.getElementById( "show_n_days" );
       e.parentNode.insertBefore( document.createTextNode( 23%`last`` +" " ), e.nextSibling );
       e.parentNode.appendChild( document.createTextNode( " "+ 24%`days`` ));
       e.addEventListener( "change", H_ocq_Q_list_Q_show_X_change_I_n_days, true );
       document.getElementById( "show_n_days_S_n" ).addEventListener( "change", H_ocq_Q_list_Q_show_X_change_I_n_days_S_n, true );
-      var e = document.getElementById( "show_all" );
+      e = document.getElementById( "show_all" );
       e.parentNode.appendChild( document.createTextNode( 17%`all this time`` ));
       e.addEventListener( "change", H_ocq_Q_list_Q_show_X_change_I_all, true );
       a.click();

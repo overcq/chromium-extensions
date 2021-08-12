@@ -7,35 +7,35 @@
 * ©overcq                on ‟Gentoo Linux 13.0” “x86_64”             2015‒4‒28 *
 *******************************************************************************/
 function Q_doc_P_ex_th( a
-){  var d = document.createDocumentFragment();
-    for( var i = 0; i !== a.length; i++ )
-    {   var e = document.createElement( "TH" );
+){  const d = document.createDocumentFragment();
+    for( let i = 0; i !== a.length; i++ )
+    {   const e = document.createElement( "TH" );
         e.appendChild( document.createTextNode( a[i] ));
         d.appendChild(e);
     }
-    var row = Q_tab_R_e(0).getElementsByTagName( "THEAD" )[0].getElementsByTagName( "TR" )[0];
+    const row = Q_tab_R_e(0).getElementsByTagName( "THEAD" )[0].getElementsByTagName( "TR" )[0];
     row.insertBefore( d, row.getElementsByTagName( "TH" )[1] );
 }
 function Q_doc_P_n_tabs( n
 ){  if( n === 1 )
         return;
-    var e = document.body.getElementsByTagName( "INPUT" )[0];
+    const e = document.body.getElementsByTagName( "INPUT" )[0];
     e.setAttribute( "max", n );
     e.addEventListener( "input"
     , function( ev
       ){  ev.stopPropagation();
-          var es = document.body.getElementsByClassName( "tab" );
-          for( var i = 0; i !== es.length; i++ )
+          const es = document.body.getElementsByClassName( "tab" );
+          for( let i = 0; i !== es.length; i++ )
               Q_tab_R_e(i).setAttribute( "hidden", "" );
           Q_tab_R_e( ev.target.value - 1 ).removeAttribute( "hidden" );
       }
     );
     e.parentNode.removeAttribute( "hidden" );
-    var datalist = document.getElementById( "video_title_datalist" );
-    var div = Q_tab_R_e(0);
-    var parent = div.parentNode;
-    for( var i = 1; i !== n; i++ )
-    {   var e = document.createElement( "OPTION" );
+    const datalist = document.getElementById( "video_title_datalist" );
+    let div = Q_tab_R_e(0);
+    const parent = div.parentNode;
+    for( let i = 1; i !== n; i++ )
+    {   const e = document.createElement( "OPTION" );
         e.setAttribute( "value", i + 1 );
         datalist.appendChild(e);
         div = div.cloneNode(true);
@@ -56,7 +56,7 @@ function Q_tab_P_title( i
         s = i;
         i = 0;
     }
-    var e = Q_tab_R_e(i).getElementsByTagName( "H1" )[0];
+    const e = Q_tab_R_e(i).getElementsByTagName( "H1" )[0];
     if( title !== undefined )
         e.setAttribute( "title", title );
     e.appendChild( document.createTextNode(s) );
@@ -64,16 +64,16 @@ function Q_tab_P_title( i
 //==============================================================================
 function Q_ytplayer_R_signature_I_1( a
 , i
-){  var v = a[ i % a.length ];
+){  const v = a[ i % a.length ];
 	a[i] = a[0];
 	a[0] = v;
 	return a;
 }
 function Q_ytplayer_R_signature( func_a
 , signature
-){  var a = signature.split( "" );
+){  let a = signature.split( "" );
     if( func_a !== undefined )
-        for( var i = 0; i !== func_a.length; i++ )
+        for( let i = 0; i !== func_a.length; i++ )
             if( typeof func_a[i] === "number" )
                 a = Q_ytplayer_R_signature_I_1( a, func_a[i] );
             else
@@ -84,15 +84,16 @@ function Q_ytplayer_R_signature( func_a
 function Q_gui_Q_link_I_dload( e
 ){  e.stopPropagation();
     e.preventDefault();
-    var file_ext;
+    let file_ext;
     switch( window[ "H_ocq_E_dload_tv_S_type" ] )
     { default:
-            var s = e.target.href;
-            var p = s.indexOf( "?" );
+        {   let s = e.target.href;
+            const p = s.indexOf( "?" );
             if( p !== -1 )
                 s = s.substring( 0, p );
             file_ext = s.substring( s.lastIndexOf( "." ) + 1 );
             break;
+        }
       case "cda.pl":
             file_ext = "mp4";
             break;
@@ -124,10 +125,10 @@ function Q_gui_Q_link_I_dload( e
                 , title
                 , file_ext
                 ){  eval( "("+ arguments[ arguments.length - 1 ][ "H_ocq_E_sh_lib_Q_js_Z_cs_I_inject_procs_R_args" ] +")(arguments);" );
-                    var id = my_var;
-                    var e = document.getElementsByClassName(id)[ video_i ];
+                    const id = my_var;
+                    let e = document.getElementsByClassName(id)[ video_i ];
                     if( e === undefined )
-                    {   var a = document.createElement( "A" );
+                    {   const a = document.createElement( "A" );
                         a.className = id;
                         a.appendChild( document.createTextNode( "save" ));
                         a.addEventListener( "click"
@@ -156,8 +157,8 @@ function Q_gui_Q_link_I_dload( e
                         e.appendChild( document.createTextNode( "‹" ));
                         e.appendChild(a);
                         e.appendChild( document.createTextNode( "› " ));
-                        var domain = H_ocq_Q_s_Z_url_Z_host_R_domain( location.hostname );
-                        var e_;
+                        const domain = H_ocq_Q_s_Z_url_Z_host_R_domain( location.hostname );
+                        let e_;
                         if( domain === "cda.pl" )
                         {   e_ = document.getElementsByClassName( "mrg-region-video" )[0];
                             e_.parentNode.insertBefore( e, e_.nextSibling );
@@ -223,7 +224,7 @@ function Q_gui_Q_link_I_dload( e
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 function Q_string_I_form_filename( s
 , type
-){  var n;
+){  let n;
     if( navigator.platform.startsWith( "Windows" ))
         switch(type)
         { case "author":
@@ -279,18 +280,18 @@ document.addEventListener( "DOMContentLoaded"
                 console.log(data);
                 switch( data[ "type" ] )
                 { case "cda.pl":
-                        var title = Q_string_I_form_filename( data[ "elem" ][ "title" ], "title" );
+                    {   let title = Q_string_I_form_filename( data[ "elem" ][ "title" ], "title" );
                         if( title.length
                         && title.length !== data[ "elem" ][ "title" ].length
                         )
                             title += "_";
-                        var tbody = Q_tab_R_e(0).getElementsByTagName( "TBODY" )[0];
+                        const tbody = Q_tab_R_e(0).getElementsByTagName( "TBODY" )[0];
                         row = document.createElement( "TR" );
-                        var cell = document.createElement( "TD" );
+                        let cell = document.createElement( "TD" );
                         cell.appendChild( document.createTextNode( "unknown" ));
                         row.appendChild(cell);
                         cell = document.createElement( "TD" );
-                        var e = document.createElement( "A" );
+                        const e = document.createElement( "A" );
                         e.setAttribute( "href", data[ "elem" ][ "stream" ] );
                         e.setAttribute( "data-title", title );
                         e.addEventListener( "click", Q_gui_Q_link_I_dload, true );
@@ -299,20 +300,21 @@ document.addEventListener( "DOMContentLoaded"
                         row.appendChild(cell);
                         tbody.appendChild(row);
                         break;
+                    }
                   case "cnn.com":
                         Q_doc_P_n_tabs( data[ "elem" ].length );
-                        for( var i = 0; i !== data[ "elem" ].length; i++ )
-                        {   var title = Q_string_I_form_filename( data[ "elem" ][i][ "title" ], "title" );
+                        for( let i = 0; i !== data[ "elem" ].length; i++ )
+                        {   let title = Q_string_I_form_filename( data[ "elem" ][i][ "title" ], "title" );
                             if( title.length
                             && title.length !== data[ "elem" ][i][ "title" ].length
                             )
                                 title += "_";
                             title += " "+ Q_string_I_form_filename( data[ "type" ], "type" );
                             Q_tab_P_title( i, title, data[ "elem" ][i][ "desc" ] );
-                            var tbody = Q_tab_R_e(i).getElementsByTagName( "TBODY" )[0];
-                            for( var k in data[ "elem" ][i][ "streams" ] )
+                            const tbody = Q_tab_R_e(i).getElementsByTagName( "TBODY" )[0];
+                            for( let k in data[ "elem" ][i][ "streams" ] )
                             {   row = document.createElement( "TR" );
-                                var cell = document.createElement( "TD" );
+                                let cell = document.createElement( "TD" );
                                 cell.appendChild( document.createTextNode( k.replace( /_/g, " " )));
                                 row.appendChild(cell);
                                 cell = document.createElement( "TD" );
@@ -331,8 +333,8 @@ document.addEventListener( "DOMContentLoaded"
                   case "onet.tv":
                         Q_doc_P_ex_th( [ "audio bitrate", "video bitrate" ] );
                         Q_doc_P_n_tabs( data[ "elem" ].length );
-                        for( var i = 0; i !== data[ "elem" ].length; i++ )
-                        {   var title = Q_string_I_form_filename( data[ "elem" ][i][ "title" ], "title" );
+                        for( let i = 0; i !== data[ "elem" ].length; i++ )
+                        {   let title = Q_string_I_form_filename( data[ "elem" ][i][ "title" ], "title" );
                             if( title.length
                             && title.length !== data[ "elem" ][i][ "title" ].length
                             )
@@ -340,10 +342,10 @@ document.addEventListener( "DOMContentLoaded"
                             title = Q_string_I_form_filename( data[ "elem" ][i][ "author" ], "author" ) +" "+ title;
                             title += " "+ Q_string_I_form_filename( data[ "type" ], "type" );
                             Q_tab_P_title( i, title, data[ "elem" ][i][ "desc" ] );
-                            var tbody = Q_tab_R_e(i).getElementsByTagName( "TBODY" )[0];
-                            for( var k in data[ "elem" ][i][ "streams" ] )
+                            const tbody = Q_tab_R_e(i).getElementsByTagName( "TBODY" )[0];
+                            for( let k in data[ "elem" ][i][ "streams" ] )
                             {   row = document.createElement( "TR" );
-                                var cell = document.createElement( "TD" );
+                                let cell = document.createElement( "TD" );
                                 cell.appendChild( document.createTextNode(k) );
                                 row.appendChild(cell);
                                 cell = document.createElement( "TD" );
@@ -365,17 +367,17 @@ document.addEventListener( "DOMContentLoaded"
                         }
                         break;
                   case "vimeo.com":
-                        var title = Q_string_I_form_filename( data[ "title" ], "title" );
+                    {   let title = Q_string_I_form_filename( data[ "title" ], "title" );
                         if( title.length
                         && title.length !== data[ "title" ].length
                         )
                             title += "_";
                         title = Q_string_I_form_filename( data[ "author" ], "author" ) +" "+ title;
                         title += " "+ Q_string_I_form_filename( data[ "type" ], "type" );
-                        var tbody = Q_tab_R_e(0).getElementsByTagName( "TBODY" )[0];
-                        for( var k in data[ "streams" ] )
+                        const tbody = Q_tab_R_e(0).getElementsByTagName( "TBODY" )[0];
+                        for( let k in data[ "streams" ] )
                         {   row = document.createElement( "TR" );
-                            var cell = document.createElement( "TD" );
+                            let cell = document.createElement( "TD" );
                             cell.appendChild( document.createTextNode(k) );
                             row.appendChild(cell);
                             cell = document.createElement( "TD" );
@@ -389,18 +391,19 @@ document.addEventListener( "DOMContentLoaded"
                             tbody.appendChild(row);
                         }
                         break;
+                    }
                   case "tvn24.pl":
-                        var title = Q_string_I_form_filename( data[ "title" ], "title" );
+                    {   let title = Q_string_I_form_filename( data[ "title" ], "title" );
                         if( title.length
                         && title.length !== data[ "title" ].length
                         )
                             title += "_";
                         title += " "+ Q_string_I_form_filename( data[ "type" ], "type" );
                         Q_tab_P_title( 0, title );
-                        var tbody = Q_tab_R_e(0).getElementsByTagName( "TBODY" )[0];
-                        for( var k in data[ "streams" ] )
+                        const tbody = Q_tab_R_e(0).getElementsByTagName( "TBODY" )[0];
+                        for( let k in data[ "streams" ] )
                         {   row = document.createElement( "TR" );
-                            var cell = document.createElement( "TD" );
+                            let cell = document.createElement( "TD" );
                             cell.appendChild( document.createTextNode(k) );
                             row.appendChild(cell);
                             cell = document.createElement( "TD" );
@@ -414,10 +417,11 @@ document.addEventListener( "DOMContentLoaded"
                             tbody.appendChild(row);
                         }
                         break;
+                    }
                   case "wp.pl":
                         Q_doc_P_n_tabs( data[ "elem" ].length );
-                        for( var i = 0; i !== data[ "elem" ].length; i++ )
-                        {   var title = Q_string_I_form_filename( data[ "elem" ][i][ "title" ], "title" );
+                        for( let i = 0; i !== data[ "elem" ].length; i++ )
+                        {   let title = Q_string_I_form_filename( data[ "elem" ][i][ "title" ], "title" );
                             if( title.length
                             && title.length !== data[ "elem" ][i][ "title" ].length
                             )
@@ -426,10 +430,10 @@ document.addEventListener( "DOMContentLoaded"
                                 title = Q_string_I_form_filename( data[ "elem" ][i][ "author" ], "author" ) +" "+ title;
                             title += " "+ Q_string_I_form_filename( data[ "type" ], "type" );
                             Q_tab_P_title( i, title, data[ "elem" ][i][ "desc" ] );
-                            var tbody = Q_tab_R_e(i).getElementsByTagName( "TBODY" )[0];
-                            for( var k in data[ "elem" ][i][ "streams" ] )
+                            const tbody = Q_tab_R_e(i).getElementsByTagName( "TBODY" )[0];
+                            for( let k in data[ "elem" ][i][ "streams" ] )
                             {   row = document.createElement( "TR" );
-                                var cell = document.createElement( "TD" );
+                                let cell = document.createElement( "TD" );
                                 cell.appendChild( document.createTextNode(k) );
                                 row.appendChild(cell);
                                 cell = document.createElement( "TD" );
@@ -445,7 +449,7 @@ document.addEventListener( "DOMContentLoaded"
                         }
                         break;
                   case "wp.tv":
-                        var title = Q_string_I_form_filename( data[ "title" ], "title" );
+                    {   let title = Q_string_I_form_filename( data[ "title" ], "title" );
                         if( title.length
                         && title.length !== data[ "title" ].length
                         )
@@ -453,10 +457,10 @@ document.addEventListener( "DOMContentLoaded"
                         title = Q_string_I_form_filename( data[ "author" ], "author" ) +" "+ title;
                         title += " "+ Q_string_I_form_filename( data[ "type" ], "type" );
                         Q_tab_P_title( title, data[ "desc" ] );
-                        var tbody = Q_tab_R_e(0).getElementsByTagName( "TBODY" )[0];
-                        for( var k in data[ "streams" ] )
+                        const tbody = Q_tab_R_e(0).getElementsByTagName( "TBODY" )[0];
+                        for( let k in data[ "streams" ] )
                         {   row = document.createElement( "TR" );
-                            var cell = document.createElement( "TD" );
+                            let cell = document.createElement( "TD" );
                             cell.appendChild( document.createTextNode(k) );
                             row.appendChild(cell);
                             cell = document.createElement( "TD" );
@@ -470,9 +474,10 @@ document.addEventListener( "DOMContentLoaded"
                             tbody.appendChild(row);
                         }
                         break;
+                    }
                   case "youtube.com":
-                        Q_doc_P_ex_th( [ "bitrate", "video freq.", "size", "dimensions", "data type" ] );
-                        var title = Q_string_I_form_filename( data[ "title" ], "title" );
+                    {   Q_doc_P_ex_th( [ "bitrate", "video freq.", "size", "dimensions", "data type" ] );
+                        let title = Q_string_I_form_filename( data[ "title" ], "title" );
                         if( title.length
                         && title.length !== data[ "title" ].length
                         )
@@ -489,41 +494,41 @@ document.addEventListener( "DOMContentLoaded"
                             e.setAttribute( "href", data[ "subtitle" ] );
                             e.addEventListener( "click", Q_gui_Q_link_I_dload, true );
                         }
-                        var tbody = Q_tab_R_e(0).getElementsByTagName( "TBODY" )[0];
+                        const tbody = Q_tab_R_e(0).getElementsByTagName( "TBODY" )[0];
                         if( data[ "streams" ][0] !== undefined )
-                        {   for( var i in data[ "streams" ][0] )
-                            {   var row = document.createElement( "TR" );
-                                var stream = data[ "streams" ][0][i];
+                        {   for( let i in data[ "streams" ][0] )
+                            {   const row = document.createElement( "TR" );
+                                const stream = data[ "streams" ][0][i];
                                 stream[ "mimeType" ] = stream[ "mimeType" ].replace( /; codecs="/, " (" ).replace( /"$/, ")" );
-                                var keys = [ "itag" ];
-                                for( var j in keys )
-                                {   var cell = document.createElement( "TH" );
+                                let keys = [ "itag" ];
+                                for( let j in keys )
+                                {   const cell = document.createElement( "TH" );
                                     if( stream[ keys[j] ] !== undefined )
                                         cell.appendChild( document.createTextNode( stream[ keys[j] ] ));
                                     row.appendChild(cell);
                                 }
                                 keys = [ "bitrate", "fps", "contentLength", "qualityLabel", "mimeType" ];
-                                for( var j in keys )
-                                {   var cell = document.createElement( "TD" );
+                                for( let j in keys )
+                                {   const cell = document.createElement( "TD" );
                                     if( stream[ keys[j] ] !== undefined )
                                         cell.appendChild( document.createTextNode( stream[ keys[j] ] ));
                                     row.appendChild(cell);
                                 }
                                 if( stream[ "signatureCipher" ] !== undefined )
-                                {   var a = stream[ "signatureCipher" ].split( /&/ );
-                                    for( var j in a )
-                                    {   var p = a[j].indexOf( "=" );
+                                {   const a = stream[ "signatureCipher" ].split( /&/ );
+                                    for( let j in a )
+                                    {   const p = a[j].indexOf( "=" );
                                         stream[ a[j].substring( 0, p ) ] = decodeURIComponent(  a[j].substring( p + 1 ));
                                     }
                                 }
-                                var signature;
+                                let signature;
                                 if( stream[ "s" ] !== undefined )
                                     signature = "&"+ stream[ "sp" ] +"="+ encodeURIComponent( Q_ytplayer_R_signature( data[ "Q_ytplayer_S_signature" ], decodeURIComponent( stream[ "s" ] )));
                                 else if( stream[ "sig" ] !== undefined )
                                     signature = "&"+ stream[ "sp" ] +"="+ stream[ "sig" ];
                                 else
                                     signature = "";
-                                var cell = document.createElement( "TD" );
+                                const cell = document.createElement( "TD" );
                                 e = document.createElement( "A" );
                                 e.setAttribute( "href", stream[ "url" ] + signature );
                                 e.setAttribute( "data-title", title +" "+ Q_string_I_form_filename( new String( stream[ "itag" ] ), "media" ));
@@ -535,40 +540,40 @@ document.addEventListener( "DOMContentLoaded"
                             }
                         }
                         if( data[ "streams" ][1] !== undefined )
-                        {   for( var i in data[ "streams" ][1] )
-                            {   var row = document.createElement( "TR" );
-                                var stream = data[ "streams" ][1][i];
+                        {   for( let i in data[ "streams" ][1] )
+                            {   const row = document.createElement( "TR" );
+                                const stream = data[ "streams" ][1][i];
                                 stream[ "mimeType" ] = stream[ "mimeType" ].replace( /; codecs="/, " (" ).replace( /"$/, ")" );
-                                var keys = [ "itag" ];
-                                for( var j in keys )
-                                {   var cell = document.createElement( "TH" );
+                                let keys = [ "itag" ];
+                                for( let j in keys )
+                                {   const cell = document.createElement( "TH" );
                                     if( stream[ keys[j] ] !== undefined )
                                         cell.appendChild( document.createTextNode( stream[ keys[j] ] ));
                                     row.appendChild(cell);
                                 }
                                 keys = [ "bitrate" ];
-                                for( var j in keys )
-                                {   var cell = document.createElement( "TD" );
+                                for( let j in keys )
+                                {   const cell = document.createElement( "TD" );
                                     if( stream[ keys[j] ] !== undefined )
                                         cell.appendChild( document.createTextNode( stream[ keys[j] ] ));
                                     row.appendChild(cell);
                                 }
                                 row.appendChild( document.createElement( "TD" ));
                                 keys = [ "contentLength", "qualityLabel", "mimeType" ];
-                                for( var j in keys )
-                                {   var cell = document.createElement( "TD" );
+                                for( let j in keys )
+                                {   const cell = document.createElement( "TD" );
                                     if( stream[ keys[j] ] !== undefined )
                                         cell.appendChild( document.createTextNode( stream[ keys[j] ] ));
                                     row.appendChild(cell);
                                 }
                                 if( stream[ "signatureCipher" ] !== undefined )
-                                {   var a = stream[ "signatureCipher" ].split( /&/ );
-                                    for( var j in a )
-                                    {   var p = a[j].indexOf( "=" );
+                                {   const a = stream[ "signatureCipher" ].split( /&/ );
+                                    for( let j in a )
+                                    {   const p = a[j].indexOf( "=" );
                                         stream[ a[j].substring( 0, p ) ] = decodeURIComponent(  a[j].substring( p + 1 ));
                                     }
                                 }
-                                var signature;
+                                let signature;
                                 if( stream[ "s" ] !== undefined )
                                     signature = "&"+ stream[ "sp" ] +"="+ Q_ytplayer_R_signature( data[ "Q_ytplayer_S_signature" ], stream[ "s" ] );
                                 else if( stream[ "sig" ] !== undefined )
@@ -580,7 +585,7 @@ document.addEventListener( "DOMContentLoaded"
                                 e.setAttribute( "data-title", title +" "+ Q_string_I_form_filename( new String( stream[ "itag" ] ), "media" ));
                                 e.addEventListener( "click", Q_gui_Q_link_I_dload, true );
                                 e.appendChild( document.createTextNode( "link" ));
-                                var cell = document.createElement( "TD" );
+                                const cell = document.createElement( "TD" );
                                 cell.appendChild(e);
                                 row.appendChild(cell);
                                 switch( stream[ "itag" ] )
@@ -595,18 +600,19 @@ document.addEventListener( "DOMContentLoaded"
                             }
                         }
                         //e = document.createElement( "PRE" );
-                        //for( var i = 0; i !== 2; i++ )
+                        //for( let i = 0; i !== 2; i++ )
                             //if( data[ "streams" ][i] !== undefined )
                             //{   e.appendChild( document.createTextNode( "streams "+ i +":\n" ));
-                                //for( var j in data[ "streams" ][i] )
+                                //for( let j in data[ "streams" ][i] )
                                 //{   e.appendChild( document.createTextNode( j +".\n" ));
-                                    //var a = data[ "streams" ][i][j].split( /&/ );
-                                    //for( var k in a )
+                                    //const a = data[ "streams" ][i][j].split( /&/ );
+                                    //for( let k in a )
                                         //e.appendChild( document.createTextNode( "\t"+ decodeURIComponent( a[k] ) +"\n" ));
                                 //}
                             //}
                         //document.body.appendChild(e);
                         break;
+                    }
                 }
                 window[ "H_ocq_E_dload_tv_S_type" ] = data[ "type" ];
                 init_end;

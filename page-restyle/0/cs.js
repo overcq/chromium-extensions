@@ -20,14 +20,14 @@
     chrome.runtime.sendMessage(
       [ 10 ]
     , function( option
-      ){  var Q_color_C_default_background = option[0];
-          var Q_color_C_default_border = option[1];
-          var Q_color_C_default_text = option[2];
-          var Q_color_C_max_gray_diff = option[3];
-          var Q_number_I_abs = function( v
+      ){  const Q_color_C_default_background = option[0];
+          const Q_color_C_default_border = option[1];
+          const Q_color_C_default_text = option[2];
+          const Q_color_C_max_gray_diff = option[3];
+          const Q_number_I_abs = function( v
           ){  return v > 0 ? v : -v;
           }
-          var I_period_start = function( t
+          const I_period_start = function( t
           , delay
           ){  if( t === undefined )
                   t = 7000;
@@ -56,7 +56,7 @@
               , t
               );
           };
-          var I_restyle_M = function( t
+          const I_restyle_M = function( t
           ){  if( window[ "H_ocq_E_restyle_S_period_timeout" ] === 1 )
                   return;
               if( t === undefined )
@@ -71,12 +71,12 @@
               }else
                   window[ "H_ocq_E_restyle_S_timeout" ] = window.setTimeout( I_restyle, t );
           };
-          var I_restyle = function(
+          const I_restyle = function(
           ){  if( window[ "H_ocq_E_restyle_S_timeout" ] !== undefined )
               {   window.clearTimeout( window[ "H_ocq_E_restyle_S_timeout" ] );
                   delete window[ "H_ocq_E_restyle_S_timeout" ];
               }
-              var Q_color_S_named =
+              const Q_color_S_named =
               { "aliceblue": [  240, 248, 255 ]
               , "antiquewhite": [  250, 235, 215 ]
               , "aqua": [  0, 255, 255 ]
@@ -225,15 +225,15 @@
               , "yellow": [  255, 255, 0 ]
               , "yellowgreen": [  154, 205, 50 ]
               };
-              var Q_color_Z_channel_T_almost_equal_gray_I_cmp = function( a
+              const Q_color_Z_channel_T_almost_equal_gray_I_cmp = function( a
               , b
               ){  return Q_number_I_abs( a - b ) <= Q_color_C_max_gray_diff * 255;
               }
-              var Q_color_T_almost_equal_gray = function( a
+              const Q_color_T_almost_equal_gray = function( a
               ){  return Q_color_Z_channel_T_almost_equal_gray_I_cmp( a[0], a[1] )
                   && Q_color_Z_channel_T_almost_equal_gray_I_cmp( a[0], a[2] );
               };
-              var Q_color_R_luminance = function( a
+              const Q_color_R_luminance = function( a
               ){  switch( a[0] )
                   { case "rgb":
                     case "rgba":
@@ -244,9 +244,9 @@
                   }
                   return;
               };
-              var Q_color_N_ext_contrast = function( a
+              const Q_color_N_ext_contrast = function( a
               , b_luminance
-              ){  var ret = b_luminance <= (( 3 * 255 ) >> 1 ) ? [ 255, 255, 255 ] : [ 0, 0, 0 ];
+              ){  const ret = b_luminance <= (( 3 * 255 ) >> 1 ) ? [ 255, 255, 255 ] : [ 0, 0, 0 ];
                   if( a[0] === "rgba"
                   || a[0] === "hsla"
                   )
@@ -256,15 +256,15 @@
                       ret.unshift( "rgb" );
                   return ret;
               };
-              var Q_css_style_N_color = function( style
+              const Q_css_style_N_color = function( style
               , name
               , stage
-              ){  var s = style[name];
+              ){  let s = style[name];
                   if( s === null
                   || s === ""
                   )
                       return;
-                  var a;
+                  let a;
                   if( stage === 1
                   && ( a = name.match( /^(?:border|outline)/ ) !== null )
                   && ( style[ a[0] +"Width" ] === ""
@@ -284,11 +284,11 @@
                       a.unshift( "rgb" );
                   else if(( a = s.match( /^#([0-9A-Fa-f])([0-9A-Fa-f])([0-9A-Fa-f])$/ )) !== null )
                   {   a[0] = "rgb";
-                      for( var i = 0; i !== 3; i++ )
+                      for( let i = 0; i !== 3; i++ )
                           a[i] = parseInt( "0x"+ a[i] + a[i] );
                   }else if(( a = s.match( /^#([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})$/ )) !== null )
                   {   a[0] = "rgb";
-                      for( var i = 0; i !== 3; i++ )
+                      for( let i = 0; i !== 3; i++ )
                           a[i] = parseInt( "0x"+ a[i] );
                   }else if(( a = s.match( /^(rgb)\((\d+(?:(?:\.\d+)?%)?), *(\d+(?:(?:\.\d+)?%)?), *(\d+(?:(?:\.\d+)?%)?)\)$/ )) !== null
                   || ( a = s.match( /^(rgba)\((\d+(?:(?:\.\d+)?%)?), *(\d+(?:(?:\.\d+)?%)?), *(\d+(?:(?:\.\d+)?%)?), *(\d+(?:\.\d+)?)\)$/ )) !== null
@@ -296,20 +296,20 @@
                   || ( a = s.match( /^(hsla)\((\d+), *(\d+(?:\.\d+)?)%, *(\d+(?:\.\d+)?)%, *(\d+(?:\.\d+)?)\)$/ )) !== null
                   )
                   {   a.shift();
-                      for( var i = 1; i !== 4; i++ )
+                      for( let i = 1; i !== 4; i++ )
                           a[i] = parseFloat( a[i] );
                       if(( a[0] === "rgb"
                         || a[0] === "rgba"
                         )
                       && a[1][ a[1].length - 1 ] === '%'
                       )
-                          for( var i = 1; i !== 4; i++ )
+                          for( let i = 1; i !== 4; i++ )
                               a[i] = a[i] * 255;
                   }else
                       return;
                   return a;
               };
-              var Q_color_P_change = function( style_in
+              const Q_color_P_change = function( style_in
               , style_out
               , name
               , inherited
@@ -317,10 +317,10 @@
               , stage
               ){  if( style_in === null )
                       style_in = style_out;
-                  var a = Q_css_style_N_color( style_in, name, stage );
+                  const a = Q_css_style_N_color( style_in, name, stage );
                   if( typeof a !== "object" )
                       return;
-                  var a_;
+                  let a_;
                   if( stage === 1
                   && ( a_ = name.match( /^(?:border|outline)/ ) !== null )
                   && ( style[ a_[0] +"Width" ] === ""
@@ -344,7 +344,7 @@
                           style_out.setProperty( name, typeof as_transparent === "object" ? "rgb("+ as_transparent.join() +")" : as_transparent, "important" );
                   }else if( a[0] === "rgba" )
                   {   a.shift();
-                      var aa = a.pop();
+                      const aa = a.pop();
                       if( aa == 1 )
                       {   if( !H_ocq_Q_object_T_eq( a, inherited )
                           && Q_color_T_almost_equal_gray(a)
@@ -364,7 +364,7 @@
                           if( a.length === 3 )
                               style_out.setProperty( name, typeof as_transparent === "object" ? "rgb("+ as_transparent.join() +")" : as_transparent, "important" );
                           else
-                          {   var aa = a.pop();
+                          {   const aa = a.pop();
                               if( parseFloat(aa) === 1.0 )
                                   style_out.setProperty( name, typeof as_transparent === "object" ? "rgb("+ as_transparent.join() +")" : as_transparent, "important" );
                               else if( stage === 0
@@ -374,32 +374,32 @@
                           }
                   }
               };
-              var Q_color_P_correct_color = function( style_in
+              const Q_color_P_correct_color = function( style_in
               , style_out
-              ){  var a = Q_css_style_N_color( style_in, "color", 1 );
+              ){  let a = Q_css_style_N_color( style_in, "color", 1 );
                   if( typeof a !== "object" )
                       return;
-                  var b = Q_css_style_N_color( style_in, "backgroundColor", 1 );
+                  const b = Q_css_style_N_color( style_in, "backgroundColor", 1 );
                   if( typeof b !== "object" )
                       return;
-                  var b_luminance = Q_color_R_luminance(b);
+                  const b_luminance = Q_color_R_luminance(b);
                   if( Q_number_I_abs( Q_color_R_luminance(a) - b_luminance ) < Q_color_C_min_contrast * 3 * 255 )
                   {   a = Q_color_N_ext_contrast( a, b_luminance );
                       style_out.setProperty( "color", a[0] +"("+ a.join() +")", "important" );
                   }
               };
-              ///pasywne czyszczenie w zdefiniowanych stylach ‘css’ przeszkód dziedziczenia od właściwości ustawionych dla ‘root’.
-              for( var css_i = 0; css_i !== document.styleSheets.length; css_i++ )
+              // Pasywne czyszczenie w zdefiniowanych stylach ‘css’ przeszkód dziedziczenia od właściwości ustawionych dla ‘root’.
+              for( let css_i = 0; css_i !== document.styleSheets.length; css_i++ )
               {   try{
                       if( document.styleSheets[ css_i ].cssRules === null )
                           continue;
                   }catch(e)
                   {   continue;
                   }
-                  for( var rule_i = 0; rule_i !== document.styleSheets[ css_i ].cssRules.length; rule_i++ )
+                  for( let rule_i = 0; rule_i !== document.styleSheets[ css_i ].cssRules.length; rule_i++ )
                   {   if( !document.styleSheets[ css_i ].cssRules[ rule_i ].style )
                           continue;
-                      var style = document.styleSheets[ css_i ].cssRules[ rule_i ].style;
+                      const style = document.styleSheets[ css_i ].cssRules[ rule_i ].style;
                       if( style.backgroundImage !== ""
                       && style.getPropertyPriority( "background-image" ) !== "important"
                       )
@@ -410,8 +410,8 @@
                       , Q_color_C_default_background, style.position === "absolute" || style.position === "fixed" ? Q_color_C_default_background : ""
                       , 0
                       );
-                      var a = [ "borderTopColor", "borderRightColor", "borderBottomColor", "borderLeftColor", "outlineColor" ];
-                      for( var i = 0; i !== a.length; i++ )
+                      const a = [ "borderTopColor", "borderRightColor", "borderBottomColor", "borderLeftColor", "outlineColor" ];
+                      for( let i = 0; i !== a.length; i++ )
                           Q_color_P_change( null
                           , document.styleSheets[ css_i ].cssRules[ rule_i ].style
                           , a[i]
@@ -426,9 +426,9 @@
                       );
                   }
               }
-              ///aktywne ustawianie kolorów, które nie zostały pasywnie odziedziczone w kolejnych elementach ‘html’— zmieniając od elementów od góry hierarchii, tak by zmiany były źródłem oczekiwanego dziedziczenia w pozostałych, niższych fragmentach hierarchii.
-              var e = document.documentElement;
-              var style = document.defaultView.getComputedStyle( e, "" );
+              // Aktywne ustawianie kolorów, które nie zostały pasywnie odziedziczone w kolejnych elementach ‘html’— zmieniając od elementów od góry hierarchii, tak by zmiany były źródłem oczekiwanego dziedziczenia w pozostałych, niższych fragmentach hierarchii.
+              let e = document.documentElement;
+              const style = document.defaultView.getComputedStyle( e, "" );
               if( style.backgroundImage !== "none"
               && style.getPropertyPriority( "background-image" ) !== "important"
               )
@@ -436,19 +436,19 @@
               e.style.setProperty( "background-color", "rgb("+ Q_color_C_default_background.join() +")", "important" );
               e = document.body;
               while( e !== null )
-              {   var style = document.defaultView.getComputedStyle( e, "" );
+              {   const style = document.defaultView.getComputedStyle( e, "" );
                   if( e.clientWidth > 0
-                  && parseInt( style.width ) > 0 ///czy element jest rysowany na stronie ‘www’.
+                  && parseInt( style.width ) > 0 // Czy element jest rysowany na stronie ‘www’.
                   )
-                  {   var b = false;
+                  {   let b = false;
                       if( style.position === "absolute"
                       || style.position === "fixed"
                       || style.zIndex !== "auto"
                       )
                       {   b = true;
-                          var e_ = e;
-                          while(( e_ = e_.parentNode ) !== document.body ) ///uproszczone sprawdzanie, czy element jest inicjujący jakąkolwiek hierarchię chaotycznego drzewa położeń (“left” itd. oraz “width”, “height”) elementów z wymuszanym “stacking context”.
-                          {   var style_ = document.defaultView.getComputedStyle( e_, "" );
+                          let e_ = e;
+                          while(( e_ = e_.parentNode ) !== document.body ) // Uproszczone sprawdzanie, czy element jest inicjujący jakąkolwiek hierarchię chaotycznego drzewa położeń (“left” itd. oraz “width”, “height”) elementów z wymuszanym “stacking context”.
+                          {   const style_ = document.defaultView.getComputedStyle( e_, "" );
                               if( e.clientWidth > 0
                               && parseInt( style_.width ) > 0
                               && ( style_.position === "absolute"
@@ -473,8 +473,8 @@
                       && style.getPropertyPriority( "background-image" ) !== "important"
                       )
                           e.style.setProperty( "background-image", style.backgroundImage, "important" );
-                      var a = [ "borderTopColor", "borderRightColor", "borderBottomColor", "borderLeftColor", "outlineColor" ];
-                      for( var i = 0; i !== a.length; i++ )
+                      const a = [ "borderTopColor", "borderRightColor", "borderBottomColor", "borderLeftColor", "outlineColor" ];
+                      for( let i = 0; i !== a.length; i++ )
                           Q_color_P_change( style
                           , e.style
                           , a[i]
@@ -491,7 +491,7 @@
                       , e.style
                       );
                   }
-                  var e_;
+                  let e_;
                   if(( e_ = e.firstElementChild ) === null )
                       while(( e_ = e.nextElementSibling ) === null )
                           if(( e = e.parentNode ) === document.body )
