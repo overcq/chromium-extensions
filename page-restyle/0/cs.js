@@ -361,7 +361,8 @@
               const T_element_ignored = (e) =>
               {   return e.tagName === "SCRIPT"
                   || e.tagName === "STYLE"
-                  || e.tagName === "svg";
+                  || e.tagName === "svg"
+                  || e.tagName === "VIDEO";
               };
               // Pasywne czyszczenie w zdefiniowanych stylach ‘css’ przeszkód dziedziczenia od właściwości ustawionych dla ‘root’.
               for( let css_i = 0; css_i !== document.styleSheets.length; css_i++ )
@@ -486,14 +487,13 @@
                           }
                           let e_;
                           if(( e_ = e.firstElementChild ) === null
-                          || T_element_ignored( e_ )
+                          || ( T_element_ignored( e_ ) && ( e_ = null, true ))
                           )
                               while( e !== e_0 )
                               {   do
                                   {   e_ = e.nextElementSibling;
                                   }while( e_ !== null
-                                  && T_element_ignored( e_ )
-                                  && ( e = e_, true )
+                                  && T_element_ignored( e_ ) && ( e = e_, true )
                                   );
                                   if( e_ !== null )
                                       break;
