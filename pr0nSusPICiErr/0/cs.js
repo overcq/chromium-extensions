@@ -19,7 +19,9 @@
         }
         const E_pr0n_T_thumb = function( a
         , e
-        ){  if( e.tagName !== "IMG" )
+        ){  if( e.tagName !== "IMG"
+            || e.getAttribute( "src" ) === null
+            )
                 return false;
             const src = H_ocq_Q_s_Z_url_R_without_query( e.getAttribute( "src" ));
             return /\.(?:jpg)$/i.test(src)

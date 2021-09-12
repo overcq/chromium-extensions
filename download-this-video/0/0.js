@@ -15,7 +15,7 @@ function E_cda_Q_document_I_script( tab_id
           ){  eval( "("+ arguments[ arguments.length - 1 ][ "H_ocq_E_sh_lib_Q_js_Z_cs_I_inject_procs_R_args" ] +")(arguments);" );
               window[ "H_ocq_S_interval" ] = window.setInterval(
                 function(
-                ){  const es = document.getElementsByClassName( "pb-video-player" );
+                ){  const es = document.getElementsByClassName( "pb-block-video-player" );
                     if( !es.length )
                         return;
                     const url = es[0].getAttribute( "src" );
@@ -642,58 +642,63 @@ function E_youtube_Q_document_I_script( tab_id
                     if( es.length )
                         a[ "author" ] = es[0].firstElementChild.firstElementChild.firstElementChild.firstChild.nodeValue.replace( /­/g, "" );
                     const req = new XMLHttpRequest();
-                    req.open( "GET", location.protocol + a[ "js" ], false );
+                    req.open( "GET", location.protocol + a[ "js" ] );
                     delete a[ "js" ];
-                    req.send(null);
-                    if( req.status === 200 )
-                    {   const re_identifier = "[_A-Za-z$][_0-9A-Za-z$]*";
-                        let m = req.responseText.match( "=("+ re_identifier +")\\(decodeURIComponent\\("+ re_identifier +"\\)\\),"+ re_identifier +"\\.set\\("+ re_identifier +",encodeURIComponent\\(" );
-                        let re = new RegExp( "\\b"+ m[1].replace( /\$/g, "\\$" ) +"=function\\(a\\)\\{([^{}]*)\\}", "" );
-                        m = req.responseText.match(re);
-                        if( m !== null )
-                        {   a[ "Q_ytplayer_S_signature" ] = [];
-                            const a_ = m[1].split( ";" );
-                            const t = {};
-                            for( let i = 1; i !== a_.length; i++ )
-                            {   if(( m = a_[i].match( "\\b"+ re_identifier +"\\.("+ re_identifier +")\\("+ re_identifier +",([0-9]+)\\)$" )) !== null )
-                                {   m.shift();
-                                    if( t[ m[0] ] === undefined )
-                                    {   re = new RegExp( "\\b"+ m[0].replace( /\$/g, "\\$" ) +":function\\("+ re_identifier +"(?:,"+ re_identifier +")*\\)\\{"+ re_identifier +"\.(reverse|splice)\\([^)]*\\)\\}", "" );
-                                        let m_;
-                                        if(( m_ = req.responseText.match(re) ) !== null )
-                                        {   m_.shift();
-                                            m[0] = t[ m[0] ] = m_[0];
-                                            const v = m.pop();
-                                            if( m[0] === "splice" )
-                                            {   m.push(0);
-                                                m.push( parseInt(v) );
-                                            }
-                                        }else
-                                            m = parseInt( m[1] );
-                                    }else
-                                    {   m[0] = t[ m[0] ];
-                                        const v = m.pop();
-                                        if( m[0] === "splice" )
-                                        {   m.push(0);
-                                            m.push( parseInt(v) );
-                                        }
-                                    }
-                                    a[ "Q_ytplayer_S_signature" ].push(m);
-                                    continue;
-                                }
-                                if( /^return a\.join\(""\)$/.test( a_[i] ))
-                                    break;
-                                a[ "Q_ytplayer_S_signature" ] = undefined;
-                                //TODO dodać ograniczone ilościowo raportowanie.
-                                break;
-                            }
-                        }
-                    }
-                    chrome.runtime.sendMessage(
-                      [ 13
-                      , H_ocq_Q_object_R_encode_undefined(a)
-                      ]
+                    req.addEventListener( "readystatechange", () =>
+                      {   if( req.readyState !== 4
+                          || req.status !== 200
+                          )
+                              return;
+                          const re_identifier = "[_A-Za-z$][_0-9A-Za-z$]*";
+                          let m = req.responseText.match( "=("+ re_identifier +")\\(decodeURIComponent\\("+ re_identifier +"\\)\\),"+ re_identifier +"\\.set\\("+ re_identifier +",encodeURIComponent\\(" );
+                          let re = new RegExp( "\\b"+ m[1].replace( /\$/g, "\\$" ) +"=function\\(a\\)\\{([^{}]*)\\}", "" );
+                          m = req.responseText.match(re);
+                          if( m !== null )
+                          {   a[ "Q_ytplayer_S_signature" ] = [];
+                              const a_ = m[1].split( ";" );
+                              const t = {};
+                              for( let i = 1; i !== a_.length; i++ )
+                              {   if(( m = a_[i].match( "\\b"+ re_identifier +"\\.("+ re_identifier +")\\("+ re_identifier +",([0-9]+)\\)$" )) !== null )
+                                  {   m.shift();
+                                      if( t[ m[0] ] === undefined )
+                                      {   re = new RegExp( "\\b"+ m[0].replace( /\$/g, "\\$" ) +":function\\("+ re_identifier +"(?:,"+ re_identifier +")*\\)\\{"+ re_identifier +"\.(reverse|splice)\\([^)]*\\)\\}", "" );
+                                          let m_;
+                                          if(( m_ = req.responseText.match(re) ) !== null )
+                                          {   m_.shift();
+                                              m[0] = t[ m[0] ] = m_[0];
+                                              const v = m.pop();
+                                              if( m[0] === "splice" )
+                                              {   m.push(0);
+                                                  m.push( parseInt(v) );
+                                              }
+                                          }else
+                                              m = parseInt( m[1] );
+                                      }else
+                                      {   m[0] = t[ m[0] ];
+                                          const v = m.pop();
+                                          if( m[0] === "splice" )
+                                          {   m.push(0);
+                                              m.push( parseInt(v) );
+                                          }
+                                      }
+                                      a[ "Q_ytplayer_S_signature" ].push(m);
+                                      continue;
+                                  }
+                                  if( /^return a\.join\(""\)$/.test( a_[i] ))
+                                      break;
+                                  a[ "Q_ytplayer_S_signature" ] = undefined;
+                                  //TODO dodać ograniczone ilościowo raportowanie.
+                                  break;
+                              }
+                          }
+                          chrome.runtime.sendMessage(
+                            [ 13
+                            , H_ocq_Q_object_R_encode_undefined(a)
+                            ]
+                          );
+                      }
                     );
+                    req.send(null);
                 }
               , H_ocq_E_flow_S_interval
               );

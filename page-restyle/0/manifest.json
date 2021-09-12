@@ -4,7 +4,7 @@
 , "default_locale": "en"
 , "name": "page restyle ©overcq"
 , "short_name": "restyle"
-, "version": "1.4.7"
+, "version": "1.4.7.21"
 , "description": "Changes common inappropriate appearances."
 , "options_ui":
   { "page": "options-page.html"

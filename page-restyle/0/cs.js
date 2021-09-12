@@ -8,12 +8,13 @@
 *******************************************************************************/
 //do zrobienia ewentualnie: “style.backgroundImage” (w tym najpierw może “gradient”).
 //==============================================================================
-(function(
-){  if( window[ "H_ocq_E_restyle_S_observer" ] !== undefined )
+(() =>
+{   if( window[ "H_ocq_E_restyle_S_observer" ] !== undefined )
     {   window[ "H_ocq_E_restyle_S_observer" ].disconnect();
         delete window[ "H_ocq_E_restyle_S_observer" ];
         if( window[ "H_ocq_E_restyle_S_timeout" ] !== undefined )
-        {   window.clearTimeout( window[ "H_ocq_E_restyle_S_timeout" ] );
+        {   if( window[ "H_ocq_E_restyle_S_timeout" ] !== null )
+                window.clearTimeout( window[ "H_ocq_E_restyle_S_timeout" ] );
             delete window[ "H_ocq_E_restyle_S_timeout" ];
         }
     }
@@ -24,58 +25,22 @@
           const Q_color_C_default_border = option[1];
           const Q_color_C_default_text = option[2];
           const Q_color_C_max_gray_diff = option[3];
-          const Q_number_I_abs = function( v
-          ){  return v > 0 ? v : -v;
+          const Q_number_I_abs = (v) =>
+          {   return v > 0 ? v : -v;
           }
-          const I_period_start = function( t
-          , delay
-          ){  if( t === undefined )
-                  t = 7000;
-              if( delay === undefined )
-                  delay = 15000;
-              window[ "H_ocq_E_restyle_S_observer" ].observe( document.documentElement
-              , { "subtree": true
-                , "childList": true
-                , "attributes": true
-                , "attributeFilter": [ "style" ]
-                }
-              );
-              window.setTimeout(
-                (function( delay
-                ){  return function(
-                    ){  window[ "H_ocq_E_restyle_S_period_timeout" ] = 0;
-                        window.setTimeout(
-                          function(
-                          ){  delete window[ "H_ocq_E_restyle_S_period_timeout" ];
-                              window[ "H_ocq_E_restyle_S_observer" ].disconnect();
-                          }
-                        , delay
-                        );
-                    };
-                })(delay)
-              , t
-              );
-          };
-          const I_restyle_M = function( t
-          ){  if( window[ "H_ocq_E_restyle_S_period_timeout" ] === 1 )
+          const I_restyle_I_add_mutations = ( mutations
+          , observer
+          ) =>
+          {   window[ "H_ocq_E_restyle_S_mutations" ] = window[ "H_ocq_E_restyle_S_mutations" ].concat(mutations);
+              window[ "H_ocq_E_restyle_S_observer" ].takeRecords();
+              if( window[ "H_ocq_E_restyle_S_timeout" ] === null )
                   return;
-              if( t === undefined )
-                  t = 360;
-              if( window[ "H_ocq_E_restyle_S_timeout" ] === undefined )
-                  I_period_start();
-              else
+              if( window[ "H_ocq_E_restyle_S_timeout" ] !== undefined )
                   window.clearTimeout( window[ "H_ocq_E_restyle_S_timeout" ] );
-              if( window[ "H_ocq_E_restyle_S_period_timeout" ] === 0 )
-              {   delete window[ "H_ocq_E_restyle_S_timeout" ];
-                  window[ "H_ocq_E_restyle_S_period_timeout" ] = 1
-              }else
-                  window[ "H_ocq_E_restyle_S_timeout" ] = window.setTimeout( I_restyle, t );
+              window[ "H_ocq_E_restyle_S_timeout" ] = window.setTimeout( I_restyle, 360 );
           };
-          const I_restyle = function(
-          ){  if( window[ "H_ocq_E_restyle_S_timeout" ] !== undefined )
-              {   window.clearTimeout( window[ "H_ocq_E_restyle_S_timeout" ] );
-                  delete window[ "H_ocq_E_restyle_S_timeout" ];
-              }
+          const I_restyle = () =>
+          {   window[ "H_ocq_E_restyle_S_timeout" ] = null;
               const Q_color_S_named =
               { "aliceblue": [  240, 248, 255 ]
               , "antiquewhite": [  250, 235, 215 ]
@@ -225,16 +190,17 @@
               , "yellow": [  255, 255, 0 ]
               , "yellowgreen": [  154, 205, 50 ]
               };
-              const Q_color_Z_channel_T_almost_equal_gray_I_cmp = function( a
+              const Q_color_Z_channel_T_almost_equal_gray_I_cmp = ( a
               , b
-              ){  return Q_number_I_abs( a - b ) <= Q_color_C_max_gray_diff * 255;
+              ) =>
+              {  return Q_number_I_abs( a - b ) <= Q_color_C_max_gray_diff * 255;
               }
-              const Q_color_T_almost_equal_gray = function( a
-              ){  return Q_color_Z_channel_T_almost_equal_gray_I_cmp( a[0], a[1] )
+              const Q_color_T_almost_equal_gray = (a) =>
+              {  return Q_color_Z_channel_T_almost_equal_gray_I_cmp( a[0], a[1] )
                   && Q_color_Z_channel_T_almost_equal_gray_I_cmp( a[0], a[2] );
               };
-              const Q_color_R_luminance = function( a
-              ){  switch( a[0] )
+              const Q_color_R_luminance = (a) =>
+              {   switch( a[0] )
                   { case "rgb":
                     case "rgba":
                           return a[1] + a[2] + a[3];
@@ -244,9 +210,10 @@
                   }
                   return;
               };
-              const Q_color_N_ext_contrast = function( a
+              const Q_color_N_ext_contrast = ( a
               , b_luminance
-              ){  const ret = b_luminance <= (( 3 * 255 ) >> 1 ) ? [ 255, 255, 255 ] : [ 0, 0, 0 ];
+              ) =>
+              {   const ret = b_luminance <= (( 3 * 255 ) >> 1 ) ? [ 255, 255, 255 ] : [ 0, 0, 0 ];
                   if( a[0] === "rgba"
                   || a[0] === "hsla"
                   )
@@ -256,10 +223,11 @@
                       ret.unshift( "rgb" );
                   return ret;
               };
-              const Q_css_style_N_color = function( style
+              const Q_css_style_N_color = ( style
               , name
               , stage
-              ){  let s = style[name];
+              ) =>
+              {   let s = style[name];
                   if( s === null
                   || s === ""
                   )
@@ -309,13 +277,14 @@
                       return;
                   return a;
               };
-              const Q_color_P_change = function( style_in
+              const Q_color_P_change = ( style_in
               , style_out
               , name
               , inherited
               , as_transparent
               , stage
-              ){  if( style_in === null )
+              ) =>
+              {   if( style_in === null )
                       style_in = style_out;
                   const a = Q_css_style_N_color( style_in, name, stage );
                   if( typeof a !== "object" )
@@ -328,8 +297,8 @@
                   ))
                       return;
                   name = name.replace( /[A-Z]/g
-                  , function( s
-                    ){  return "-"+ s.toLowerCase()
+                  , (s) =>
+                    {   return "-"+ s.toLowerCase()
                     }
                   );
                   if( a === "initial"
@@ -374,9 +343,10 @@
                           }
                   }
               };
-              const Q_color_P_correct_color = function( style_in
+              const Q_color_P_correct_color = ( style_in
               , style_out
-              ){  let a = Q_css_style_N_color( style_in, "color", 1 );
+              ) =>
+              {   let a = Q_css_style_N_color( style_in, "color", 1 );
                   if( typeof a !== "object" )
                       return;
                   const b = Q_css_style_N_color( style_in, "backgroundColor", 1 );
@@ -388,6 +358,11 @@
                       style_out.setProperty( "color", a[0] +"("+ a.join() +")", "important" );
                   }
               };
+              const T_element_ignored = (e) =>
+              {   return e.tagName === "SCRIPT"
+                  || e.tagName === "STYLE"
+                  || e.tagName === "svg";
+              };
               // Pasywne czyszczenie w zdefiniowanych stylach ‘css’ przeszkód dziedziczenia od właściwości ustawionych dla ‘root’.
               for( let css_i = 0; css_i !== document.styleSheets.length; css_i++ )
               {   try{
@@ -397,9 +372,9 @@
                   {   continue;
                   }
                   for( let rule_i = 0; rule_i !== document.styleSheets[ css_i ].cssRules.length; rule_i++ )
-                  {   if( !document.styleSheets[ css_i ].cssRules[ rule_i ].style )
+                  {   const style = document.styleSheets[ css_i ].cssRules[ rule_i ].style;
+                      if( !style )
                           continue;
-                      const style = document.styleSheets[ css_i ].cssRules[ rule_i ].style;
                       if( style.backgroundImage !== ""
                       && style.getPropertyPriority( "background-image" ) !== "important"
                       )
@@ -434,87 +409,127 @@
               )
                   e.style.setProperty( "background-image", style.backgroundImage, "important" );
               e.style.setProperty( "background-color", "rgb("+ Q_color_C_default_background.join() +")", "important" );
-              e = document.body;
-              while( e !== null )
-              {   const style = document.defaultView.getComputedStyle( e, "" );
-                  if( e.clientWidth > 0
-                  && parseInt( style.width ) > 0 // Czy element jest rysowany na stronie ‘www’.
-                  )
-                  {   let b = false;
-                      if( style.position === "absolute"
-                      || style.position === "fixed"
-                      || style.zIndex !== "auto"
+              const mutations = window[ "H_ocq_E_restyle_S_mutations" ];
+              window[ "H_ocq_E_restyle_S_mutations" ] = [];
+              for( const mutation of mutations )
+              {   let es;
+                  if( mutation.type === 'attributes' )
+                  {   if( mutation.attributeName !== "style" )
+                          continue;
+                      es = [ mutation.target ];
+                  }else
+                      es = mutation.addedNodes;
+                  for( const e_0 of es )
+                  {   e = e_0;
+                      if( e === null
+                      || e.nodeType !== 1
+                      || T_element_ignored(e)
                       )
-                      {   b = true;
-                          let e_ = e;
-                          while(( e_ = e_.parentNode ) !== document.body ) // Uproszczone sprawdzanie, czy element jest inicjujący jakąkolwiek hierarchię chaotycznego drzewa położeń (“left” itd. oraz “width”, “height”) elementów z wymuszanym “stacking context”.
-                          {   const style_ = document.defaultView.getComputedStyle( e_, "" );
-                              if( e.clientWidth > 0
-                              && parseInt( style_.width ) > 0
-                              && ( style_.position === "absolute"
-                                || style_.position === "fixed"
-                                || style_.zIndex !== "auto"
-                              ))
-                              {   b = false;
-                                  break;
+                          continue;
+                      do
+                      {   const style = document.defaultView.getComputedStyle( e, "" );
+                          if( e.clientWidth > 0
+                          && parseInt( style.width ) > 0 // Czy element jest rysowany na stronie ‘www’.
+                          )
+                          {   let b = false;
+                              if( style.position === "absolute"
+                              || style.position === "fixed"
+                              || style.zIndex !== "auto"
+                              )
+                              {   b = true;
+                                  if( e !== document.body )
+                                  {   let e_ = e;
+                                      while(( e_ = e_.parentNode ) !== document.body ) // Uproszczone sprawdzanie, czy element jest inicjujący jakąkolwiek hierarchię chaotycznego drzewa położeń (“left” itd. oraz “width”, “height”) elementów z wymuszanym “stacking context”.
+                                      {   const style_ = document.defaultView.getComputedStyle( e_, "" );
+                                          if( e.clientWidth > 0
+                                          && parseInt( style_.width ) > 0
+                                          && ( style_.position === "absolute"
+                                            || style_.position === "fixed"
+                                            || style_.zIndex !== "auto"
+                                          ))
+                                          {   b = false;
+                                              break;
+                                          }
+                                      }
+                                  }
+                                  if(b)
+                                      e.style.setProperty( "background-color", "rgb("+ Q_color_C_default_background.join() +")", "important" );
                               }
+                              if( !b )
+                                  Q_color_P_change( style
+                                  , e.style
+                                  , "backgroundColor"
+                                  , Q_color_C_default_background, Q_color_C_default_background
+                                  , 1
+                                  );
+                              if( style.backgroundImage !== "none"
+                              && style.getPropertyPriority( "background-image" ) !== "important"
+                              )
+                                  e.style.setProperty( "background-image", style.backgroundImage, "important" );
+                              const a = [ "borderTopColor", "borderRightColor", "borderBottomColor", "borderLeftColor", "outlineColor" ];
+                              for( let i = 0; i !== a.length; i++ )
+                                  Q_color_P_change( style
+                                  , e.style
+                                  , a[i]
+                                  , Q_color_C_default_border, Q_color_C_default_border
+                                  , 1
+                                  );
+                              Q_color_P_change( style
+                              , e.style
+                              , "color"
+                              , Q_color_C_default_text, Q_color_C_default_text
+                              , 1
+                              );
+                              Q_color_P_correct_color( style
+                              , e.style
+                              );
                           }
-                          if(b)
-                              e.style.setProperty( "background-color", "rgb("+ Q_color_C_default_background.join() +")", "important" );
-                      }
-                      if( !b )
-                          Q_color_P_change( style
-                          , e.style
-                          , "backgroundColor"
-                          , Q_color_C_default_background, Q_color_C_default_background
-                          , 1
-                          );
-                      if( style.backgroundImage !== "none"
-                      && style.getPropertyPriority( "background-image" ) !== "important"
-                      )
-                          e.style.setProperty( "background-image", style.backgroundImage, "important" );
-                      const a = [ "borderTopColor", "borderRightColor", "borderBottomColor", "borderLeftColor", "outlineColor" ];
-                      for( let i = 0; i !== a.length; i++ )
-                          Q_color_P_change( style
-                          , e.style
-                          , a[i]
-                          , Q_color_C_default_border, Q_color_C_default_border
-                          , 1
-                          );
-                      Q_color_P_change( style
-                      , e.style
-                      , "color"
-                      , Q_color_C_default_text, Q_color_C_default_text
-                      , 1
-                      );
-                      Q_color_P_correct_color( style
-                      , e.style
-                      );
+                          let e_;
+                          if(( e_ = e.firstElementChild ) === null
+                          || T_element_ignored( e_ )
+                          )
+                              while( e !== e_0 )
+                              {   do
+                                  {   e_ = e.nextElementSibling;
+                                  }while( e_ !== null
+                                  && T_element_ignored( e_ )
+                                  && ( e = e_, true )
+                                  );
+                                  if( e_ !== null )
+                                      break;
+                                  e = e.parentNode;
+                              }
+                          e = e_;
+                      }while( e !== null );
                   }
-                  let e_;
-                  if(( e_ = e.firstElementChild ) === null )
-                      while(( e_ = e.nextElementSibling ) === null )
-                          if(( e = e.parentNode ) === document.body )
-                              break;
-                  e = e_;
               }
-              window[ "H_ocq_E_restyle_S_observer" ].takeRecords();
-          }
+              delete window[ "H_ocq_E_restyle_S_timeout" ];
+          };
           if( window[ "H_ocq_E_restyle_S_observer" ] === undefined )
-          {   window[ "H_ocq_E_restyle_S_observer" ] = new MutationObserver(
-                function(
-                ){  I_restyle_M();
+          {   window[ "H_ocq_E_restyle_S_mutations" ] =
+              [ { 'type': 'childList'
+                , 'addedNodes': [ document.body ]
+                }
+              ];
+              window[ "H_ocq_E_restyle_S_observer" ] = new MutationObserver( I_restyle_I_add_mutations );
+              window[ "H_ocq_E_restyle_S_observer" ].observe( document.documentElement
+              , { "subtree": true
+                , "childList": true
+                , "attributes": true
+                , "attributeFilter": [ "style" ]
                 }
               );
               document.addEventListener( "beforeunload"
-              , function(
-                ){  window[ "H_ocq_E_restyle_S_observer" ].disconnect();
-                    if( window[ "H_ocq_E_restyle_S_timeout" ] !== undefined )
+              , () =>
+                {  window[ "H_ocq_E_restyle_S_observer" ].disconnect();
+                    if( window[ "H_ocq_E_restyle_S_timeout" ] !== undefined
+                    && window[ "H_ocq_E_restyle_S_timeout" ] !== null
+                    )
                         window.clearTimeout( window[ "H_ocq_E_restyle_S_timeout" ] );
                 }
               );
+              I_restyle();
           }
-          I_restyle_M();
       }
     );
 })();

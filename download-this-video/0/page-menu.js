@@ -277,7 +277,6 @@ document.addEventListener( "DOMContentLoaded"
             ]
           , function( data
             ){  data = H_ocq_Q_object_R_decode_undefined(data);
-                console.log(data);
                 switch( data[ "type" ] )
                 { case "cda.pl":
                     {   let title = Q_string_I_form_filename( data[ "elem" ][ "title" ], "title" );
@@ -286,7 +285,7 @@ document.addEventListener( "DOMContentLoaded"
                         )
                             title += "_";
                         const tbody = Q_tab_R_e(0).getElementsByTagName( "TBODY" )[0];
-                        row = document.createElement( "TR" );
+                        const row = document.createElement( "TR" );
                         let cell = document.createElement( "TD" );
                         cell.appendChild( document.createTextNode( "unknown" ));
                         row.appendChild(cell);
@@ -318,7 +317,7 @@ document.addEventListener( "DOMContentLoaded"
                                 cell.appendChild( document.createTextNode( k.replace( /_/g, " " )));
                                 row.appendChild(cell);
                                 cell = document.createElement( "TD" );
-                                e = document.createElement( "A" );
+                                const e = document.createElement( "A" );
                                 e.setAttribute( "href", data[ "elem" ][i][ "streams" ][k] );
                                 e.setAttribute( "data-title", title +" "+ Q_string_I_form_filename( k, "media" ));
                                 e.addEventListener( "click", Q_gui_Q_link_I_dload, true );
@@ -355,7 +354,7 @@ document.addEventListener( "DOMContentLoaded"
                                 cell.appendChild( document.createTextNode( data[ "elem" ][i][ "streams" ][k][ "video_bitrate" ] ));
                                 row.appendChild(cell);
                                 cell = document.createElement( "TD" );
-                                e = document.createElement( "A" );
+                                const e = document.createElement( "A" );
                                 e.setAttribute( "href", data[ "elem" ][i][ "streams" ][k][ "url" ] );
                                 e.setAttribute( "data-title", title +" "+ Q_string_I_form_filename( k, "media" ));
                                 e.addEventListener( "click", Q_gui_Q_link_I_dload, true );
@@ -381,7 +380,7 @@ document.addEventListener( "DOMContentLoaded"
                             cell.appendChild( document.createTextNode(k) );
                             row.appendChild(cell);
                             cell = document.createElement( "TD" );
-                            e = document.createElement( "A" );
+                            const e = document.createElement( "A" );
                             e.setAttribute( "href", data[ "streams" ][k] );
                             e.setAttribute( "data-title", title +" "+ Q_string_I_form_filename( k, "media" ));
                             e.addEventListener( "click", Q_gui_Q_link_I_dload, true );
@@ -407,7 +406,7 @@ document.addEventListener( "DOMContentLoaded"
                             cell.appendChild( document.createTextNode(k) );
                             row.appendChild(cell);
                             cell = document.createElement( "TD" );
-                            e = document.createElement( "A" );
+                            const e = document.createElement( "A" );
                             e.setAttribute( "href", data[ "streams" ][k] );
                             e.setAttribute( "data-title", title +" "+ Q_string_I_form_filename( k, "media" ));
                             e.addEventListener( "click", Q_gui_Q_link_I_dload, true );
@@ -437,7 +436,7 @@ document.addEventListener( "DOMContentLoaded"
                                 cell.appendChild( document.createTextNode(k) );
                                 row.appendChild(cell);
                                 cell = document.createElement( "TD" );
-                                e = document.createElement( "A" );
+                                const e = document.createElement( "A" );
                                 e.setAttribute( "href", data[ "elem" ][i][ "streams" ][k] );
                                 e.setAttribute( "data-title", title +" "+ Q_string_I_form_filename( k, "media" ));
                                 e.addEventListener( "click", Q_gui_Q_link_I_dload, true );
@@ -464,7 +463,7 @@ document.addEventListener( "DOMContentLoaded"
                             cell.appendChild( document.createTextNode(k) );
                             row.appendChild(cell);
                             cell = document.createElement( "TD" );
-                            e = document.createElement( "A" );
+                            const e = document.createElement( "A" );
                             e.setAttribute( "href", data[ "streams" ][k] );
                             e.setAttribute( "data-title", title +" "+ Q_string_I_form_filename( k, "media" ));
                             e.addEventListener( "click", Q_gui_Q_link_I_dload, true );
@@ -488,7 +487,7 @@ document.addEventListener( "DOMContentLoaded"
                         title += " "+ Q_string_I_form_filename( data[ "uid" ], "uid" );
                         Q_tab_P_title(title);
                         if( data[ "subtitle" ] !== undefined )
-                        {   e = document.getElementsByTagName( "P" )[0];
+                        {   let e = document.getElementsByTagName( "P" )[0];
                             e.removeAttribute( "hidden" );
                             e = e.childNodes[0];
                             e.setAttribute( "href", data[ "subtitle" ] );
@@ -529,7 +528,7 @@ document.addEventListener( "DOMContentLoaded"
                                 else
                                     signature = "";
                                 const cell = document.createElement( "TD" );
-                                e = document.createElement( "A" );
+                                const e = document.createElement( "A" );
                                 e.setAttribute( "href", stream[ "url" ] + signature );
                                 e.setAttribute( "data-title", title +" "+ Q_string_I_form_filename( new String( stream[ "itag" ] ), "media" ));
                                 e.addEventListener( "click", Q_gui_Q_link_I_dload, true );
@@ -580,7 +579,7 @@ document.addEventListener( "DOMContentLoaded"
                                     signature = "&"+ stream[ "sp" ] +"="+ stream[ "sig" ];
                                 else
                                     signature = "";
-                                e = document.createElement( "A" );
+                                const e = document.createElement( "A" );
                                 e.setAttribute( "href", stream[ "url" ] + signature );
                                 e.setAttribute( "data-title", title +" "+ Q_string_I_form_filename( new String( stream[ "itag" ] ), "media" ));
                                 e.addEventListener( "click", Q_gui_Q_link_I_dload, true );
@@ -599,7 +598,7 @@ document.addEventListener( "DOMContentLoaded"
                                 tbody.appendChild(row);
                             }
                         }
-                        //e = document.createElement( "PRE" );
+                        //const e = document.createElement( "PRE" );
                         //for( let i = 0; i !== 2; i++ )
                             //if( data[ "streams" ][i] !== undefined )
                             //{   e.appendChild( document.createTextNode( "streams "+ i +":\n" ));
