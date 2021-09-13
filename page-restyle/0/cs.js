@@ -28,7 +28,17 @@
           const Q_number_I_abs = (v) =>
           {   return v > 0 ? v : -v;
           }
-          const I_restyle_I_add_mutations = ( mutations
+          const H_ocq_Q_object_T_eq = ( a
+          , b
+          ) =>
+          {   const t = typeof a;
+              if( t !== typeof b )
+                  return false;
+              if( t === "object" )
+                  return JSON.stringify(a) === JSON.stringify(b);
+              return a === b;
+          }
+                  const I_restyle_I_add_mutations = ( mutations
           , observer
           ) =>
           {   window[ "H_ocq_E_restyle_S_mutations" ] = window[ "H_ocq_E_restyle_S_mutations" ].concat(mutations);
