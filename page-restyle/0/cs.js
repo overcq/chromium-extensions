@@ -27,7 +27,7 @@
           const Q_color_C_max_gray_diff = option[3];
           const Q_number_I_abs = (v) =>
           {   return v > 0 ? v : -v;
-          }
+          };
           const H_ocq_Q_object_T_eq = ( a
           , b
           ) =>
@@ -37,8 +37,8 @@
               if( t === "object" )
                   return JSON.stringify(a) === JSON.stringify(b);
               return a === b;
-          }
-                  const I_restyle_I_add_mutations = ( mutations
+          };
+          const I_restyle_I_add_mutations = ( mutations
           , observer
           ) =>
           {   window[ "H_ocq_E_restyle_S_mutations" ] = window[ "H_ocq_E_restyle_S_mutations" ].concat(mutations);
@@ -204,7 +204,7 @@
               , b
               ) =>
               {  return Q_number_I_abs( a - b ) <= Q_color_C_max_gray_diff * 255;
-              }
+              };
               const Q_color_T_almost_equal_gray = (a) =>
               {  return Q_color_Z_channel_T_almost_equal_gray_I_cmp( a[0], a[1] )
                   && Q_color_Z_channel_T_almost_equal_gray_I_cmp( a[0], a[2] );
@@ -369,9 +369,13 @@
                   }
               };
               const T_element_ignored = (e) =>
-              {   return e.tagName === "SCRIPT"
+              {   return e.tagName === "HEAD"
+                  || e.tagName === "LINK"
+                  || e.tagName === "META"
+                  || e.tagName === "SCRIPT"
                   || e.tagName === "STYLE"
                   || e.tagName === "svg"
+                  || e.tagName === "TITLE"
                   || e.tagName === "VIDEO";
               };
               // Pasywne czyszczenie w zdefiniowanych stylach ‘css’ przeszkód dziedziczenia od właściwości ustawionych dla ‘root’.
@@ -422,98 +426,133 @@
               e.style.setProperty( "background-color", "rgb("+ Q_color_C_default_background.join() +")", "important" );
               const mutations = window[ "H_ocq_E_restyle_S_mutations" ];
               window[ "H_ocq_E_restyle_S_mutations" ] = [];
+              const es_ = [];
               for( const mutation of mutations )
-              {   let es;
-                  if( mutation.type === 'attributes' )
+              {   if( mutation.type === 'attributes' )
                   {   if( mutation.attributeName !== "style" )
                           continue;
-                      es = [ mutation.target ];
+                      es_.push(mutation.target);
                   }else
-                      es = mutation.addedNodes;
-                  for( const e_0 of es )
-                  {   e = e_0;
-                      if( e === null
-                      || e.nodeType !== 1
-                      || T_element_ignored(e)
-                      )
-                          continue;
+                      for( e of mutation.addedNodes )
+                          es_.push(e);
+              }
+              const es = [];
+              for( let i = 0; i !== es_.length; i++ )
+              {   const e = es_[i];
+                  if( e === null
+                  || e.nodeType !== 1
+                  || T_element_ignored(e)
+                  )
+                      continue;
+                  let parent = e;
+                  do
+                  {   parent = parent.parentNode;
+                  }while( parent !== null
+                  && parent.tagName !== "HEAD"
+                  );
+                  if( parent !== null )
+                      continue;
+                  let b = false;
+                  for( let j = i + 1; j !== es_.length; j++ )
+                  {   const e_ = es_[j];
+                      let parent = e;
                       do
-                      {   const style = document.defaultView.getComputedStyle( e, "" );
-                          if( e.clientWidth > 0
-                          && parseInt( style.width ) > 0 // Czy element jest rysowany na stronie ‘www’.
+                      {   if( parent === e_ )
+                          {   b = true;
+                              break;
+                          }
+                          parent = parent.parentNode;
+                      }while( parent !== null );
+                      if(b)
+                          break;
+                  }
+                  if(b)
+                      continue;
+                  es.push(e);
+              }
+              for( const e_0 of es )
+              {   e = e_0;
+                  do
+                  {   const style = document.defaultView.getComputedStyle( e, "" );
+                      if( e.clientWidth > 0
+                      && parseInt( style.width ) > 0 // Czy element jest rysowany na stronie ‘www’.
+                      )
+                      {   let b = false;
+                          if( style.position === "absolute"
+                          || style.position === "fixed"
+                          || style.zIndex !== "auto"
                           )
-                          {   let b = false;
-                              if( style.position === "absolute"
-                              || style.position === "fixed"
-                              || style.zIndex !== "auto"
-                              )
-                              {   b = true;
-                                  if( e !== document.body )
-                                  {   let e_ = e;
-                                      while(( e_ = e_.parentNode ) !== document.body ) // Uproszczone sprawdzanie, czy element jest inicjujący jakąkolwiek hierarchię chaotycznego drzewa położeń (“left” itd. oraz “width”, “height”) elementów z wymuszanym “stacking context”.
-                                      {   const style_ = document.defaultView.getComputedStyle( e_, "" );
-                                          if( e.clientWidth > 0
-                                          && parseInt( style_.width ) > 0
-                                          && ( style_.position === "absolute"
-                                            || style_.position === "fixed"
-                                            || style_.zIndex !== "auto"
-                                          ))
-                                          {   b = false;
-                                              break;
-                                          }
+                          {   b = true;
+                              if( e !== document.body )
+                              {   let e_ = e;
+                                  while(( e_ = e_.parentNode ) !== document.body ) // Uproszczone sprawdzanie, czy element jest inicjujący jakąkolwiek hierarchię chaotycznego drzewa położeń (“left” itd. oraz “width”, “height”) elementów z wymuszanym “stacking context”.
+                                  {   const style_ = document.defaultView.getComputedStyle( e_, "" );
+                                      if( e.clientWidth > 0
+                                      && parseInt( style_.width ) > 0
+                                      && ( style_.position === "absolute"
+                                        || style_.position === "fixed"
+                                        || style_.zIndex !== "auto"
+                                      ))
+                                      {   b = false;
+                                          break;
                                       }
                                   }
-                                  if(b)
-                                      e.style.setProperty( "background-color", "rgb("+ Q_color_C_default_background.join() +")", "important" );
                               }
-                              if( !b )
-                                  Q_color_P_change( style
-                                  , e.style
-                                  , "backgroundColor"
-                                  , Q_color_C_default_background, Q_color_C_default_background
-                                  , 1
-                                  );
-                              if( style.backgroundImage !== "none"
-                              && style.getPropertyPriority( "background-image" ) !== "important"
-                              )
-                                  e.style.setProperty( "background-image", style.backgroundImage, "important" );
-                              const a = [ "borderTopColor", "borderRightColor", "borderBottomColor", "borderLeftColor", "outlineColor" ];
-                              for( let i = 0; i !== a.length; i++ )
-                                  Q_color_P_change( style
-                                  , e.style
-                                  , a[i]
-                                  , Q_color_C_default_border, Q_color_C_default_border
-                                  , 1
-                                  );
+                              if(b)
+                                  e.style.setProperty( "background-color", "rgb("+ Q_color_C_default_background.join() +")", "important" );
+                          }
+                          if( !b )
                               Q_color_P_change( style
                               , e.style
-                              , "color"
-                              , Q_color_C_default_text, Q_color_C_default_text
+                              , "backgroundColor"
+                              , Q_color_C_default_background, Q_color_C_default_background
                               , 1
                               );
-                              Q_color_P_correct_color( style
-                              , e.style
-                              );
-                          }
-                          let e_;
-                          if(( e_ = e.firstElementChild ) === null
-                          || ( T_element_ignored( e_ ) && ( e_ = null, true ))
+                          if( style.backgroundImage !== "none"
+                          && style.getPropertyPriority( "background-image" ) !== "important"
                           )
-                              while( e !== e_0 )
-                              {   do
-                                  {   e_ = e.nextElementSibling;
-                                  }while( e_ !== null
-                                  && T_element_ignored( e_ ) && ( e = e_, true )
-                                  );
-                                  if( e_ !== null )
-                                      break;
-                                  e = e.parentNode;
-                              }
-                          e = e_;
-                      }while( e !== null );
-                  }
+                              e.style.setProperty( "background-image", style.backgroundImage, "important" );
+                          const a = [ "borderTopColor", "borderRightColor", "borderBottomColor", "borderLeftColor", "outlineColor" ];
+                          for( let i = 0; i !== a.length; i++ )
+                              Q_color_P_change( style
+                              , e.style
+                              , a[i]
+                              , Q_color_C_default_border, Q_color_C_default_border
+                              , 1
+                              );
+                          Q_color_P_change( style
+                          , e.style
+                          , "color"
+                          , Q_color_C_default_text, Q_color_C_default_text
+                          , 1
+                          );
+                          Q_color_P_correct_color( style
+                          , e.style
+                          );
+                      }
+                      let e_;
+                      if(( e_ = e.firstElementChild ) === null
+                      || ( T_element_ignored( e_ ) && ( e = e_, true ))
+                      )
+                          do
+                          {   do
+                                  e_ = e.nextElementSibling;
+                              while( e_ !== null && e_ !== undefined
+                              && T_element_ignored( e_ ) && ( e = e_, true )
+                              );
+                              if( e_ !== null
+                              || ( e_ !== undefined && ( e_ = null, true ))
+                              )
+                                  break;
+                              e = e.parentNode;
+                          }while( e !== e_0 );
+                      e = e_;
+                  }while( e !== null );
               }
-              delete window[ "H_ocq_E_restyle_S_timeout" ];
+              if( window[ "H_ocq_E_restyle_S_mutations" ].length )
+                  window[ "H_ocq_E_restyle_S_timeout" ] = window.setTimeout( I_restyle, 360 );
+              else
+                  delete window[ "H_ocq_E_restyle_S_timeout" ];
           };
           if( window[ "H_ocq_E_restyle_S_observer" ] === undefined )
           {   window[ "H_ocq_E_restyle_S_mutations" ] =
@@ -522,6 +561,7 @@
                 }
               ];
               window[ "H_ocq_E_restyle_S_observer" ] = new MutationObserver( I_restyle_I_add_mutations );
+              window[ "H_ocq_E_restyle_S_timeout" ] = window.setTimeout( I_restyle, 360 );
               window[ "H_ocq_E_restyle_S_observer" ].observe( document.documentElement
               , { "subtree": true
                 , "childList": true
@@ -538,7 +578,6 @@
                         window.clearTimeout( window[ "H_ocq_E_restyle_S_timeout" ] );
                 }
               );
-              I_restyle();
           }
       }
     );
