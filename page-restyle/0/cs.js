@@ -424,8 +424,7 @@
               )
                   e.style.setProperty( "background-image", style.backgroundImage, "important" );
               e.style.setProperty( "background-color", "rgb("+ Q_color_C_default_background.join() +")", "important" );
-              const mutations = window[ "H_ocq_E_restyle_S_mutations" ];
-              window[ "H_ocq_E_restyle_S_mutations" ] = [];
+              const mutations = window[ "H_ocq_E_restyle_S_mutations" ].splice( 0, window[ "H_ocq_E_restyle_S_mutations" ].length );
               const es_ = [];
               for( const mutation of mutations )
               {   if( mutation.type === 'attributes' )
