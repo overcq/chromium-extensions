@@ -96,6 +96,8 @@
                                           }
                                   }else
                                       s = words[ word_i ];
+                                  if( s.startsWith( "http" ))
+                                      continue;
                                   for( let re_i = 0; re_i !== res_hyphen.length; re_i++ )
                                   {   do
                                       {   s_ = s;
