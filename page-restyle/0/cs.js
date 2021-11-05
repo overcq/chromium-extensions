@@ -274,13 +274,18 @@
                   || ( a = s.match( /^(hsla)\((\d+), *(\d+(?:\.\d+)?)%, *(\d+(?:\.\d+)?)%, *(\d+(?:\.\d+)?)\)$/ )) !== null
                   )
                   {   a.shift();
-                      for( let i = 1; i !== 4; i++ )
-                          a[i] = parseFloat( a[i] );
+                      let percent = false;
                       if(( a[0] === "rgb"
                         || a[0] === "rgba"
                         )
                       && a[1][ a[1].length - 1 ] === '%'
                       )
+                          percent = true;
+                      for( let i = 1; i !== 4; i++ )
+                          a[i] = parseFloat( a[i] );
+                      if( a.length === 5 )
+                          a[4] = parseFloat( a[4] );
+                      if(percent)
                           for( let i = 1; i !== 4; i++ )
                               a[i] = a[i] * 255;
                   }else
@@ -324,13 +329,13 @@
                   }else if( a[0] === "rgba" )
                   {   a.shift();
                       const aa = a.pop();
-                      if( aa == 1 )
+                      if( aa === 1 )
                       {   if( !H_ocq_Q_object_T_eq( a, inherited )
                           && Q_color_T_almost_equal_gray(a)
                           )
                               style_out.setProperty( name, typeof as_transparent === "object" ? "rgb("+ as_transparent.join() +")" : as_transparent, "important" );
                       }else if(( stage === 0
-                        || aa != 0
+                        || aa !== 0
                         )
                       && Q_color_T_almost_equal_gray(a)
                       )
@@ -397,7 +402,7 @@
                       Q_color_P_change( null
                       , style
                       , "backgroundColor"
-                      , Q_color_C_default_background, style.position === "absolute" || style.position === "fixed" ? Q_color_C_default_background : ""
+                      , Q_color_C_default_background, style.position === "absolute" || style.position === "fixed" || ( style.zIndex !== "" && style.zIndex !== "auto" ) ? Q_color_C_default_background : ""
                       , 0
                       );
                       const a = [ "borderTopColor", "borderRightColor", "borderBottomColor", "borderLeftColor", "outlineColor" ];
@@ -486,7 +491,7 @@
                               {   let e_ = e;
                                   while(( e_ = e_.parentNode ) !== document.body ) // Uproszczone sprawdzanie, czy element jest inicjujący jakąkolwiek hierarchię chaotycznego drzewa położeń (“left” itd. oraz “width”, “height”) elementów z wymuszanym “stacking context”.
                                   {   const style_ = document.defaultView.getComputedStyle( e_, "" );
-                                      if( e.clientWidth > 0
+                                      if( e_.clientWidth > 0
                                       && parseInt( style_.width ) > 0
                                       && ( style_.position === "absolute"
                                         || style_.position === "fixed"
@@ -540,7 +545,7 @@
                               && T_element_ignored( e_ ) && ( e = e_, true )
                               );
                               if( e_ !== null
-                              || ( e_ !== undefined && ( e_ = null, true ))
+                              && e_ !== undefined
                               )
                                   break;
                               e = e.parentNode;
