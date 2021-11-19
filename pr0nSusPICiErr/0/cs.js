@@ -8,7 +8,8 @@
 *******************************************************************************/
 (() =>
 {  const f = (s) =>
-    {   eval(s);
+    {   if( typeof s === "string" )
+            eval(s);
         const E_pr0n_T_text = (s) =>
         {   if( s === undefined )
                 return false;
@@ -149,14 +150,12 @@
     };
     window[ "H_ocq_E_pr0n_S_some_blocked" ] = false;
     document.addEventListener( "DOMContentLoaded"
-    , (( f_main_0
-      , f_main
+    , (( f_main
       ) =>
       {   return () =>
-          {   f_main_0();
-              f_main();
+          {   f_main();
           };
-      })( f_main_0, f_main )
+      })( f_main )
     );
     f_main_0();
     f_main();

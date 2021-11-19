@@ -6,7 +6,7 @@
 *         content scripts
 * ©overcq                on ‟Gentoo Linux 13.0” “x86_64”             2015‒4‒28 *
 *******************************************************************************/
-//do zrobienia ewentualnie: “style.backgroundImage” (w tym najpierw może “gradient”).
+//TODO Do zrobienia ewentualnie: “style.backgroundImage” (w tym najpierw może “gradient”).
 //==============================================================================
 (() =>
 {   if( window[ "H_ocq_E_restyle_S_observer" ] !== undefined )
@@ -381,7 +381,9 @@
                   || e.tagName === "STYLE"
                   || e.tagName === "svg"
                   || e.tagName === "TITLE"
-                  || e.tagName === "VIDEO";
+                  || e.tagName === "VIDEO"
+                  || e.id.match( /player|progress|video/i ) !== null
+                  || e.className.match( /player|progress|video/i ) !== null;
               };
               // Pasywne czyszczenie w zdefiniowanych stylach ‘css’ przeszkód dziedziczenia od właściwości ustawionych dla ‘root’.
               for( let css_i = 0; css_i !== document.styleSheets.length; css_i++ )
@@ -538,18 +540,18 @@
                       if(( e_ = e.firstElementChild ) === null
                       || ( T_element_ignored( e_ ) && ( e = e_, true ))
                       )
-                          do
+                          while( e !== e_0 )
                           {   do
                                   e_ = e.nextElementSibling;
                               while( e_ !== null && e_ !== undefined
-                              && T_element_ignored( e_ ) && ( e = e_, true )
+                              && ( T_element_ignored( e_ ) && ( e = e_, true ))
                               );
                               if( e_ !== null
                               && e_ !== undefined
                               )
                                   break;
                               e = e.parentNode;
-                          }while( e !== e_0 );
+                          }
                       e = e_;
                   }while( e !== null );
               }
