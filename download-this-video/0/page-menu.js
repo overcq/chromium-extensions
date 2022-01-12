@@ -235,6 +235,7 @@ function Q_string_I_form_filename( s
                 break;
           case "title":
                 n = 10;
+                s = s.replace( /­/g, "" );
                 break;
           case "type":
                 n = 11;
@@ -253,6 +254,7 @@ function Q_string_I_form_filename( s
                 break;
           case "title":
                 n = 40;
+                s = s.replace( /­/g, "" );
                 break;
           case "type":
                 n = 11;

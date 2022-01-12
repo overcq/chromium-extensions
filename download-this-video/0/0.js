@@ -15,7 +15,7 @@ function E_cda_Q_document_I_script( tab_id
           ){  eval( "("+ arguments[ arguments.length - 1 ][ "H_ocq_E_sh_lib_Q_js_Z_cs_I_inject_procs_R_args" ] +")(arguments);" );
               window[ "H_ocq_S_interval" ] = window.setInterval(
                 function(
-                ){  const es = document.getElementsByClassName( "pb-block-video-player" );
+                ){  const es = document.getElementsByClassName( "pb-video-player" );
                     if( !es.length )
                         return;
                     const url = es[0].getAttribute( "src" );
