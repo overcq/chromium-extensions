@@ -6,7 +6,7 @@
 #         makefile
 # ©overcq                on ‟Gentoo Linux 13.0” “x86_64”              2015‒1‒8 #
 ################################################################################
-.PHONY: all build clean rebuild dist distclean
+.PHONY: all build clean rebuild dist distclean FORCE
 all: build
 rebuild: clean build
 dist: 1.crx
@@ -16,9 +16,18 @@ override homepage_url := $(strip $(homepage_url))
 #===============================================================================
 1:
 	mkdir 1
-1/%: 0/%
+1/manifest.json: 0/manifest.json FORCE
+	chromium-ex-ver-inc.sh $<
+	json-minify $< >$@
+1/%.css: 0/%.css
 	ln -fT -- $< $@
-build: 1 0/manifest.json $(patsubst 0/%,1/%,$(filter-out %.js,$(wildcard 0/*)))
+1/%.html: 0/%.html
+	html-minifier --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true -o $@ $<
+1/%.js: 0/%.js
+	touch $@
+1/%.png: 0/%.png
+	ln -fT -- $< $@
+build: 1 1/manifest.json $(patsubst 0/%,1/%,$(wildcard 0/*))
 	./0-messages.pl $(wildcard 0/*.js)
 	[ -d 1/_locales/en ] || mkdir -p 1/_locales/en
 	tmp_file="$$( mktemp )" ;\
@@ -71,5 +80,4 @@ clean: distclean
 	rm -f $(patsubst 0/%,1/%,$(wildcard 0/*)) 1/_locales/en/messages.json
 distclean:
 	rm -f 1.crx ;\
-    ln -fT 0/manifest.json 1/manifest.json
 ################################################################################

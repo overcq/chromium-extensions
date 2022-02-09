@@ -4,7 +4,7 @@
 , "default_locale": "en"
 , "name": "hyphenate ©overcq"
 , "short_name": "hyphen"
-, "version": "0.0.1.1"
+, "version": "0.0.1.4"
 , "description": "Breaks words in lines on a page."
 , "options_ui":
   { "page": "options-page.html"

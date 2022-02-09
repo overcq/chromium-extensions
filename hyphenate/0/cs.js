@@ -61,7 +61,9 @@
                               && e.nodeName !== "SCRIPT"
                               && e.nodeName !== "STYLE"
                               && e.nodeName !== "TEXTAREA"
-                              && ( e.nodeName !== "TABLE"
+                              && (( e.nodeName !== "DIV"
+                                  && e.nodeName !== "TABLE"
+                                )
                                 || e.className.indexOf( "highlight" ) === -1
                               )
                               && ( e.nodeName !== "TD"
