@@ -18,7 +18,6 @@ override homepage_url := $(strip $(homepage_url))
 	mkdir 1
 1/manifest.json: 0/manifest.json FORCE
 	chromium-ex-ver-inc.sh $<
-	json-minify $< >$@
 1/%.css: 0/%.css
 	ln -fT -- $< $@
 1/%.html: 0/%.html

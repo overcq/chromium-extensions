@@ -41,7 +41,7 @@ function Q_url_M( tab_id
                      if( Q_url_S_removed[i][ "title" ] === "[no title]"
                      && Q_url_S_removed[i][ "url" ] === Q_url_S_a[ tab_id ][ "url" ]
                      )
-                         Q_url_S_removed[0][ "title" ] = Q_url_S_a[ tab_id ][ "title" ];
+                         Q_url_S_removed[i][ "title" ] = Q_url_S_a[ tab_id ][ "title" ];
          }
       })(url)
     );

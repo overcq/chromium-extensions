@@ -13,7 +13,7 @@
         const E_pr0n_T_text = (s) =>
         {   if( s === undefined )
                 return false;
-            return /gangbang|groupsex|fuck|orgy|pussy|squirt|suck|swinger/i.test(s)
+            return /gangbang|groupsex|(?<!brain)fuck|orgy|pussy|squirt|suck|swinger/i.test(s)
             || /\b(?:porn)\b/i.test(s)
             || /\b(?:anal|bsdm|cfnm|tits)\b/i.test(s)
             || /\b(?:cock|dick|gay)s?\b/i.test(s);
