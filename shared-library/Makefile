@@ -18,12 +18,15 @@ override homepage_url := $(strip $(homepage_url))
 	mkdir 1
 1/manifest.json: 0/manifest.json FORCE
 	chromium-ex-ver-inc.sh $<
+	json-minify $< >$@
 1/%.css: 0/%.css
 	ln -fT -- $< $@
 1/%.html: 0/%.html
 	html-minifier --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true -o $@ $<
 1/%.js: 0/%.js
 	touch $@
+1/%.gif: 0/%.gif
+	ln -fT -- $< $@
 1/%.png: 0/%.png
 	ln -fT -- $< $@
 build: 1 1/manifest.json $(patsubst 0/%,1/%,$(wildcard 0/*))
@@ -49,7 +52,8 @@ build: 1 1/manifest.json $(patsubst 0/%,1/%,$(wildcard 0/*))
 			js-clc <"$$f" >"$$tmp_file" \
 			&& cp "$$tmp_file" "$$f" ;\
 		done ;\
-	fi
+	fi \
+	&& chmod -R g=rX 1
 # https://developers.google.com/closure/compiler/docs/gettingstarted_app
 1.crx: build
 	if [ -n "$(update_url)" -o -n "$(homepage_url)" ]; then \
