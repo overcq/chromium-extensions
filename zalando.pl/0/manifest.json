@@ -1,0 +1,41 @@
+{ "manifest_version": 3
+, "default_locale": "en"
+, "name": "zalando.pl buy ©overcq"
+, "short_name": "zalando"
+, "version": "0.0.9.34"
+, "description": "zalando.pl buy."
+, "action":
+  { "default_icon":
+    { "32": "32.png"
+    }
+  , "default_popup": "action.html"
+  }
+, "content_scripts":
+  [ { "matches":
+      [ "https://www.zalando.pl/cart"
+      , "https://www.zalando.pl/cart/"
+      , "https://www.zalando.pl/cart?*"
+      , "https://www.zalando.pl/cart/?*"
+      ]
+    , "js": [ "cs-cart.js" ]
+    }
+  , { "matches":
+      [ "https://www.zalando.pl/checkout/success"
+      ]
+    , "js": [ "cs-success.js" ]
+    }
+  , { "matches":
+      [ "https://www.zalando.pl/*.html"
+      ]
+    , "js": [ "cs-html.js" ]
+    }
+  ]
+, "host_permissions":
+  [ "https://www.zalando.pl/"
+  ]
+, "permissions":
+  [ "scripting"
+  , "storage"
+  , "tabs"
+  ]
+}

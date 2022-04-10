@@ -209,7 +209,7 @@
               {  return Q_color_Z_channel_T_almost_equal_gray_I_cmp( a[0], a[1] )
                   && Q_color_Z_channel_T_almost_equal_gray_I_cmp( a[0], a[2] );
               };
-              const Q_color_R_luminance = (a) =>
+              const Q_color_R_luminance = a =>
               {   switch( a[0] )
                   { case "rgb":
                     case "rgba":
@@ -373,7 +373,7 @@
                       style_out.setProperty( "color", a[0] +"("+ a.join() +")", "important" );
                   }
               };
-              const T_element_ignored = (e) =>
+              const T_element_ignored = e =>
               {   return e.tagName === "HEAD"
                   || e.tagName === "LINK"
                   || e.tagName === "META"
@@ -383,7 +383,7 @@
                   || e.tagName === "TITLE"
                   || e.tagName === "VIDEO"
                   || e.id.match( /player|progress|video/i ) !== null
-                  || e.className.match( /player|progress|video/i ) !== null;
+                  || e.className.match( /highlight|player|progress|video/i ) !== null;
               };
               // Pasywne czyszczenie w zdefiniowanych stylach ‘css’ przeszkód dziedziczenia od właściwości ustawionych dla ‘root’.
               for( let css_i = 0; css_i !== document.styleSheets.length; css_i++ )
