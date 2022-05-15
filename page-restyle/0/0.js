@@ -137,9 +137,7 @@ window.addEventListener( "load"
         function( tab_id
         , info
         , tab
-        ){  if(( info.url !== undefined
-              || info.status === "complete"
-              )
+        ){  if( info.status === "complete"
             && H_ocq_Q_s_Z_url_T_www( info.url !== undefined ? info.url : tab.url )
             )
                 Q_page_I_restyle( tab_id );

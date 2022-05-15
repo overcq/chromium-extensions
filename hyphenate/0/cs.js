@@ -64,8 +64,9 @@
                               && (( e.nodeName !== "DIV"
                                   && e.nodeName !== "TABLE"
                                 )
-                                || e.className.indexOf( "highlight" ) === -1
-                              )
+                                || ( e.id.indexOf( "vscode" ) === -1
+                                  && e.className.indexOf( "highlight" ) === -1
+                              ))
                               && ( e.nodeName !== "TD"
                                 || e.className !== "code"
                               )

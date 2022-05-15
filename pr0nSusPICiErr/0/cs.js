@@ -10,7 +10,7 @@
 {  const f = (s) =>
     {   if( typeof s === "string" )
             eval(s);
-        const E_pr0n_T_text = (s) =>
+        const E_pr0n_T_text = s =>
         {   if( s === undefined )
                 return false;
             return /gangbang|groupsex|(?<!brain)fuck|orgy|pussy|squirt|suck|swinger/i.test(s)
@@ -33,7 +33,7 @@
               || E_pr0n_T_text( a.getAttribute( "href" ))
             );
         };
-        const E_pr0n_T_a_thumb = (e) =>
+        const E_pr0n_T_a_thumb = e =>
         {   do
             {   const a = e;
                 let e_ = e;
@@ -48,7 +48,7 @@
             }while( e !== null );
             return false;
         };
-        const E_pr0n_T_root_tag = (e) =>
+        const E_pr0n_T_root_tag = e =>
         {   if( e === null )
                 return false;
             const e_root = e.parentNode;
