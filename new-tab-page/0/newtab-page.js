@@ -392,7 +392,9 @@ function Q_conf_X( o
 //------------------------------------------------------------------------------
 document.addEventListener( "DOMContentLoaded"
 , function(
-  ){  let e = document.getElementById( "sea_arc" );
+  ){  let e = document.getElementsByTagName( "title" )[0];
+      e.innerText = 33%`New Tab``;
+      e = document.getElementById( "sea_arc" );
       e.addEventListener( "submit"
       , function( e
         ){  e.preventDefault();
@@ -541,7 +543,7 @@ document.addEventListener( "DOMContentLoaded"
                 a.style.textDecoration = "underline";
                 a.appendChild( document.createTextNode( 11%`on‐line description of all`` ));
                 p.appendChild(a);
-                p.appendChild( document.createTextNode( 12%`.`` ));
+                p.appendChild( document.createTextNode( "." ));
                 adv.appendChild(p);
                 adv.removeAttribute( "hidden" );
             }
