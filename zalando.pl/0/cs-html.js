@@ -13,22 +13,23 @@ function I_run(
 ){  const req = new XMLHttpRequest();
     req.open( "GET", window.location );
     req.addEventListener( "readystatechange", () =>
-      {   if( req.readyState !== 4 )
-              return;
-          if( req.status !== 200 )
+      {   if( req.readyState !== 4
+          || req.status !== 200
+          )
               return;
           const start = req.responseText.indexOf( " type=\"application/ld+json\">" ) + 28;
           const end = req.responseText.indexOf( "<", start );
           const o = JSON.parse( req.responseText.substring( start, end ).replace( /&amp;/g, "&" ).replace( /&quot;/g, "\"" ));
+          console.log(o);
           const select = document.createElement( "SELECT" );
           for( let i = 0; i !== o.offers.length; i++ )
           {   const option = document.createElement( "OPTION" );
               option.setAttribute( "value", o.offers[i].sku );
-              option.appendChild( document.createTextNode( o.offers[i].sku.substr( o.sku.length ) +", "+ o.offers[i].price +" "+ o.offers[i].priceCurrency + ( o.offers[i].availability === "http://schema.org/OutOfStock" ? 12%` (unavailable)`` : "" )));
-              select.appendChild(option);
+              option.append( document.createTextNode( o.offers[i].sku.substr( o.sku.length ) +", "+ o.offers[i].price +" "+ o.offers[i].priceCurrency + ( o.offers[i].availability === "http://schema.org/OutOfStock" ? 12%` (unavailable)`` : "" )));
+              select.append(option);
           }
           const button = document.createElement( "BUTTON" );
-          button.appendChild( document.createTextNode( 11%`add product`` ));
+          button.append( document.createTextNode( 11%`add product`` ));
           button.addEventListener( "click", () =>
             {   if( select.selectedIndex === -1 )
                     return;
@@ -64,9 +65,9 @@ function I_run(
                 req.send( JSON.stringify( post_data ));
             }
           );
-          const e = document.getElementsByTagName( "x-wrapper-re-1-6" )[0];
-          e.appendChild(select);
-          e.appendChild(button);
+          const e = document.getElementsByTagName( "x-wrapper-re-1-7" )[0];
+          e.append(select);
+          e.append(button);
         }
     );
     req.send(null);

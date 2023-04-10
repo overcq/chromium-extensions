@@ -4,8 +4,8 @@
 , "default_locale": "en"
 , "name": "pr0nSusPICiErr ©overcq"
 , "short_name": "pr0n‐er"
-, "version": "0.0.8.14"
-, "description": "Tries to detect (on content of page) aggressive pornography stores and hides it. „because they have no soul.”"
+, "version": "0.0.8.28"
+, "description": "Tries to detect (on content of page) aggressive pornography stores and hides it. „Because they have no soul.”"
 , "background":
   { "scripts": [ "0.js" ]
   , "persistent": false

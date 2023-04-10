@@ -233,8 +233,9 @@ window.addEventListener( "load"
       chrome.idle.onStateChanged.addListener(
         function( state
         ){  if(( state !== "idle"
-            && state !== "locked"
-            ) || H_ocq_Q_database_S_readonly
+              && state !== "locked"
+            )
+            || H_ocq_Q_database_S_readonly
             )
                 return;
             if( H_ocq_Q_date_M_now() < Q_purge_C_next_time )

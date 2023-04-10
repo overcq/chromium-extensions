@@ -4,7 +4,7 @@
 , "default_locale": "en"
 , "name": "alternative history ©overcq"
 , "short_name": "alt‐his"
-, "version": "1.1.0.1"
+, "version": "1.1.0.15"
 , "description": "Saves page history using own database."
 , "chrome_url_overrides":
   { "history": "history-page.html"
