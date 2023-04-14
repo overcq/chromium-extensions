@@ -2,7 +2,7 @@
 , "default_locale": "en"
 , "name": "zalando.pl buy ©overcq"
 , "short_name": "zalando"
-, "version": "0.0.9.38"
+, "version": "0.0.9.42"
 , "description": "zalando.pl buy."
 , "action":
   { "default_icon":
