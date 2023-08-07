@@ -12,7 +12,7 @@ function Q_url_I_reduce( s
             s = s.substring( 0, i );
     }
     s = s.substring( s.indexOf( "//" ) + 2 );
-    if( s.match( /\/(?:index\.[a-z]{3,4})?$/ ) !== null )
+    if( s.match( /\/(?:index\.[a-z]{3,4}[0-9]?)?$/ ) !== null )
         s = s.substring( 0, s.lastIndexOf( "/" ));
     return s;
 }

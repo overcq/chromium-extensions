@@ -42,8 +42,8 @@ body > button
 <h1>Edit user</h1>
 <form>
     <input name="user" type="hidden" required>
-    <div><label>Name: <input name="name" type="text" required></label></div>
-    <div><label>Password: <input name="password" type="password" minlength="8" maxlength="30" required></label></div>
+    <div><label>Name: <input name="name" type="text" autocomplete="username" required></label></div>
+    <div><label>Password: <input name="password" type="password" minlength="8" maxlength="30" autocomplete="new-password" required></label></div>
     <input type="submit" value="Send">
 </form>
 </body>

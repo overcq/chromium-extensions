@@ -9,7 +9,7 @@
 .PHONY: all build clean rebuild dist distclean FORCE
 all: build
 rebuild: clean build
-dist: 1.zip
+dist: extension.7z
 #===============================================================================
 override update_url := $(strip $(update_url))
 override homepage_url := $(strip $(homepage_url))
@@ -45,7 +45,13 @@ build: 1 1/manifest.json $(patsubst 0/%,1/%,$(wildcard 0/*))
 		done ;\
 	fi \
 	&& chmod -R g=rX 1
+extension.7z:
+	cd 1 \
+	&& 7z u ../$@ \
+	&& chmod g+r ../$@
 #------------------------------------------------------------------------------
 clean: distclean
 	rm -f $(patsubst 0/%,1/%,$(wildcard 0/*)) 1/_locales/en/messages.json
+distclean:
+	rm -f extension.7z
 #*******************************************************************************
