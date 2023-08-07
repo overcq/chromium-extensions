@@ -1,0 +1,94 @@
+<!-- *********************************************************************** -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Site comments</title>
+<style>
+*
+{ margin: 0
+; padding: 0
+}
+body
+{ background-color: #a2a2a2
+; margin: 1vw 1vh
+; color: black
+; font-family: Constantia, "Times New Roman", serif
+; font-size: 14px
+}
+h1
+{ margin: 8px 0 5px 0
+; font-family: Calibri, Arial, "Lucida Sans", sans-serif
+; font-size: 14px
+; font-weight: bold
+; word-break: break-all
+}
+h2
+{ margin: 5px 0 2px 0
+; font-family: Calibri, Arial, "Lucida Sans", sans-serif
+; font-size: 20px
+; font-weight: bold
+}
+h3
+{ font-family: Calibri, Arial, "Lucida Sans", sans-serif
+; font-size: 14px
+; font-weight: bold
+}
+button, input[type="submit"]
+{ background-color: #a2a2a2
+; border: 1px outset #7a7a7f
+; padding: 0 3px 1px 3px
+; font-family: "Segoe UI", sans-serif
+; font-size: 14px
+; font-weight: bold
+}
+textarea
+{ background-color: #cacaca
+; border: 1px solid #7a7a7f
+; padding: 4px
+; font-family: Constantia, "Times New Roman", serif
+; font-size: 16px
+}
+#new_comment > form > textarea
+{ width: 97%
+}
+#new_comment > button, #comments > button
+{ float: right
+}
+#comments > div > div > p
+{ margin: 3px 0 5px 0
+; border-bottom: 1px dotted #7a7a7f
+; padding: 0 0 1px 0
+; font-family: Constantia, "Times New Roman", serif
+; font-size: 16px
+}
+#comments > div > div > p.time
+{ margin: 0
+; border: none
+; padding: 0
+; font-size: 13px
+}
+</style>
+<script src="side_panel.js"></script>
+</head>
+<!-- ======================================================================= -->
+<body>
+<h1>No site</h1>
+<div id="new_comment">
+    <button>User</button>
+    <h2>New comment</h2>
+    <form>
+        <input name="url" type="hidden" required>
+        <input name="user" type="hidden" required>
+        <textarea name="comment" required rows="5"></textarea>
+        <input type="submit" value="Send">
+    </form>
+</div>
+<div id="comments">
+    <button>Reload</button>
+    <h2>Comments</h2>
+    <div>Loading…</div>
+</div>
+</body>
+</html>
+<!-- *********************************************************************** -->

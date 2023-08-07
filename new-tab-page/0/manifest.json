@@ -4,7 +4,7 @@
 , "default_locale": "en"
 , "name": "new tab page ©overcq"
 , "short_name": "new‐tab"
-, "version": "3.2.0.38"
+, "version": "3.2.0.58"
 , "description": "Replaces the new tab page."
 , "icons":
   { "16": "16.png"
@@ -27,7 +27,6 @@
   [ "bookmarks"
   , "management"
   , "storage"
-  , "tabs"
   , "chrome://favicon/"
   , "file:///*"
   ]

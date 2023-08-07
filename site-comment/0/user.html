@@ -1,0 +1,47 @@
+<!-- *********************************************************************** -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Site comments — edit user</title>
+<style>
+*
+{ margin: 0
+; padding: 0
+}
+body
+{ background-color: #a2a2a2
+; margin: 1vw 1vh
+; color: black
+; font-family: Constantia, "Times New Roman", serif
+; font-size: 14px
+}
+h1
+{ margin: 5px 0 2px 0
+; font-family: Calibri, Arial, "Lucida Sans", sans-serif
+; font-size: 20px
+; font-weight: bold
+}
+input[type="submit"]
+{ background-color: #a2a2a2
+; border: 1px outset #7a7a7f
+; padding: 0 3px 1px 3px
+; font-family: "Segoe UI", sans-serif
+; font-size: 14px
+; font-weight: bold
+}
+</style>
+<script src="user.js"></script>
+</head>
+<!-- ======================================================================= -->
+<body>
+<h1>Edit user</h1>
+<form>
+    <input name="user" type="hidden" required>
+    <div><label>Name: <input name="name" type="text" required></label></div>
+    <div><label>Password: <input name="password" type="password" minlength="8" maxlength="30" required></label></div>
+    <input type="submit" value="Send">
+</form>
+</body>
+</html>
+<!-- *********************************************************************** -->

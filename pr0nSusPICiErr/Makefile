@@ -1,15 +1,15 @@
-################################################################################
+#*******************************************************************************
 #   ___   workplace
 #  ¦OUX¦  ‟GNU” “make”
 #  ¦/C+¦  compile
 #   ---   ‟chromium” extension
 #         makefile
 # ©overcq                on ‟Gentoo Linux 13.0” “x86_64”              2015‒1‒8 #
-################################################################################
+#*******************************************************************************
 .PHONY: all build clean rebuild dist distclean FORCE
 all: build
 rebuild: clean build
-dist: 1.crx
+dist: 1.zip
 #===============================================================================
 override update_url := $(strip $(update_url))
 override homepage_url := $(strip $(homepage_url))
@@ -54,33 +54,23 @@ build: 1 1/manifest.json $(patsubst 0/%,1/%,$(wildcard 0/*))
 		done ;\
 	fi \
 	&& chmod -R g=rX 1
-# https://developers.google.com/closure/compiler/docs/gettingstarted_app
-1.crx: build
-	if [ -n "$(update_url)" -o -n "$(homepage_url)" ]; then \
-        rm -f 1/manifest.json ;\
-        head_line=$$( grep -ne '^, *"key"' 0/manifest.json | cut -d : -f 1 ) ;\
-        head -n $$head_line 0/manifest.json >1/manifest.json \
-        && if [ -n "$(update_url)" ]; then \
-            echo ', "update_url": "$(update_url)"' >>1/manifest.json ;\
-        fi \
-        && if [ -n "$(homepage_url)" ]; then \
-            echo ', "homepage_url": "$(homepage_url)"' >>1/manifest.json ;\
-        fi \
-        && tail -n +$$( expr $$head_line + 1 ) 0/manifest.json >>1/manifest.json ;\
-    fi \
-    && \
-    { if [ -e 1.pem ]; then \
-          chromium-browser --pack-extension=1 --pack-extension-key=1.pem ;\
-      elif [ -e 0.pem ]; then \
-          chromium-browser --pack-extension=1 --pack-extension-key=0.pem ;\
-      else \
-          chromium-browser --pack-extension=1 ;\
-      fi ;\
-      true ;\
-    }
+1.zip: build
+	rm -f 1/manifest.json ;\
+	head_line=$$( grep -ne '^, *"key"' 0/manifest.json | cut -d : -f 1 ) ;\
+	head -n $$( expr $$head_line - 1 ) 0/manifest.json >1/manifest.json \
+	&& if [ -n "$(update_url)" ]; then \
+		echo ', "update_url": "$(update_url)"' >>1/manifest.json ;\
+	fi \
+	&& if [ -n "$(homepage_url)" ]; then \
+		echo ', "homepage_url": "$(homepage_url)"' >>1/manifest.json ;\
+	fi \
+	&& tail -n +$$( expr $$head_line + 1 ) 0/manifest.json >>1/manifest.json \
+	&& cd 1 \
+    && zip -9r ../1.zip * \
+	&& chmod g+r ../1.zip
 #------------------------------------------------------------------------------
 clean: distclean
 	rm -f $(patsubst 0/%,1/%,$(wildcard 0/*)) 1/_locales/en/messages.json
 distclean:
-	rm -f 1.crx ;\
-################################################################################
+	rm -f 1.zip
+#*******************************************************************************
