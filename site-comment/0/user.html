@@ -22,7 +22,7 @@ h1
 ; font-size: 20px
 ; font-weight: bold
 }
-input[type="submit"]
+button, input[type="submit"]
 { background-color: #a2a2a2
 ; border: 1px outset #7a7a7f
 ; padding: 0 3px 1px 3px
@@ -30,11 +30,15 @@ input[type="submit"]
 ; font-size: 14px
 ; font-weight: bold
 }
+body > button
+{ float: right
+}
 </style>
 <script src="user.js"></script>
 </head>
 <!-- ======================================================================= -->
 <body>
+<button>Cancel</button>
 <h1>Edit user</h1>
 <form>
     <input name="user" type="hidden" required>

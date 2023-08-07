@@ -5,6 +5,11 @@ document.addEventListener( "DOMContentLoaded", async () =>
       Q_user_S_id = Q_user_S_id.Q_user_S_id;
       if( Q_user_S_id === undefined )
           Q_user_S_id = "";
+      const cancel = document.body.getElementsByTagName( "BUTTON" )[0];
+      cancel.addEventListener( "click", (ev) =>
+        {   chrome.sidePanel.setOptions({ path: "side_panel.html" });
+        }
+      );
       const form = document.getElementsByTagName( "form" )[0];
       form.addEventListener( "submit", async (ev) =>
         {   ev.preventDefault();

@@ -26,7 +26,7 @@ document.addEventListener( "DOMContentLoaded", async () =>
       const Q_user_S_name = v.Q_user_S_name;
       const new_comment = document.getElementById( "new_comment" );
       const user = new_comment.getElementsByTagName( "BUTTON" )[0];
-      user.addEventListener( "click", async (ev) =>
+      user.addEventListener( "click", (ev) =>
         {   chrome.sidePanel.setOptions({ path: "user.html" });
         }
       );
