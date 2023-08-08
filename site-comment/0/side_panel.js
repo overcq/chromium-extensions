@@ -47,16 +47,20 @@ document.addEventListener( "DOMContentLoaded", async () =>
             const form_data = new FormData(form);
             form_data.set( "url", url );
             form_data.set( "user", Q_user_S_id );
+            const textarea = form.getElementsByTagName( "TEXTAREA" )[0];
             const submit = form.querySelector( "input[type='submit']" );
+            textarea.setAttribute( "readonly", "" );
             submit.setAttribute( "disabled", "" );
             const response = await fetch( Q_srv_S_root +"add.php",
               { method: "POST"
               , body: form_data
               }
             );
+            textarea.removeAttribute( "readonly" );
             submit.removeAttribute( "disabled" );
             if( !response.ok )
                 return;
+            textarea.value = "";
             const author = document.createElement( "h3" );
             author.append( Q_user_S_name );
             const text = document.createElement( "P" );

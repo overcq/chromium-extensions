@@ -11,9 +11,6 @@ all: build
 rebuild: clean build
 dist: extension.7z
 #===============================================================================
-override update_url := $(strip $(update_url))
-override homepage_url := $(strip $(homepage_url))
-#===============================================================================
 1:
 	mkdir 1
 1/manifest.json: 0/manifest.json FORCE
