@@ -374,13 +374,13 @@
                   }
               };
               const T_element_ignored = e =>
-              {   return e.tagName === "HEAD"
+              {   return e.tagName === "CANVAS"
+                  || e.tagName === "HEAD"
                   || e.tagName === "LINK"
                   || e.tagName === "META"
                   || e.tagName === "SCRIPT"
                   || e.tagName === "STYLE"
                   || e.tagName === "svg"
-                  || e.tagName === "TITLE"
                   || e.tagName === "VIDEO"
                   || e.id.match( /player|progress|video/i ) !== null
                   || e.className.match( /highlight|player|progress|video/i ) !== null;
@@ -459,8 +459,10 @@
                   if( parent !== null )
                       continue;
                   let b = false;
-                  for( let j = i + 1; j !== es_.length; j++ )
-                  {   const e_ = es_[j];
+                  for( let j = 0; j !== es_.length; j++ )
+                  {   if( i === j )
+                          continue;
+                      const e_ = es_[j];
                       let parent = e;
                       do
                       {   if( parent === e_ )
@@ -481,26 +483,59 @@
                   do
                   {   const style = document.defaultView.getComputedStyle( e, "" );
                       if( e.clientWidth > 0
-                      && parseInt( style.width ) > 0 // Czy element jest rysowany na stronie ‘www’.
-                      )
+                      && ( style.width === "auto"
+                        || parseInt( style.width, 10 ) > 0 // Czy element jest rysowany na stronie ‘www’.
+                      ))
                       {   let b = false;
                           if( style.position === "absolute"
                           || style.position === "fixed"
                           || style.zIndex !== "auto"
                           )
                           {   b = true;
-                              if( e !== document.body )
-                              {   let e_ = e;
-                                  while(( e_ = e_.parentNode ) !== document.body ) // Uproszczone sprawdzanie, czy element jest inicjujący jakąkolwiek hierarchię chaotycznego drzewa położeń (“left” itd. oraz “width”, “height”) elementów z wymuszanym “stacking context”.
-                                  {   const style_ = document.defaultView.getComputedStyle( e_, "" );
-                                      if( e_.clientWidth > 0
-                                      && parseInt( style_.width ) > 0
+                              if( e !== document.documentElement
+                              && e !== document.body
+                              )
+                              {   if( e.previousElementSibling !== null )
+                                  {   const style_ = document.defaultView.getComputedStyle( e.previousElementSibling, "" );
+                                      if( e.previousElementSibling.clientWidth > 0
+                                      && ( style_.width === "auto"
+                                        || parseInt( style_.width, 10 ) > 0
+                                      )
                                       && ( style_.position === "absolute"
                                         || style_.position === "fixed"
                                         || style_.zIndex !== "auto"
                                       ))
-                                      {   b = false;
-                                          break;
+                                          b = false;
+                                  }
+                                  if(b)
+                                  {   let e_ = e;
+                                      while(( e_ = e_.parentNode ) !== document.body ) // Uproszczone sprawdzanie, czy element jest inicjujący jakąkolwiek hierarchię chaotycznego drzewa położeń (“left” itd. oraz “width”, “height”) elementów z wymuszanym “stacking context”.
+                                      {   const style_ = document.defaultView.getComputedStyle( e_, "" );
+                                          if( e_.clientWidth > 0
+                                          && ( style_.width === "auto"
+                                            || parseInt( style_.width, 10 ) > 0
+                                          )
+                                          && ( style_.position === "absolute"
+                                            || style_.position === "fixed"
+                                            || style_.zIndex !== "auto"
+                                          ))
+                                          {   b = false;
+                                              break;
+                                          }
+                                          if( e_.previousElementSibling !== null )
+                                          {   const style_ = document.defaultView.getComputedStyle( e_.previousElementSibling, "" );
+                                              if( e_.previousElementSibling.clientWidth > 0
+                                              && ( style_.width === "auto"
+                                                || parseInt( style_.width, 10 ) > 0
+                                              )
+                                              && ( style_.position === "absolute"
+                                                || style_.position === "fixed"
+                                                || style_.zIndex !== "auto"
+                                              ))
+                                              {   b = false;
+                                                  break;
+                                              }
+                                          }
                                       }
                                   }
                               }

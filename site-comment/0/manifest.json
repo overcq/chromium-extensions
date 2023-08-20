@@ -3,7 +3,7 @@
 , "default_locale": "en"
 , "name": "Site Comment ©overcq"
 , "short_name": "site‐comment"
-, "version": "0.0.0.278"
+, "version": "0.0.0.282"
 , "description": "Show global comments for a site."
 , "action":
   { "default_title": "Open side panel with the site comments"

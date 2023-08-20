@@ -317,12 +317,12 @@ window.addEventListener( "load"
                     && domain === Q_tabs_S_cookie_domains[ Q_tabs_S_opener[ details.tabId ]][0]
                     )
                     {   Q_cookie_set_M( details.tabId, url );
-                        return {}; //zezwolenie na pobranie pierwszego głównego ‘urla’ z referencji otwartej karty: z otwartej witryny można otworzyć cokolwiek w nowej karcie.
+                        return {}; // Zezwolenie na pobranie pierwszego głównego ‘urla’ z referencji otwartej karty: z otwartej witryny można otworzyć cokolwiek w nowej karcie.
                     }
                 }else if( domain === Q_tabs_S_cookie_domains[ details.tabId ][0] )
                 {   if( details.type === "main_frame" )
                         Q_cookie_set_I_add( details.tabId, url, true );
-                    return {}; //zezwolenie na pobranie ‘urla’ z głównej domeny tej karty.
+                    return {}; // Zezwolenie na pobranie ‘urla’ z głównej domeny tej karty.
                 }
                 if( details.type === "main_frame" )
                     for( let id in Q_tabs_S_cookie_hosts )
@@ -333,7 +333,7 @@ window.addEventListener( "load"
                                 break;
                             if( Q_tabs_S_cookie_hosts[id][i] === host )
                             {   Q_request_I_main_frame( details.tabId, url );
-                                return {}; //zezwolenie na pobranie głownego ‘urla’ z głównym ‘hostem’ w którejś karcie.
+                                return {}; // Zezwolenie na pobranie głownego ‘urla’ z głównym ‘hostem’ w którejś karcie.
                             }
                         }
                     }
@@ -341,11 +341,11 @@ window.addEventListener( "load"
             {   for( let i = 0; i !== Q_oth_req_S_uid.length; i++ )
                     if( Q_oth_req_S_uid[i][0] === details.requestId )
                     {   Q_oth_req_S_uid[i][1] = H_ocq_Q_date_M_now() + Q_oth_req_S_timeout;
-                        return {}; //zezwolenie na kolejne ‘urle’ zarejestrowanego, nie blokowanego żądania “chrome.downloads”.
+                        return {}; // Zezwolenie na kolejne ‘urle’ zarejestrowanego, nie blokowanego żądania “chrome.downloads”.
                     }
                 for( let i = 0; i !== Q_oth_req_S_first_url.length; i++ )
                     if( Q_oth_req_S_first_url[i][0] === url )
-                        return {}; //delegowanie decyzji o blokowaniu żądań “chrome.downloads” do procedury nagłówków ‘http’ przed wysłaniem żądania ‘http’.
+                        return {}; // Delegowanie decyzji o blokowaniu żądań “chrome.downloads” do procedury nagłówków ‘http’ przed wysłaniem żądania ‘http’.
             }
             for( let id in Q_tabs_S_cookie_domains )
             {   if( id == details.tabId )
@@ -356,7 +356,7 @@ window.addEventListener( "load"
                         && Q_tabs_S_cookie_urls[ details.tabId ] !== undefined
                         )
                             Q_cookie_set_W( details.tabId );
-                        return { "cancel": true }; //zablokowanie ‘urla’ z domeną w którejś karcie.
+                        return { "cancel": true }; // Zablokowanie ‘urla’ z domeną w którejś karcie.
                     }
             }
             if( details.type === "main_frame" )
@@ -364,10 +364,8 @@ window.addEventListener( "load"
             return {};
         }
       , { "urls":
-          [ "file://*"
-          , "http://*/*"
+          [ "http://*/*"
           , "https://*/*"
-          , "ftp://*/*"
           ]
         }
       , [ "blocking" ]
@@ -395,10 +393,8 @@ window.addEventListener( "load"
             return {};
         }
       , { "urls":
-          [ "file://*"
-          , "http://*/*"
+          [ "http://*/*"
           , "https://*/*"
-          , "ftp://*/*"
           ]
         , "types": [ "other" ]
         , "tabId": -1
@@ -426,10 +422,8 @@ window.addEventListener( "load"
             return {};
         }
       , { "urls":
-          [ "file://*"
-          , "http://*/*"
+          [ "http://*/*"
           , "https://*/*"
-          , "ftp://*/*"
           ]
         }
       , [ "blocking" ]
