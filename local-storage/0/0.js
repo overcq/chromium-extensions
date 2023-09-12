@@ -163,20 +163,18 @@ function Q_cookie_set_W( tab_id
 function Q_content_script_I_document_load( tab_id
 ){  chrome.tabs.executeScript( tab_id
     , { "code": "("+
-            function( my_var
-            ){  if( window[ my_var +"clear" ] !== undefined )
-                    return;
-                window[ my_var +"clear" ] = true;
-                const req = indexedDB.webkitGetDatabaseNames();
-                req.addEventListener( "success"
-                , function( e
-                ){  for( let i = 0; i !== e.target.result.length; i++ )
-                        indexedDB.deleteDatabase( e.target.result[i] );
-                }
-                );
-                localStorage.clear();
-                sessionStorage.clear();
-            }
+            window.setTimeout( async ( my_var ) =>
+              {   if( window[ my_var +"clear" ] !== undefined )
+                      return;
+                  window[ my_var +"clear" ] = true;
+                  const dbs = await indexedDB.databases();
+                  for( const db of dbs )
+                      indexedDB.deleteDatabase(db);
+                  localStorage.clear();
+                  sessionStorage.clear();
+              }
+            , 1
+            )
         +")( "+ JSON.stringify( H_ocq_E_sh_lib_Q_init_R_session_name() )
         +" );"
       , "allFrames": true

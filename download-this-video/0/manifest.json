@@ -4,7 +4,7 @@
 , "default_locale": "en"
 , "name": "download This Video ©overcq"
 , "short_name": "dload‐tv"
-, "version": "1.2.14.46"
+, "version": "1.2.14.48"
 , "description": "On content pages of «youtube.com» and other sites («cnn.com» and some)— presents streams to download into files."
 , "icons":
   { "16": "16.png"
