@@ -19,10 +19,12 @@ override homepage_url := $(strip $(homepage_url))
 1/manifest.json: 0/manifest.json FORCE
 	chromium-ex-ver-inc.sh $<
 	json-minify $< >$@
+	chmod g+r $@
 1/%.css: 0/%.css
 	ln -fT -- $< $@
 1/%.html: 0/%.html
 	html-minifier --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true -o $@ $<
+	chmod g+r $@
 1/%.js: 0/%.js
 	touch $@
 1/%.gif: 0/%.gif

@@ -1,0 +1,19 @@
+{ "manifest_version": 3
+, "minimum_chrome_version": "114"
+, "default_locale": "en"
+, "author":
+  { "email": "overcq@int.pl"
+  }
+, "name": "Make Links ©overcq"
+, "short_name": "make-links"
+, "version": "0.0.0.25"
+, "description": "Replaces text links with ‘html’ links."
+, "content_scripts":
+  [ { "matches": [ "*://*/*" ]
+    , "js": [ "cs.js" ]
+    }
+  ]
+, "externally_connectable":
+  { "ids": []
+  }
+}

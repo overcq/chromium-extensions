@@ -1,9 +1,12 @@
 { "manifest_version": 3
 , "minimum_chrome_version": "114"
 , "default_locale": "en"
+, "author":
+  { "email": "overcq@int.pl"
+  }
 , "name": "Site Comment ©overcq"
 , "short_name": "site‐comment"
-, "version": "0.0.0.284"
+, "version": "0.0.0.299"
 , "description": "Show global comments for a site."
 , "action":
   { "default_title": "Open side panel with the site comments"
