@@ -1,7 +1,9 @@
 (() =>
 {   let e = document.body;
     do
-    {   if( e.nodeName !== "A" )
+    {   if( e.nodeName !== "A"
+        && e.nodeName !== "BUTTON"
+        )
             for( const e_ of e.childNodes )
                 if( e_.nodeType === 3 )
                 {   let s = e_.nodeValue;
