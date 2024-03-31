@@ -5,7 +5,7 @@
             for( const e_ of e.childNodes )
                 if( e_.nodeType === 3 )
                 {   let s = e_.nodeValue;
-                    const re = /\bhttps?:\/\/[0-9A-Za-z.­-]+\/\S+/;
+                    const re = /\bhttps?:\/\/[0-9A-Za-z.­-]+\/[0-9A-Za-z._%\/?&=-]+/;
                     let m = s.match(re);
                     if( m !== null )
                     {   const f = document.createDocumentFragment();

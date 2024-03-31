@@ -6,7 +6,7 @@
   }
 , "name": "Make Links ©overcq"
 , "short_name": "make-links"
-, "version": "0.0.0.25"
+, "version": "0.0.0.28"
 , "description": "Replaces text links with ‘html’ links."
 , "content_scripts":
   [ { "matches": [ "*://*/*" ]
