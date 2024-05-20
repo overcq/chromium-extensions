@@ -15,7 +15,7 @@ dist: extension.7z
 	mkdir 1
 1/manifest.json: 0/manifest.json FORCE
 	chromium-ex-ver-inc.sh $<
-	json-minify $< >$@
+	json-minify $< > $@
 	chmod g+r $@
 1/%.css: 0/%.css
 	ln -fT -- $< $@
@@ -23,7 +23,7 @@ dist: extension.7z
 	html-minifier --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true -o $@ $<
 	chmod g+r $@
 1/%.js: 0/%.js
-	js-clc $< >$@
+	js-clc 0/manifest.json < $< > $@
 	chmod g+r $@
 1/%.gif: 0/%.gif
 	ln -fT -- $< $@
@@ -38,12 +38,6 @@ build: 1 1/manifest.json $(patsubst 0/%,1/%,$(wildcard 0/*))
     && if ! diff -Nq "$$tmp_file" 1/_locales/en/messages.json >/dev/null; then \
         cp -- "$$tmp_file" 1/_locales/en/messages.json ;\
     fi \
-    && if [ "$(wildcard 1/*.js)" != "" ]; then \
-	    for f in 1/*.js; do \
-			js-clc <"$$f" >"$$tmp_file" \
-			&& cp "$$tmp_file" "$$f" ;\
-		done ;\
-	fi \
 	&& chmod -R g=rX 1
 extension.7z:
 	cd 1 \

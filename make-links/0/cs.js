@@ -3,6 +3,7 @@
     do
     {   if( e.nodeName !== "A"
         && e.nodeName !== "BUTTON"
+        && e.nodeName !== "TEXTAREA"
         )
             for( const e_ of e.childNodes )
                 if( e_.nodeType === 3 )

@@ -68,9 +68,10 @@
                                   && e.className.indexOf( "highlight" ) === -1
                               ))
                               && ( e.nodeName !== "TD"
-                                || e.className !== "code"
+                                || !e.classList.contains( "code" )
                               )
                               && e.nodeName !== "YTD-EXPANDER"
+                              && !e.classList.contains( "application-main" )
                               )
                                   ea.push(e);
                               break;
