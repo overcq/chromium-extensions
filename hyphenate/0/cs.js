@@ -57,7 +57,8 @@
                   {   const e = es_child[ es_child_i ];
                       switch( e.nodeType )
                       { case 1:
-                              if( e.nodeName !== "PRE"
+                              if( e.nodeName !== "CODE"
+                              && e.nodeName !== "PRE"
                               && e.nodeName !== "SCRIPT"
                               && e.nodeName !== "STYLE"
                               && e.nodeName !== "TEXTAREA"
