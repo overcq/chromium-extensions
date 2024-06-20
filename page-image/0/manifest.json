@@ -1,0 +1,31 @@
+{ "manifest_version": 3
+, "minimum_chrome_version": "99"
+, "default_locale": "en"
+, "author":
+  { "email": "overcq@int.pl"
+  }
+, "name": "page image ©overcq"
+, "short_name": "page-image"
+, "version": "0.6.0.116"
+, "description": "Adds ‛create page image’."
+, "icons":
+  { "48": "logo_48.png"
+  }
+, "background":
+  { "service_worker": "0.js"
+  }
+, "action":
+  { "default_icon":
+    { "19": "icon.gif"
+    }
+  , "default_title": "page image"
+  , "default_popup": "popup.html"
+  }
+, "permissions":
+  [ "scripting"
+  , "tabs"
+  ]
+, "host_permissions":
+  [ "<all_urls>"
+  ]
+}

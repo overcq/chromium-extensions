@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="0.css">
+    <style>
+body
+{ overflow: hidden;
+  margin: 0;
+  font-family: "Ubuntu Light", "Segoe UI", Tahoma, sans-serif;
+  font-size: 7pt;
+}
+table
+{ margin: 1pt 5pt 0 0;
+}
+label
+{ white-space: nowrap;
+}
+#area
+{ position: absolute;
+  left: -100px;
+  top: -100px;
+  width: 100px;
+  height: 100px;
+}
+#image_div
+{ margin: 4pt 3pt 2pt 4pt;
+  text-align: center;
+}
+#canvas, #image
+{ min-height: 64px;
+  max-width: 100%;
+}
+    </style>
+    <script src="popup.js"></script>
+</head>
+<body>
+    <form>
+    <table><tbody>
+        <tr>
+            <td><label><input type="radio" name="a">all page</label></td>
+            <td><label><input type="radio" name="a">visible</label></td>
+        </tr>
+    </tbody></table>
+    </form>
+    <div id="image_div" hidden><a href="javascript:void(0)"><canvas id="canvas" width="0" height="0"></canvas><img id="image" alt="thumbnail" src=""></a></div>
+    <textarea id="area" hidden></textarea>
+</body>
+</html>

@@ -1,0 +1,14 @@
+body, section, article, div, nav, header, footer, table, h1, h2, h3, h4, h5, h6, p, object, embed, audio, video, img, input
+{ line-height: 1;
+}
+body
+{ background-color: #cacaca;
+  color: black;
+}
+table
+{ border-collapse: collapse;
+}
+p
+{ font-family: "Liberation Serif", Century, Georgia, serif;
+  font-size: 10pt;
+}
