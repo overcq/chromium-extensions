@@ -122,8 +122,7 @@ async function I_all_I_cont(
     );
 }
 async function Q_document_I_scroll_restore(
-){  removeEventListener( "beforeunload", Q_document_I_scroll_restore );
-    await chrome.scripting.executeScript(
+){  await chrome.scripting.executeScript(
       { "target":
         { "tabId": S_current_tab.id
         }
@@ -183,7 +182,6 @@ document.addEventListener( "DOMContentLoaded", async () =>
                     }
                   );
                   S_x = S_y = 0;
-                  addEventListener( "beforeunload", Q_document_I_scroll_restore );
                   setTimeout( I_all_I_cont, S_idle_delay );
                   break;
             }
