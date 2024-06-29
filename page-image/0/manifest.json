@@ -6,7 +6,7 @@
   }
 , "name": "page image ©overcq"
 , "short_name": "page-image"
-, "version": "0.6.0.121"
+, "version": "0.6.0.123"
 , "description": "Adds ‛create page image’."
 , "icons":
   { "48": "logo_48.png"
@@ -16,7 +16,7 @@
   }
 , "action":
   { "default_icon":
-    { "19": "icon.gif"
+    { "19": "icon_19.png"
     }
   , "default_title": "page image"
   , "default_popup": "popup.html"
