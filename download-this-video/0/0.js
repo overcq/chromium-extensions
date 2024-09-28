@@ -624,6 +624,11 @@ function E_youtube_Q_document_I_script( tab_id
                             a[ "streams" ][1] = y_res[ "streamingData" ][ "formats" ];
                             if( y[ "config" ][ "args" ][ "ttsurl" ] !== undefined )
                                 a[ "subtitle" ] = y[ "config" ][ "args" ][ "ttsurl" ] + "&type=track&lang=pl&name&kind&fmt=1";
+                            const cpn_0 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_";
+                            let cpn = "";
+                            for( let i = 0; i !== 16; i++ )
+                                cpn += cpn_0.charAt( Math.floor( Math.random() * cpn_0.length ));
+                            a[ "cpn" ] = cpn;
                             e.appendChild( document.createTextNode( JSON.stringify( H_ocq_Q_object_R_encode_undefined(a) )));
                             document.body.appendChild(e);
                         }
@@ -763,41 +768,20 @@ window.addEventListener( "load"
                     && Q_navigated_S_data[ sender.tab.id ][ "dload" ]
                     )
                         break;
-                    chrome.runtime.sendMessage( "ogiafkmaphggnbciiedamipikobfoagi"
-                    , msg[1][ "url" ]
-                    , (function( url
-                      , filename
-                      , tab_id
-                      ){  return function( header
-                          ){  window.setTimeout(
-                                (function( header
-                                ){  return function(
-                                    ){  const req =
-                                        { "url": url
-                                        , "filename": filename
-                                        , "conflictAction": "prompt"
-                                        , "saveAs": true
-                                        };
-                                        if( header !== undefined )
-                                            req[ "headers" ] =
-                                            [ { "name": header[0]
-                                              , "value": header[1]
-                                              }
-                                            ];
-                                        Q_navigated_S_data[ tab_id ][ "dload" ] = true;
-                                        chrome.downloads.download( req
-                                        , function( id
-                                          ){  if( id === undefined )
-                                                  alert( chrome.runtime.lastError.message );
-                                              Q_navigated_S_data[ tab_id ][ "dload" ] = false;
-                                          }
-                                        );
-                                    };
-                                })(header)
-                              , 1
-                              );
-                          };
-                      })( msg[1][ "url" ], msg[1][ "filename" ], sender.tab.id )
+                    const req =
+                    { "url": msg[1][ "url" ]
+                    , "method": "POST"
+                    , "filename": msg[1][ "filename" ]
+                    , "conflictAction": "prompt"
+                    , "saveAs": true
+                    };
+                    Q_navigated_S_data[ sender.tab.id ][ "dload" ] = true;
+                    chrome.downloads.download( req
+                    , function( id
+                      ){  if( id === undefined )
+                              alert( chrome.runtime.lastError.message );
+                          Q_navigated_S_data[ sender.tab.id ][ "dload" ] = false;
+                      }
                     );
                     break;
               case 13:

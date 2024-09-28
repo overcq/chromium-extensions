@@ -6,16 +6,18 @@
 #         makefile
 # ©overcq                on ‟Gentoo Linux 13.0” “x86_64”              2015‒1‒8 #
 #*******************************************************************************
-.PHONY: all build clean rebuild dist distclean FORCE
+.PHONY: all build clean rebuild dist distclean FORCE messages
 all: build
 rebuild: clean build
 dist: 1.zip
+build: 1 messages $(patsubst 0/%,1/%,$(filter-out %.js,$(wildcard 0/*)))
 #===============================================================================
 override update_url := $(strip $(update_url))
 override homepage_url := $(strip $(homepage_url))
 #===============================================================================
 1:
 	mkdir 1
+#-------------------------------------------------------------------------------
 1/manifest.json: 0/manifest.json FORCE
 	chromium-ex-ver-inc.sh $<
 	json-minify $< >$@
@@ -25,13 +27,12 @@ override homepage_url := $(strip $(homepage_url))
 1/%.html: 0/%.html
 	html-minifier --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true -o $@ $<
 	chmod g+r $@
-1/%.js: 0/%.js
-	touch $@
 1/%.gif: 0/%.gif
 	ln -fT -- $< $@
 1/%.png: 0/%.png
 	ln -fT -- $< $@
-build: 1 1/manifest.json $(patsubst 0/%,1/%,$(wildcard 0/*))
+#-------------------------------------------------------------------------------
+messages:
 	./0-messages.pl $(wildcard 0/*.js)
 	[ -d 1/_locales/en ] || mkdir -p 1/_locales/en
 	tmp_file="$$( mktemp )" ;\
@@ -49,13 +50,14 @@ build: 1 1/manifest.json $(patsubst 0/%,1/%,$(wildcard 0/*))
 		&& cat 1/options_page.js >>"$$tmp_file" \
 		&& cp -- "$$tmp_file" 1/options_page.js ;\
 	fi \
-    && if [ "$(wildcard 1/*.js)" != "" ]; then \
+    && if [ "$$(ls 1/*.js)" != "" ]; then \
 	    for f in 1/*.js; do \
 			js-clc <"$$f" >"$$tmp_file" \
 			&& cp "$$tmp_file" "$$f" ;\
 		done ;\
 	fi \
 	&& chmod -R g=rX 1
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 1.zip: build
 	rm -f 1/manifest.json ;\
 	head_line=$$( grep -ne '^, *"key"' 0/manifest.json | cut -d : -f 1 ) ;\
@@ -70,7 +72,7 @@ build: 1 1/manifest.json $(patsubst 0/%,1/%,$(wildcard 0/*))
 	&& cd 1 \
     && zip -9r ../1.zip * \
 	&& chmod g+r ../1.zip
-#------------------------------------------------------------------------------
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 clean: distclean
 	rm -f $(patsubst 0/%,1/%,$(wildcard 0/*)) 1/_locales/en/messages.json
 distclean:

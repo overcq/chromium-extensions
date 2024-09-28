@@ -382,7 +382,7 @@
                   || e.tagName === "STYLE"
                   || e.tagName === "svg"
                   || e.tagName === "VIDEO"
-                  || e.id.match( /player|progress|video/i ) !== null
+                  || e.id.match( /highlight|player|progress|video/i ) !== null
                   || e.className.match( /highlight|player|progress|video/i ) !== null;
               };
               // Pasywne czyszczenie w zdefiniowanych stylach ‘css’ przeszkód dziedziczenia od właściwości ustawionych dla ‘root’.

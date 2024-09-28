@@ -62,6 +62,25 @@ function Q_tab_P_title( i
     e.appendChild( document.createTextNode(s) );
 }
 //==============================================================================
+function Q_url_I_format( url
+, params
+, replace_params
+){  const query_i = url.indexOf( "?" ) + 1;
+    const query = url.substring( query_i ).split( "&" );
+    const query_o = {};
+    for( const param of query )
+    {   const i = param.indexOf( "=" );
+        query_o[ param.substring( 0, i ) ] = param.substring( i + 1 );
+    }
+    const a = [];
+    for( const param of params )
+        if( replace_params[param] !== undefined )
+            a.push( param +"="+ replace_params[param] );
+        else if( query_o[param] !== undefined )
+            a.push( param +"="+ query_o[param] );
+    return url.substring( 0, query_i ) + a.join( "&" );
+}
+//==============================================================================
 function Q_ytplayer_R_signature_I_1( a
 , i
 ){  const v = a[ i % a.length ];
@@ -522,16 +541,29 @@ document.addEventListener( "DOMContentLoaded"
                                         stream[ a[j].substring( 0, p ) ] = decodeURIComponent(  a[j].substring( p + 1 ));
                                     }
                                 }
-                                let signature;
-                                if( stream[ "s" ] !== undefined )
-                                    signature = "&"+ stream[ "sp" ] +"="+ encodeURIComponent( Q_ytplayer_R_signature( data[ "Q_ytplayer_S_signature" ], decodeURIComponent( stream[ "s" ] )));
-                                else if( stream[ "sig" ] !== undefined )
-                                    signature = "&"+ stream[ "sp" ] +"="+ stream[ "sig" ];
-                                else
-                                    signature = "";
+                                const o = {};
+                                o[ "sparams" ] = [ "expire", "ei", "ip", "id", "source", "requiressl", "xpc", "spc", "svpuc", "ns", "sabr", "rqh" ].join( "%2C" );
+                                if(false)
+                                {   const query_i = stream[ "url" ].indexOf( "?" ) + 1;
+                                    const query = stream[ "url" ].substring( query_i ).split( "&" );
+                                    for( const s of query )
+                                    {   const i = s.indexOf( "=" );
+                                        if( s.substring( 0, i ) === "sig" )
+                                        {   o[ "sig" ] = encodeURIComponent( Q_ytplayer_R_signature( data[ "Q_ytplayer_S_signature" ], decodeURIComponent( s.substring( i + 1 ))));
+                                            break;
+                                        }
+                                    }
+                                }
+                                o[ "cpn" ] = data[ "cpn" ];
+                                o[ "cver" ] = "2.20240702.09.00";
+                                o[ "sabr" ] = o[ "smc" ] = "1";
                                 const cell = document.createElement( "TD" );
                                 const e = document.createElement( "A" );
-                                e.setAttribute( "href", stream[ "url" ] + signature );
+                                e.setAttribute( "href"
+                                , Q_url_I_format( stream[ "url" ]
+                                  , [ "expire", "ei", "ip", "id", "source", "requiressl", "xpc", "mh", "mm", "mn", "ms", "mv", "mvi", "pl", "initcwndbps", "spc", "svpuc", "ns", "sabr", "rqh", "mt", "fvip", "keepalive", "c", "smc", "n", "sparams", "sig", "lsparams", "lsig", "cpn", "cver", "rn" ]
+                                  , o
+                                ));
                                 e.setAttribute( "data-title", title +" "+ Q_string_I_form_filename( new String( stream[ "itag" ] ), "media" ));
                                 e.addEventListener( "click", Q_gui_Q_link_I_dload, true );
                                 e.appendChild( document.createTextNode( "link" ));
@@ -574,15 +606,28 @@ document.addEventListener( "DOMContentLoaded"
                                         stream[ a[j].substring( 0, p ) ] = decodeURIComponent(  a[j].substring( p + 1 ));
                                     }
                                 }
-                                let signature;
-                                if( stream[ "s" ] !== undefined )
-                                    signature = "&"+ stream[ "sp" ] +"="+ Q_ytplayer_R_signature( data[ "Q_ytplayer_S_signature" ], stream[ "s" ] );
-                                else if( stream[ "sig" ] !== undefined )
-                                    signature = "&"+ stream[ "sp" ] +"="+ stream[ "sig" ];
-                                else
-                                    signature = "";
+                                const o = {};
+                                o[ "sparams" ] = [ "expire", "ei", "ip", "id", "source", "requiressl", "xpc", "spc", "svpuc", "ns", "sabr", "rqh" ].join( "%2C" );
+                                if(false)
+                                {   const query_i = stream[ "url" ].indexOf( "?" ) + 1;
+                                    const query = stream[ "url" ].substring( query_i ).split( "&" );
+                                    for( const s of query )
+                                    {   const i = s.indexOf( "=" );
+                                        if( s.substring( 0, i ) === "sig" )
+                                        {   o[ "sig" ] = encodeURIComponent( Q_ytplayer_R_signature( data[ "Q_ytplayer_S_signature" ], decodeURIComponent( s.substring( i + 1 ))));
+                                            break;
+                                        }
+                                    }
+                                }
+                                o[ "cpn" ] = data[ "cpn" ];
+                                o[ "cver" ] = "2.20240702.09.00";
+                                o[ "sabr" ] = o[ "smc" ] = "1";
                                 const e = document.createElement( "A" );
-                                e.setAttribute( "href", stream[ "url" ] + signature );
+                                e.setAttribute( "href"
+                                , Q_url_I_format( stream[ "url" ]
+                                  , [ "expire", "ei", "ip", "id", "source", "requiressl", "xpc", "mh", "mm", "mn", "ms", "mv", "mvi", "pcm2cms", "pl", "initcwndbps", "spc", "svpuc", "ns", "sabr", "rqh", "mt", "fvip", "keepalive", "c", "smc", "n", "sparams", "sig", "lsparams", "lsig", "cpn", "cver", "rn" ]
+                                  , o
+                                ));
                                 e.setAttribute( "data-title", title +" "+ Q_string_I_form_filename( new String( stream[ "itag" ] ), "media" ));
                                 e.addEventListener( "click", Q_gui_Q_link_I_dload, true );
                                 e.appendChild( document.createTextNode( "link" ));
