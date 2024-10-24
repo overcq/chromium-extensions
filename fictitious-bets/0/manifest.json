@@ -1,0 +1,32 @@
+{ "manifest_version": 3
+, "minimum_chrome_version": "114"
+, "default_locale": "en"
+, "author":
+  { "email": "overcq@int.pl"
+  }
+, "name": "Fictitious bets ©overcq"
+, "short_name": "fictit-bets"
+, "version": "0.0.0.345"
+, "description": "Allows you to place fictitious bets."
+, "background":
+  { "service_worker": "service-worker.js"
+  , "type": "module"
+  }
+, "action":
+  { "default_popup": "popup.html"
+  }
+, "content_scripts":
+  [ { "matches":
+      [ "https://www.sts.pl/*"
+      ]
+    , "js": [ "sts.pl.js" ]
+    , "run_at": "document_start"
+    }
+  ]
+, "permissions":
+  [ "storage"
+  , "tabs"
+  , "unlimitedStorage"
+  ]
+, "externally_connectable": {}
+}
