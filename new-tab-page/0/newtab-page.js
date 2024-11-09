@@ -24,7 +24,7 @@ function Q_browser_I_open_tab(
       ){  chrome.tabs.create(
             { "url": url
             , "openerTabId": tab.id
-            , "index": tab.index + 1
+            , "index": tab.index
             , "active": false
             }
           );
