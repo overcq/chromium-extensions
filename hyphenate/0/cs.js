@@ -66,6 +66,7 @@
                                   && e.nodeName !== "TABLE"
                                 )
                                 || ( e.id.indexOf( "vscode" ) === -1
+                                  && !e.className.contains( "code" )
                                   && e.className.indexOf( "highlight" ) === -1
                               ))
                               && ( e.nodeName !== "TD"
