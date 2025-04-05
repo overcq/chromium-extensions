@@ -59,9 +59,9 @@ document.addEventListener( "DOMContentLoaded", function(
       function( tab_id
       , info
       , tab
-      ){  const url = tab.url != undefined ? tab.url : info.url != undefined ? info.url : undefined;
-          if( url !== undefined
-          && !/^http:/.test(url) )
+      ){  const url = tab.url != undefined ? tab.url : info.url;
+          if( url === undefined
+          || !/^http:/.test(url) )
               return;
           let a;
           if( info.status == "loading" )
@@ -153,14 +153,13 @@ document.addEventListener( "DOMContentLoaded", function(
                         && /^http:\/\/(?:p\.p|config\.privoxy\.org)\//.test( tab.url )
                         )
                             return;
-                        let url;
                         if(a)
                         {   const p = a[1].indexOf( "#" );
                             url = decodeURIComponent( p == -1 ? a[1] : a[1].substring( 0, p ));
                         }else
                             url = tab.url;
                         a = url.match( /^([^:]+:\/\/[^\/]+)(.*)$/ );
-                        if( /\/PRIVOXY-FORCE(?:\/|$)/.test( a[2] ))
+                        if( /^\/PRIVOXY-FORCE(?:\/|$)/.test( a[2] ))
                             url = a[1] + a[2].substring(14);
                         else
                             url = a[1] +"/PRIVOXY-FORCE"+ a[2];
