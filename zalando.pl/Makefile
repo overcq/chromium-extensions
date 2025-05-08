@@ -1,6 +1,6 @@
 ################################################################################
 #   ___   workplace
-#  ¦OUX¦  ‟GNU” “make”
+#  ¦OUX¦  GNU “make”
 #  ¦/C+¦  compile
 #   ---   ‟chromium” extension
 #         makefile

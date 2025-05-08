@@ -55,30 +55,45 @@ function Q_link_Z_one_X_click( e
     }
     Q_browser_I_open_tab(url);
 }
-function Q_link_Z_dir_X_click( e
-){  if( e.altKey )
-    {   Q_link_Z_one_X_click(e);
+function Q_link_Z_dir_X_click( ev
+){  if( ev.altKey )
+    {   Q_link_Z_one_X_click(ev);
         return;
     }
-    e.stopPropagation();
-    e.preventDefault();
-    if( e.button !== 0
-    || e.metaKey || e.ctrlKey || e.shiftKey )
+    ev.stopPropagation();
+    ev.preventDefault();
+    if( ev.button !== 0
+    || ev.metaKey
+    || ev.ctrlKey
+    )
         return;
     if( Q_bar_Q_ul_S_timeout !== undefined )
     {   window.clearTimeout( Q_bar_Q_ul_S_timeout );
         Q_bar_Q_li_I_timeout();
     }
-    if( !confirm( 0%`open ·all· bookmarks from first level in the directory “$1$”?`H_ocq_E_html_Q_element_R_text( e.currentTarget.getElementsByTagName( "div" )[0] )` ))
-        return;
-    e = e.currentTarget.nextSibling;
+    const e = ev.currentTarget.nextSibling;
     const a = [];
     for( let i = 0; i !== e.childNodes.length; i++ )
     {   const url = e.childNodes[i].firstChild.getAttribute( "href" );
         if( url !== "#" )
             a.push(url);
     }
-    if( a.length )
+    if( !a.length
+    || !confirm( 0%`open ·all· bookmarks from first level in the directory “$1$”?`H_ocq_E_html_Q_element_R_text( ev.currentTarget.getElementsByTagName( "div" )[0] )` )
+    )
+        return;
+    if( ev.shiftKey )
+        chrome.tabs.getCurrent(
+          function( tab
+          ){  for( const url of a )
+                  chrome.tabs.create(
+                    { "url": url
+                    , "active": false
+                    }
+                  );
+          }
+        );
+    else
         chrome.tabs.getCurrent(
           function( tab
           ){  chrome.windows.create(

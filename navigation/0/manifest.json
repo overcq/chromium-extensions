@@ -4,7 +4,7 @@
 , "default_locale": "en"
 , "name": "navigation ©overcq"
 , "short_name": "navig"
-, "version": "1.0.6"
+, "version": "1.0.6.2"
 , "description": "Extends functions of page navigation."
 , "icons":
   { "16": "16.png"
