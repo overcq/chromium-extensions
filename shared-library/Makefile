@@ -50,12 +50,6 @@ messages:
 		&& cat 1/options_page.js >>"$$tmp_file" \
 		&& cp -- "$$tmp_file" 1/options_page.js ;\
 	fi \
-    && if [ "$$(ls 1/*.js)" != "" ]; then \
-	    for f in 1/*.js; do \
-			js-clc <"$$f" >"$$tmp_file" \
-			&& cp "$$tmp_file" "$$f" ;\
-		done ;\
-	fi \
 	&& chmod -R g=rX 1
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 1.zip: build

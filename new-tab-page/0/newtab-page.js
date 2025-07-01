@@ -363,8 +363,6 @@ function Q_conf_X( o
                     e.className = H_ocq_Q_s_Z_set_I_add( e.className, "bar_1_alt" );
                     e = document.getElementById( "bar_bm" );
                     e.className = H_ocq_Q_s_Z_set_I_add( e.className, "bar_bm_alt" );
-                    e = document.getElementById( "adv" );
-                    e.className = H_ocq_Q_s_Z_set_I_add( e.className, "adv_alt" );
                 }else
                 {   let e = document.getElementById( "sea" );
                     e.className = H_ocq_Q_s_Z_set_I_remove( e.className, "sea_alt" );
@@ -374,8 +372,6 @@ function Q_conf_X( o
                     e.className = H_ocq_Q_s_Z_set_I_remove( e.className, "bar_1_alt" );
                     e = document.getElementById( "bar_bm" );
                     e.className = H_ocq_Q_s_Z_set_I_remove( e.className, "bar_bm_alt" );
-                    e = document.getElementById( "adv" );
-                    e.className = H_ocq_Q_s_Z_set_I_remove( e.className, "adv_alt" );
                 }
                 break;
           case "Q_bg_C_root_path":
@@ -480,19 +476,7 @@ document.addEventListener( "DOMContentLoaded"
       );
       chrome.management.onInstalled.addListener(
         function( extension
-        ){  const adv = document.getElementById( "adv" );
-            const es = adv.getElementsByTagName( "p" );
-            for( let i = 0; i !== es.length; i++ )
-                if( es[i].getAttribute( "data-guid" ) === extension.id )
-                {   if( es.length > 1 )
-                        es[i].parentNode.removeChild( es[i] );
-                    else
-                    {   adv.setAttribute( "hidden", "" );
-                        adv.innerHTML = "";
-                    }
-                    break;
-                }
-            if( extension.type === "theme"
+        ){  if( extension.type === "theme"
             && Q_bg_C_root_path !== ""
             && Q_bg_C_rel_path !== ""
             )
@@ -503,66 +487,6 @@ document.addEventListener( "DOMContentLoaded"
         function( id
         ){  if( document.body.style.backgroundImage.indexOf( "/Default/Extensions/"+ id +"/" ) !== -1 )
                 document.body.style.backgroundImage = "";
-        }
-      );
-      chrome.management.getAll(
-        function( extensions
-        ){  const my_extensions =
-            [ { "guid": "fphbnkckhppinhpofaeidjekbhjgegdh"
-              , "name": "navigation"
-              }
-            , { "guid": "ndengmlnoehaajobfahhkiihflfdknpa"
-              , "name": "local storage"
-              }
-            , { "guid": "dmhjnihflmkjkgakhoklchdadfiehcic"
-              , "name": "alternative history"
-              }
-            , { "guid": "lbkadpnnldnnakkiochlmlchlpgjaclf"
-              , "name": "download This Video"
-              }
-            , { "guid": "cllpbdkeibiidpnkfhjllnpgjchpplen"
-              , "name": "page restyle"
-              }
-            , { "guid": "hgaeflbpmnichadgeghjnpifaiiacbck"
-              , "name": "pr0nSusPICiErr"
-              }
-            ];
-            for( let i = 0; i !== extensions.length; i++ )
-            {   for( let j = 0; j !== my_extensions.length; j++ )
-                    if( extensions[i].id === my_extensions[j][ "guid" ] )
-                    {   my_extensions.splice( j, 1 );
-                        break;
-                    }
-                if( !my_extensions.length )
-                    break;
-            }
-            if( my_extensions.length )
-            {   const adv = document.getElementById( "adv" );
-                let p = document.createElement( "p" );
-                p.appendChild( document.createTextNode( 8%`would you like to consider… 8-]`` ));
-                adv.appendChild(p);
-                p = document.createElement( "p" );
-                p.appendChild( document.createTextNode( 9%`other my extension programs?`` ));
-                adv.appendChild(p);
-                let a;
-                for( let i = 0; i !== my_extensions.length; i++ )
-                {   p = document.createElement( "p" );
-                    p.setAttribute( "data-guid", my_extensions[i][ "guid" ] );
-                    p.appendChild( document.createTextNode( "•"+ my_extensions[i][ "name" ] ));
-                    adv.appendChild(p);
-                }
-                p = document.createElement( "p" );
-                p.appendChild( document.createTextNode( 10%`there is`` +" " ));
-                a = document.createElement( "a" );
-                a.setAttribute( "href", ```extensions_url``` );
-                a.style.textDecoration = "underline";
-                a.appendChild( document.createTextNode( 11%`on‐line description of all`` ));
-                p.appendChild(a);
-                p.appendChild( document.createTextNode( "." ));
-                adv.appendChild(p);
-                adv.removeAttribute( "hidden" );
-            }
-            init_end;
         }
       );
       window.addEventListener( "keydown"

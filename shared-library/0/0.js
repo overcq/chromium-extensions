@@ -246,7 +246,7 @@ function H_ocq_Q_object_T_eq( a
     return a === b;
 }
 //------------------------------------------------------------------------------
-///uzupełnienie o ‘serializację’ przypisanej w obiekcie wartości “undefined” dla niezgubienia tej wartości w obiekcie przekazywanym poprzez nieznaną ‘serializację’ (“response”, procedury ‘api’ rozszerzeń, tekst w “znaczniku” ‘html’).
+// Uzupełnienie o ‘serializację’ przypisanej w obiekcie wartości “undefined” dla niezgubienia tej wartości w obiekcie przekazywanym poprzez nieznaną ‘serializację’ (“response”, procedury ‘api’ rozszerzeń, tekst w “znaczniku” ‘html’).
 function H_ocq_Q_object_R_encode_undefined( o
 ){  for( let k in o )
         if( o[k] === undefined )

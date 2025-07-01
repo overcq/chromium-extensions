@@ -1,0 +1,24 @@
+{ "manifest_version": 3
+, "minimum_chrome_version": "83"
+, "default_locale": "en"
+, "author":
+  { "email": "overcq@int.pl"
+  }
+, "name": "Youtube ad blocker ©overcq"
+, "short_name": "yt-ad-block"
+, "version": "0.0.0.29"
+, "description": "Blocks advertisements na Youtube."
+, "background":
+  { "service_worker": "service_worker.js"
+  }
+, "permissions":
+  [ "scripting"
+  , "tabs"
+  ]
+, "host_permissions":
+  [ "https://www.youtube.com/*"
+  ]
+, "externally_connectable":
+  { "ids": []
+  }
+}
