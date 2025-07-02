@@ -10,6 +10,8 @@ function remove_sponsored(
 function remove_player_ads(
 ){  const player = document.getElementById( "movie_player" );
     const player_video = player.getElementsByTagName( "video" )[0];
+    const player_title = player.getElementsByClassName( "ytp-chrome-top" )[0];
+    const player_video_ads = player.getElementsByClassName( "video-ads" )[0];
     const f = () =>
     {   const e = document.getElementById( "player-ads" );
         if( e !== null )
@@ -17,8 +19,20 @@ function remove_player_ads(
         const es = document.getElementsByTagName( "ytd-engagement-panel-section-list-renderer" );
         for( const e of es )
             e.style.display = "none";
-        player.style.visibility = player.classList.contains( "ad-interrupting" ) ? "hidden" : "unset";
-        player_video.muted = player.classList.contains( "ad-interrupting" );
+        if( player.classList.contains( "ad-interrupting" ))
+        {   player_video.muted = true;
+            player_video.style.visibility = "hidden";
+            player_title.style.visibility = "hidden";
+            try
+            {   for( const e of player_video_ads.firstElementChild.children )
+                    if( !e.classList.contains( "ytp-ad-player-overlay-layout__skip-or-preview-container" ))
+                        e.style.visibility = "hidden";
+            }catch(error){}
+        }else
+        {   player_video.muted = false;
+            player_video.style.visibility = "";
+            player_title.style.visibility = "";
+        }
     }
     setInterval( f, 2000 );
 }
