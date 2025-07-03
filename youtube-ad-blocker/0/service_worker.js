@@ -12,6 +12,7 @@ function remove_player_ads(
     const player_video = player.getElementsByTagName( "video" )[0];
     const player_title = player.getElementsByClassName( "ytp-chrome-top" )[0];
     const player_video_ads = player.getElementsByClassName( "video-ads" )[0];
+    const player_captions = document.getElementById( "ytp-caption-window-container" );
     const f = () =>
     {   const e = document.getElementById( "player-ads" );
         if( e !== null )
@@ -23,6 +24,7 @@ function remove_player_ads(
         {   player_video.muted = true;
             player_video.style.visibility = "hidden";
             player_title.style.visibility = "hidden";
+            player_captions.style.visibility = "hidden";
             try
             {   for( const e of player_video_ads.firstElementChild.children )
                     if( !e.classList.contains( "ytp-ad-player-overlay-layout__skip-or-preview-container" ))
@@ -32,6 +34,7 @@ function remove_player_ads(
         {   player_video.muted = false;
             player_video.style.visibility = "";
             player_title.style.visibility = "";
+            player_captions.style.visibility = "";
         }
     }
     setInterval( f, 2000 );
