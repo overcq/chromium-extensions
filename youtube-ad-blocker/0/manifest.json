@@ -6,7 +6,7 @@
   }
 , "name": "Youtube ad blocker ©overcq"
 , "short_name": "yt-ad-block"
-, "version": "0.0.0.69"
+, "version": "0.0.0.70"
 , "description": "Blocks advertisements on Youtube."
 , "background":
   { "service_worker": "service_worker.js"
