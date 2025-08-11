@@ -397,10 +397,10 @@
                   {   const style = document.styleSheets[ css_i ].cssRules[ rule_i ].style;
                       if( !style )
                           continue;
-                      if( style.backgroundImage !== ""
-                      && style.getPropertyPriority( "background-image" ) !== "important"
-                      )
-                          style.setProperty( "background-image", style.backgroundImage, "important" );
+                      //if( style.backgroundImage !== ""
+                      //&& style.getPropertyPriority( "background-image" ) !== "important"
+                      //)
+                          //style.setProperty( "background-image", style.backgroundImage, "important" );
                       Q_color_P_change( null
                       , style
                       , "backgroundColor"
@@ -426,10 +426,10 @@
               // Aktywne ustawianie kolorów, które nie zostały pasywnie odziedziczone w kolejnych elementach ‘html’— zmieniając od elementów od góry hierarchii, tak by zmiany były źródłem oczekiwanego dziedziczenia w pozostałych, niższych fragmentach hierarchii.
               let e = document.documentElement;
               const style = document.defaultView.getComputedStyle( e, "" );
-              if( style.backgroundImage !== "none"
-              && style.getPropertyPriority( "background-image" ) !== "important"
-              )
-                  e.style.setProperty( "background-image", style.backgroundImage, "important" );
+              //if( style.backgroundImage !== "none"
+              //&& style.getPropertyPriority( "background-image" ) !== "important"
+              //)
+                  //e.style.setProperty( "background-image", style.backgroundImage, "important" );
               e.style.setProperty( "background-color", "rgb("+ Q_color_C_default_background.join() +")", "important" );
               const mutations = window[ "H_ocq_E_restyle_S_mutations" ].splice( 0, window[ "H_ocq_E_restyle_S_mutations" ].length );
               const es_ = [];
@@ -549,10 +549,10 @@
                               , Q_color_C_default_background, Q_color_C_default_background
                               , 1
                               );
-                          if( style.backgroundImage !== "none"
-                          && style.getPropertyPriority( "background-image" ) !== "important"
-                          )
-                              e.style.setProperty( "background-image", style.backgroundImage, "important" );
+                          //if( style.backgroundImage !== "none"
+                          //&& style.getPropertyPriority( "background-image" ) !== "important"
+                          //)
+                              //e.style.setProperty( "background-image", style.backgroundImage, "important" );
                           const a = [ "borderTopColor", "borderRightColor", "borderBottomColor", "borderLeftColor", "outlineColor" ];
                           for( let i = 0; i !== a.length; i++ )
                               Q_color_P_change( style
